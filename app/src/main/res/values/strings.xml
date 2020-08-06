@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">HonoursProject</string>
+    <string name="login_email_title">Email:</string>
+    <string name="login_enter_email_address_hint">Enter Email Address</string>
+    <string name="login_password_title">Password:</string>
+    <string name="login_enter_password_hint">Enter Password</string>
+    <string name="sign_in_button_text">Sign in</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign up here!</string>
+    <string name="login_title_pc_part_builder">PC Part Builder</string>
+    <string name="pc_part_builder_app_logo_image_content_description">PC Part Builder App Logo</string>
+    <string name="button_register_sign_up_text">sign up</string>
+    <string name="already_have_an_account_login_here">Already have an account? Login here!</string>
 </resources>
