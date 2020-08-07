@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".AccountRegisterActivity" />
+        <activity 
+            android:name=".AccountRegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".LoginAccountActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
