@@ -29,6 +29,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints="username"
         android:ems="10"
         android:hint="@string/login_enter_email_address_hint"
         android:inputType="textWebEmailAddress"
@@ -36,8 +37,7 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_email_login_title"
-        android:autofillHints="username" />
+        app:layout_constraintTop_toBottomOf="@+id/text_email_login_title" />
 
     <TextView
         android:id="@+id/text_password_login_title"
@@ -92,16 +92,15 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:focusable="true"
         android:text="@string/don_t_have_an_account_sign_up_here"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:onClick="onClick"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
 
     <ImageView
         android:id="@+id/image_login_logo"
