@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 public class LoginAccountActivity extends AppCompatActivity {
 
-    //Create variables for user interface elements
+    //Declare instances for User Interface elements
     private TextView registerForAccountTextView;
 
 
