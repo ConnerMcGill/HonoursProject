@@ -10,4 +10,6 @@
     <string name="pc_part_builder_app_logo_image_content_description">PC Part Builder App Logo</string>
     <string name="button_register_sign_up_text">sign up</string>
     <string name="already_have_an_account_login_here">Already have an account? Login here!</string>
+    <string name="temp_login_text_for_testing">Welcome you are now logged in</string>
+    <string name="temp_logout_button">Logout</string>
 </resources>
