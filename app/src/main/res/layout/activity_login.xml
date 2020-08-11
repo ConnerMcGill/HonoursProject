@@ -70,7 +70,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_login_enter_password"
         android:layout_width="353dp"
-        android:layout_height="64dp"
+        android:layout_height="66dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
