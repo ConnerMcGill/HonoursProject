@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 
 public class AccountRegisterActivity extends AppCompatActivity {
 
-    /* Create constant patterns used for password validation:
+    /* Create constant patterns used for email and password validation:
 
        The following regex rules are:
        (?=.*[0-9]) - At least one digit
