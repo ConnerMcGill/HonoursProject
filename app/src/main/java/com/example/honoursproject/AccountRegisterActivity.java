@@ -19,9 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +31,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -75,14 +72,32 @@ public class AccountRegisterActivity extends AppCompatActivity {
         //Initialise user interface elements
         textInputEmail = findViewById(R.id.text_register_enter_email);
         textInputPassword = findViewById(R.id.text_register_enter_password);
-        alreadyHaveAnAccountTextView = findViewById(R.id.text_login_redirect);
         registerForAccountButton = findViewById(R.id.button_register);
+        //Text view that will allow the user to switch to the LoginAccountActivity
+        alreadyHaveAnAccountTextView = findViewById(R.id.text_login_redirect);
 
         //Initialise the FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
-    }
+        //User will attempt to sign up for an account if they press the sign up button
+        registerForAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerNewUser();
+            }
+        });
 
+        /*Create on click listener for text-view which will allow the user to 'click' the text view
+        and go to the login form activity. The activity will be opened by calling a function
+        which calls an intent to start the LoginAccountActivity. */
+        alreadyHaveAnAccountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLoginAccountActivity();
+            }
+        });
+
+    }
 
     //Validate the users email address
     private Boolean validateEmail() {
@@ -137,9 +152,10 @@ public class AccountRegisterActivity extends AppCompatActivity {
 
     /*
        Register the users account and store the details on firebase if they are valid when they
-       press the sign up button on the registration form.
+       press the sign up button on the registration form. Switch to the MainActivity if the
+       registration is successful.
      */
-    public void registerNewUser(View view) {
+    private void registerNewUser() {
 
         //If the email or password field have invalid details then do not register the user
         if (!validateEmail() | !validatePassword()) {
@@ -174,4 +190,15 @@ public class AccountRegisterActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    /*This function is called when a user clicks the alreadyHaveAnAccountTextView. This function
+     sets up an intent which starts the LoginAccountActivity class. */
+    private void openLoginAccountActivity() {
+        Intent openLoginAccountActivityIntent = new Intent
+                (this, LoginAccountActivity.class);
+        startActivity(openLoginAccountActivityIntent);
+
+    }
+
 }
