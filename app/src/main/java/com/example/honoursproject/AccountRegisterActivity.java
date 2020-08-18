@@ -15,15 +15,25 @@ Summary of file:
 
 package com.example.honoursproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -43,6 +53,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
     private static final Pattern LOWER_CASE_PATTERN = Pattern.compile("[a-z]");
     private static final Pattern DIGITAL_CASE_PATTERN = Pattern.compile("[0-9]");
     private static final Pattern MIN_CHARS_PATTERN = Pattern.compile(".{6,}");
+    private static final String TAG = "MyActivity";
 
 
     //Declare instances of user interface elements
@@ -51,6 +62,9 @@ public class AccountRegisterActivity extends AppCompatActivity {
     private Button registerForAccountButton;
     //Text view that will be used to allow user to switch to LoginAccountActivity
     private TextView alreadyHaveAnAccountTextView;
+
+    //Declare an instance of FirebaseAuth
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -64,7 +78,11 @@ public class AccountRegisterActivity extends AppCompatActivity {
         alreadyHaveAnAccountTextView = findViewById(R.id.text_login_redirect);
         registerForAccountButton = findViewById(R.id.button_register);
 
+        //Initialise the FirebaseAuth instance
+        mAuth = FirebaseAuth.getInstance();
+
     }
+
 
     //Validate the users email address
     private Boolean validateEmail() {
@@ -91,7 +109,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
     private Boolean validatePassword() {
 
         //Gets the text from the email text field and trim any whitespace
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+        String passwordInput = textInputPassword.getEditText().getText().toString();
 
         if (passwordInput.isEmpty()) {
             textInputPassword.setError("Password field can't be empty!");
@@ -117,32 +135,43 @@ public class AccountRegisterActivity extends AppCompatActivity {
 
     }
 
-
-    private void registerNewUser() {
-
-        //Old code for when I was trying to add firebase earlier. I will keep it
-        //for when I go back to it
-
-        //Store the email and password that was entered into the EditText fields
-        String email, password;
-
-        //email = emailRegisterText.getText().toString();
-        //password = passwordRegisterText.getText().toString();
-
-        //You would call the validation functions that check the email and password are fine
-        //return if they're not
-        //Then run the firebase auth thing and login
-
-        //Then somewhere at the end of the code just have the intent for the textview that
-        //switches to the login activity
-    }
-
-
+    /*
+       Register the users account and store the details on firebase if they are valid when they
+       press the sign up button on the registration form.
+     */
     public void registerNewUser(View view) {
 
+        //If the email or password field have invalid details then do not register the user
         if (!validateEmail() | !validatePassword()) {
             return;
         }
 
+        //Get the text in the email and password fields if the details are valid
+        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+        String passwordInput = textInputPassword.getEditText().getText().toString();
+
+        /*
+          This method is provided by the Firebase documentation:
+          https://firebase.google.com/docs/auth/android/start
+         */
+        mAuth.createUserWithEmailAndPassword(emailInput, passwordInput)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //If registration is successful then switch to the login activity
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Registration Successful!",
+                                    Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(AccountRegisterActivity.this,
+                                    LoginAccountActivity.class);
+                            startActivity(intent);
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Registration Failed!",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 }
