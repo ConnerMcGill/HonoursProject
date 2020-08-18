@@ -11,7 +11,6 @@ properly. I will update this in due course
  */
 
 
-
 package com.example.honoursproject;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,13 +49,18 @@ public class MainActivity extends AppCompatActivity {
     private void logoutUserFromAccount() {
 
         mAuth.signOut();
+        returnToLoginActivity();
+
+    }
+
+    private void returnToLoginActivity() {
+
         Toast.makeText(getApplicationContext(), "Logging out!",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
 
         Intent returnToLoginIntent = new Intent(MainActivity.this,
                 LoginAccountActivity.class);
         startActivity(returnToLoginIntent);
-
     }
 
 }

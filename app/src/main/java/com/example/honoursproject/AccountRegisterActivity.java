@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -177,7 +178,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
                         //If registration is successful then switch to the login activity
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Registration Successful!",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(AccountRegisterActivity.this,
                                     MainActivity.class);
@@ -185,7 +186,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
 
                         } else {
                             Toast.makeText(getApplicationContext(), "Registration Failed!",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -198,6 +199,30 @@ public class AccountRegisterActivity extends AppCompatActivity {
         Intent openLoginAccountActivityIntent = new Intent
                 (this, LoginAccountActivity.class);
         startActivity(openLoginAccountActivityIntent);
+
+    }
+
+    //Check if the user is already logged in. If they are then start the MainActivity.Class
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+
+            switchToMainActivity();
+
+        }
+
+    }
+
+    //Switch the user to the MainActivity class
+    private void switchToMainActivity() {
+        Intent switchToMainActivityIntent = new Intent(AccountRegisterActivity.this,
+                MainActivity.class);
+        startActivity(switchToMainActivityIntent);
 
     }
 

@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -174,14 +175,14 @@ public class LoginAccountActivity extends AppCompatActivity {
                         //If login is successful go to game main menu activity
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Login Successful!",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(LoginAccountActivity.this,
                                     MainActivity.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Login failed!",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -194,6 +195,30 @@ public class LoginAccountActivity extends AppCompatActivity {
         Intent openAccountRegisterActivityIntent = new Intent
                 (this, AccountRegisterActivity.class);
         startActivity(openAccountRegisterActivityIntent);
+
+    }
+
+    //Check if the user is already logged in. If they are then start the MainActivity.Class
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+
+            switchToMainActivity();
+
+        }
+
+    }
+
+    //Switch the user to the MainActivity class
+    private void switchToMainActivity() {
+        Intent switchToMainActivityIntent = new Intent(LoginAccountActivity.this,
+                MainActivity.class);
+        startActivity(switchToMainActivityIntent);
 
     }
 
