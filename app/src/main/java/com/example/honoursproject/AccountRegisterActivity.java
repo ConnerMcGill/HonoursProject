@@ -180,7 +180,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
 
                             Intent intent = new Intent(AccountRegisterActivity.this,
-                                    LoginAccountActivity.class);
+                                    MainActivity.class);
                             startActivity(intent);
 
                         } else {

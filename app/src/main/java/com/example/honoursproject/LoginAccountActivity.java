@@ -6,13 +6,10 @@ Date: 2020/08/07
 
 Summary of file:
 
-    This file contains code which allows a user to login to the main activity of the app.
-    Functions in the class allows a user to login to their account with their email and
-    password. This is validated on the client. If the values are valid the details are validated
-    and authenticated through Firebase. The user can also sign up for an account by clicking on the
-    text-line that will take the user to a new activity to register for an account. The user
-    can also go to a new activity to request for a new password for their account if they have
-    forgotten their password.
+    This file contains code which allows a user to login into their account. The user must enter
+    their email and password. The users details will then be validated on the clients-side
+    to make sure they are valid. Once valid then the details will be authenticated on Firebase to
+    check that they are valid. If valid the user will be taken to the MainActivity.
 
  */
 
@@ -84,7 +81,7 @@ public class LoginAccountActivity extends AppCompatActivity {
         loginToAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginUserToAccount();
+                loginUserToAccount();
             }
         });
 
@@ -156,7 +153,7 @@ public class LoginAccountActivity extends AppCompatActivity {
         stored on Firebase. If valid then switch the user to the MainActivity after they have
         logged in.
      */
-    private void LoginUserToAccount() {
+    private void loginUserToAccount() {
 
         if (!validateEmail() | !validatePassword()) {
             return;
