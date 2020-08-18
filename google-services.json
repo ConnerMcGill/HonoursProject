@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "946644383700",
+    "firebase_url": "https://honours-project-ff12e.firebaseio.com",
+    "project_id": "honours-project-ff12e",
+    "storage_bucket": "honours-project-ff12e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946644383700:android:540fb088c0a302335ac841",
+        "android_client_info": {
+          "package_name": "com.example.honoursproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946644383700-dmqiv99bi84gskkr7unh75n4t3n8lbik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXz0KrDQZcft8-3RcCy99p9uoZKiPEa04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946644383700-dmqiv99bi84gskkr7unh75n4t3n8lbik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

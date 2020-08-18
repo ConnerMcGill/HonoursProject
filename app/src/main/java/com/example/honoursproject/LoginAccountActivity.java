@@ -18,17 +18,51 @@ Summary of file:
 
 package com.example.honoursproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.regex.Pattern;
 
 public class LoginAccountActivity extends AppCompatActivity {
 
+     /* Create constant patterns used for email and password validation:
+
+       The following regex rules are:
+       (?=.*[0-9]) - At least one digit
+       (?=.*[a-z]) - At least one lower case letter
+       (?=.*[A-Z]) - At least one upper case letter
+       .{4,} - At least 6 characters
+
+     */
+
+    private static final Pattern UPPER_CASE_PATTERN = Pattern.compile("[A-Z]");
+    private static final Pattern LOWER_CASE_PATTERN = Pattern.compile("[a-z]");
+    private static final Pattern DIGITAL_CASE_PATTERN = Pattern.compile("[0-9]");
+    private static final Pattern MIN_CHARS_PATTERN = Pattern.compile(".{6,}");
+
     //Declare instances for User Interface elements
+    private TextInputLayout textInputEmail;
+    private TextInputLayout textInputPassword;
+    private Button loginToAccountButton;
+    //Text view that will be used to allow user to switch to AccountRegisterActivity
     private TextView registerForAccountTextView;
+
+    //Declare an instance of FirebaseAuth
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -37,9 +71,24 @@ public class LoginAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Initialise user interface elements
+        textInputEmail = findViewById(R.id.text_login_enter_email);
+        textInputPassword = findViewById(R.id.text_login_enter_password);
         registerForAccountTextView = findViewById(R.id.text_register_redirect);
+        loginToAccountButton = findViewById(R.id.button_login);
 
-        /*Create on click listener for text-view which will allow the user to click the text view
+        //Initialise the FirebaseAuth instance
+        mAuth = FirebaseAuth.getInstance();
+
+
+        //User will attempt to sign into their account if they press the sign in button
+        loginToAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginUserToAccount();
+            }
+        });
+
+        /*Create on click listener for text-view which will allow the user to 'click' the text view
         and go to the register form activity. The activity will be opened by calling a function
         which calls an intent to start the AccountRegisterActivity. */
         registerForAccountTextView.setOnClickListener(new View.OnClickListener() {
@@ -51,13 +100,105 @@ public class LoginAccountActivity extends AppCompatActivity {
 
     }
 
-    /*This function is called when a user clicks the registerForAccountTextView. This function
-    sets up an intent which starts the AccountRegisterActivity class. */
-    public void openAccountRegisterActivity() {
+    //Validate the users email address
+    private Boolean validateEmail() {
+
+        //Gets the text from the email text field and trim any whitespace
+        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            textInputEmail.setError("Email field can't be empty!");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            textInputEmail.setError("Please enter a valid email address!");
+            return false;
+        } else {
+            //Remove the error message
+            textInputEmail.setError(null);
+            textInputEmail.setErrorEnabled(false);
+            return true;
+        }
+
+    }
+
+    //Validate the users password
+    private Boolean validatePassword() {
+
+        //Gets the text from the email text field and trim any whitespace
+        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            textInputPassword.setError("Password field can't be empty!");
+            return false;
+        } else if (!UPPER_CASE_PATTERN.matcher(passwordInput).find()) {
+            textInputPassword.setError("Password must have one uppercase letter!");
+            return false;
+        } else if (!LOWER_CASE_PATTERN.matcher(passwordInput).find()) {
+            textInputPassword.setError("Password must have one lowercase letter!");
+            return false;
+        } else if (!DIGITAL_CASE_PATTERN.matcher(passwordInput).find()) {
+            textInputPassword.setError("Password must contain at least one number!");
+            return false;
+        } else if (!MIN_CHARS_PATTERN.matcher(passwordInput).find()) {
+            textInputPassword.setError("Password must have a minimum of 6 characters");
+            return false;
+        } else {
+            //Remove the error message
+            textInputPassword.setError(null);
+            textInputPassword.setErrorEnabled(false);
+            return true;
+        }
+
+    }
+
+    /*
+        Login to users account by checking that the users details match the account details
+        stored on Firebase. If valid then switch the user to the MainActivity after they have
+        logged in.
+     */
+    private void LoginUserToAccount() {
+
+        if (!validateEmail() | !validatePassword()) {
+            return;
+        }
+
+        //Get the text in the email and password fields if the details are valid
+        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+        String passwordInput = textInputPassword.getEditText().getText().toString();
+
+         /*
+          This method is provided by the Firebase documentation:
+          https://firebase.google.com/docs/auth/android/start
+         */
+        mAuth.signInWithEmailAndPassword(emailInput, passwordInput)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //If login is successful go to game main menu activity
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Login Successful!",
+                                    Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(LoginAccountActivity.this,
+                                    MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Login failed!",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+
+    /*This function is called when a user 'clicks' the registerForAccountTextView. This function
+      sets up an intent which starts the AccountRegisterActivity class. */
+    private void openAccountRegisterActivity() {
         Intent openAccountRegisterActivityIntent = new Intent
                 (this, AccountRegisterActivity.class);
         startActivity(openAccountRegisterActivityIntent);
 
     }
+
 
 }
