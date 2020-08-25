@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 
 public class AccountRegisterActivity extends AppCompatActivity {
 
-    /* Create constant patterns used for email and password validation:
+    /* Create constant patterns used for password validation:
 
        The following regex rules are:
        (?=.*[0-9]) - At least one digit
@@ -183,7 +183,6 @@ public class AccountRegisterActivity extends AppCompatActivity {
                             Intent intent = new Intent(AccountRegisterActivity.this,
                                     MainActivity.class);
                             startActivity(intent);
-
                         } else {
                             Toast.makeText(getApplicationContext(), "Registration Failed!",
                                     Toast.LENGTH_SHORT).show();

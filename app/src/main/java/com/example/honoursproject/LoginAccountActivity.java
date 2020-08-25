@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 
 public class LoginAccountActivity extends AppCompatActivity {
 
-     /* Create constant patterns used for email and password validation:
+     /* Create constant patterns used for password validation:
 
        The following regex rules are:
        (?=.*[0-9]) - At least one digit
@@ -52,13 +52,13 @@ public class LoginAccountActivity extends AppCompatActivity {
     private static final Pattern DIGITAL_CASE_PATTERN = Pattern.compile("[0-9]");
     private static final Pattern MIN_CHARS_PATTERN = Pattern.compile(".{6,}");
 
-    //Declare instances for User Interface elements
+    //Declare instances for user interface elements
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
     private Button loginToAccountButton;
     //Text view that will be used to allow user to switch to AccountRegisterActivity
     private TextView registerForAccountTextView;
-    //Text view that will be used to allow the user to go to an activity to reset their password
+    //Text view that will be used to allow the user to switch to ForgotPasswordActivity
     private TextView forgotPasswordForAccountTextView;
 
     //Declare an instance of FirebaseAuth
