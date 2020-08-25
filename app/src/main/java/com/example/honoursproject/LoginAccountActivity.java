@@ -58,6 +58,8 @@ public class LoginAccountActivity extends AppCompatActivity {
     private Button loginToAccountButton;
     //Text view that will be used to allow user to switch to AccountRegisterActivity
     private TextView registerForAccountTextView;
+    //Text view that will be used to allow the user to go to an activity to reset their password
+    private TextView forgotPasswordForAccountTextView;
 
     //Declare an instance of FirebaseAuth
     private FirebaseAuth mAuth;
@@ -72,7 +74,9 @@ public class LoginAccountActivity extends AppCompatActivity {
         textInputEmail = findViewById(R.id.text_login_enter_email);
         textInputPassword = findViewById(R.id.text_login_enter_password);
         registerForAccountTextView = findViewById(R.id.text_register_redirect);
+        forgotPasswordForAccountTextView = findViewById(R.id.text_password_reset_redirect);
         loginToAccountButton = findViewById(R.id.button_login);
+
 
         //Initialise the FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
@@ -86,15 +90,28 @@ public class LoginAccountActivity extends AppCompatActivity {
             }
         });
 
-        /*Create on click listener for text-view which will allow the user to 'click' the text view
-        and go to the register form activity. The activity will be opened by calling a function
-        which calls an intent to start the AccountRegisterActivity. */
+        /*Create on click listener for the register for account text-view which will allow the user
+        to 'click' the text view and go to the register form activity. The activity will be opened
+        by calling a function which calls an intent to start the AccountRegisterActivity. */
         registerForAccountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAccountRegisterActivity();
             }
         });
+
+        /*Create on click listener for the reset password for account text-view which will allow
+        the user to 'click' the text view and go to the reset password form activity. The activity
+        will be opened by calling a function which calls an intent to start the
+        ForgotPasswordActivity. */
+        forgotPasswordForAccountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openForgotPasswordActivity();
+            }
+        });
+
+
 
     }
 
@@ -188,7 +205,6 @@ public class LoginAccountActivity extends AppCompatActivity {
                 });
     }
 
-
     /*This function is called when a user 'clicks' the registerForAccountTextView. This function
       sets up an intent which starts the AccountRegisterActivity class. */
     private void openAccountRegisterActivity() {
@@ -196,6 +212,14 @@ public class LoginAccountActivity extends AppCompatActivity {
                 (this, AccountRegisterActivity.class);
         startActivity(openAccountRegisterActivityIntent);
 
+    }
+
+    /*This function is called when a user 'clicks' the forgotPasswordForAccountTextView. This
+      function sets up an intent which starts the ForgotPasswordActivity class. */
+    private void openForgotPasswordActivity() {
+        Intent openForgotPasswordActivityIntent = new Intent
+                (this, ForgotPasswordActivity.class);
+        startActivity(openForgotPasswordActivityIntent);
     }
 
     //Check if the user is already logged in. If they are then start the MainActivity.Class
@@ -214,7 +238,7 @@ public class LoginAccountActivity extends AppCompatActivity {
 
     }
 
-    //Switch the user to the MainActivity class
+    //Switch the user to the MainActivity class if user is already logged in
     private void switchToMainActivity() {
         Intent switchToMainActivityIntent = new Intent(LoginAccountActivity.this,
                 MainActivity.class);

@@ -106,7 +106,6 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="120dp"
         android:background="#FFC107"
-        android:onClick="LoginUser"
         android:text="@string/sign_in_button_text"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -159,5 +158,22 @@
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_login_logo" />
+
+    <TextView
+        android:id="@+id/text_password_reset_redirect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/forgot_password_reset_your_password_here"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_register_redirect" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
