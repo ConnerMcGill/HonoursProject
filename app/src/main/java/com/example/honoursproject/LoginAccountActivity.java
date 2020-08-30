@@ -47,9 +47,11 @@ public class LoginAccountActivity extends AppCompatActivity {
 
      */
 
-    private static final Pattern UPPER_CASE_PATTERN = Pattern.compile("[A-Z]");
-    private static final Pattern LOWER_CASE_PATTERN = Pattern.compile("[a-z]");
-    private static final Pattern DIGITAL_CASE_PATTERN = Pattern.compile("[0-9]");
+    //private static final Pattern UPPER_CASE_PATTERN = Pattern.compile("[A-Z]");
+    //private static final Pattern LOWER_CASE_PATTERN = Pattern.compile("[a-z]");
+    //private static final Pattern DIGITAL_CASE_PATTERN = Pattern.compile("[0-9]");
+
+    //Commented out old regex validation to match Firebase reset password rules that can't be changed
     private static final Pattern MIN_CHARS_PATTERN = Pattern.compile(".{6,}");
 
     //Declare instances for user interface elements
@@ -112,7 +114,6 @@ public class LoginAccountActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     //Validate the users email address
@@ -144,15 +145,6 @@ public class LoginAccountActivity extends AppCompatActivity {
 
         if (passwordInput.isEmpty()) {
             textInputPassword.setError("Password field can't be empty!");
-            return false;
-        } else if (!UPPER_CASE_PATTERN.matcher(passwordInput).find()) {
-            textInputPassword.setError("Password must have one uppercase letter!");
-            return false;
-        } else if (!LOWER_CASE_PATTERN.matcher(passwordInput).find()) {
-            textInputPassword.setError("Password must have one lowercase letter!");
-            return false;
-        } else if (!DIGITAL_CASE_PATTERN.matcher(passwordInput).find()) {
-            textInputPassword.setError("Password must contain at least one number!");
             return false;
         } else if (!MIN_CHARS_PATTERN.matcher(passwordInput).find()) {
             textInputPassword.setError("Password must have a minimum of 6 characters");
