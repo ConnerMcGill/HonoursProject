@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HonoursProject</string>
+    <string name="app_name">PC Part Builder</string>
     <string name="login_email_title">Email:</string>
     <string name="login_enter_email_address_hint">Enter Email Address</string>
     <string name="login_password_title">Password:</string>
@@ -28,4 +28,5 @@
     <string name="view_lists_card_description">View Your Saved Lists and Other Lists!</string>
     <string name="view_guides_card_title">View Guides</string>
     <string name="view_guides_card_description">View guides about components and more!</string>
+    <string name="logout_text_toolbar">Logout</string>
 </resources>

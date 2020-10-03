@@ -7,6 +7,9 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/create_list_card"
@@ -21,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/build_pc_list_card_bg"
+            android:background="@drawable/test_bg"
             android:orientation="vertical">
 
 
@@ -31,12 +34,12 @@
 
 
                 <ImageView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="230dp"
-                    android:layout_marginStart="270dp"
-                    android:layout_marginEnd="290dp"
-                    android:src="@drawable/cpu_for_build_list_card"
-                    android:contentDescription="@string/create_list_card_icon_description" />
+                    android:layout_marginStart="250dp"
+                    android:layout_marginEnd="270dp"
+                    android:contentDescription="@string/create_list_card_icon_description"
+                    android:src="@drawable/cpu_for_build_list_card" />
 
             </RelativeLayout>
 
@@ -72,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_list_card_description"
                     android:textColor="#ffff"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
 
             </LinearLayout>
@@ -95,7 +98,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/view_pc_lists_card_bg"
+            android:background="@drawable/test_bg"
             android:orientation="vertical">
 
 
@@ -105,11 +108,12 @@
 
 
                 <ImageView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="230dp"
-                    android:layout_marginStart="270dp"
-                    android:src="@drawable/list_for_view_lists_card"
-                    android:contentDescription="@string/view_lists_icon_description" />
+                    android:layout_marginStart="250dp"
+                    android:layout_marginEnd="270dp"
+                    android:contentDescription="@string/view_lists_icon_description"
+                    android:src="@drawable/list_for_view_lists_card" />
 
             </RelativeLayout>
 
@@ -145,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_lists_card_description"
                     android:textColor="#ffff"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
 
             </LinearLayout>
@@ -168,7 +172,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/view_guides_card_bg"
+            android:background="@drawable/test_bg"
             android:orientation="vertical">
 
 
@@ -178,11 +182,12 @@
 
 
                 <ImageView
-                    android:layout_width="80dp"
+                    android:layout_width="75dp"
                     android:layout_height="230dp"
-                    android:layout_marginStart="270dp"
-                    android:src="@drawable/guide_for_view_guides_card"
-                    android:contentDescription="@string/png_icon_for_guide_card" />
+                    android:layout_marginStart="250dp"
+                    android:layout_marginEnd="270dp"
+                    android:contentDescription="@string/png_icon_for_guide_card"
+                    android:src="@drawable/guide_for_view_guides_card" />
 
             </RelativeLayout>
 
@@ -218,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_guides_card_description"
                     android:textColor="#ffff"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
 
             </LinearLayout>
@@ -227,15 +232,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/temp_logout_button">
-
-
-    </Button>
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>
