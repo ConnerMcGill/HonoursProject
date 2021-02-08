@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Need to add onclick to card view to open other activity as it crashes the app
 
     }
 
@@ -77,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
         Intent returnToLoginIntent = new Intent(MainActivity.this,
                 LoginAccountActivity.class);
         startActivity(returnToLoginIntent);
+    }
+
+    private void openGuideLandingPageActivity() {
+        Intent openGuideLandingPage = new Intent(MainActivity.this,
+                GuideLandingPageActivity.class);
+        startActivity(openGuideLandingPage);
     }
 
 }

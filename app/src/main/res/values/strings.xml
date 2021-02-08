@@ -29,4 +29,10 @@
     <string name="view_guides_card_title">View Guides</string>
     <string name="view_guides_card_description">View guides about components and more!</string>
     <string name="logout_text_toolbar">Logout</string>
+    <string name="how_to_use_the_app">How to use the App!</string>
+    <string name="learn_how_to_navigate_through_the_app">Learn how to navigate through the app</string>
+    <string name="learn_more_about_parts">Learn more about parts!</string>
+    <string name="learn_more_about_each_individual_component">Learn more about each individual component</string>
+    <string name="learn_how_to_build_a_pc">Learn how to build a PC</string>
+    <string name="learn_how_to_build_a_pc_from_the_ground_up">Learn how to build a PC from the ground up</string>
 </resources>
