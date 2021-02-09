@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_list_card_title"
                     android:textColor="#ffff"
-                    android:textSize="32dp">
+                    android:textSize="28sp">
 
                 </TextView>
 
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_list_card_description"
                     android:textColor="#ffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_lists_card_title"
                     android:textColor="#ffff"
-                    android:textSize="32dp">
+                    android:textSize="28sp">
 
                 </TextView>
 
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_lists_card_description"
                     android:textColor="#ffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -214,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_guides_card_title"
                     android:textColor="#ffff"
-                    android:textSize="32dp">
+                    android:textSize="28sp">
 
                 </TextView>
 
@@ -223,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_guides_card_description"
                     android:textColor="#ffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>

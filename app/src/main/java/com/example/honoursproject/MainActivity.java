@@ -43,7 +43,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Need to add onclick to card view to open other activity as it crashes the app
+        CardView guidesCard = findViewById(R.id.view_guides_card);
+
+        guidesCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGuideLandingPageActivity();
+            }
+        });
+
 
     }
 
@@ -84,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openGuideLandingPageActivity() {
         Intent openGuideLandingPage = new Intent(MainActivity.this,
-                GuideLandingPageActivity.class);
+                GuidesLandingPage.class);
         startActivity(openGuideLandingPage);
     }
 
