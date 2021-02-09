@@ -165,7 +165,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
-    //Switch the user to the MainActivity class
+    //Switch the user to the MainActivity class if they are logged in
     private void switchToMainActivity() {
         Intent switchToMainActivityIntent = new Intent(ForgotPasswordActivity.this,
                 MainActivity.class);

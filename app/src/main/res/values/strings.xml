@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HonoursProject</string>
+    <string name="app_name">PC Part Builder</string>
     <string name="login_email_title">Email:</string>
     <string name="login_enter_email_address_hint">Enter Email Address</string>
     <string name="login_password_title">Password:</string>
@@ -19,4 +19,20 @@
     <string name="reset_password_enter_email_address_hint">Enter Email Address</string>
     <string name="button_reset_password_text">reset password</string>
     <string name="return_back_to_user_login_here">Return back to user login here!</string>
+    <string name="create_list_card_icon_description">PNG Icon Image of a CPU</string>
+    <string name="view_lists_icon_description">PNG Icon for View Lists Card</string>
+    <string name="png_icon_for_guide_card">PNG Icon for Guide card</string>
+    <string name="create_list_card_title">Create List</string>
+    <string name="create_list_card_description">Create a List of Different Components!</string>
+    <string name="view_lists_card_title">View Lists</string>
+    <string name="view_lists_card_description">View Your Saved Lists and Other Lists!</string>
+    <string name="view_guides_card_title">View Guides</string>
+    <string name="view_guides_card_description">View guides about components and more!</string>
+    <string name="logout_text_toolbar">Logout</string>
+    <string name="how_to_use_the_app">How to use the App!</string>
+    <string name="learn_how_to_navigate_through_the_app">Learn how to navigate through the app</string>
+    <string name="learn_more_about_parts">Learn more about parts!</string>
+    <string name="learn_more_about_each_individual_component">Learn more about each individual component</string>
+    <string name="learn_how_to_build_a_pc">Learn how to build a PC</string>
+    <string name="learn_how_to_build_a_pc_from_the_ground_up">Learn how to build a PC from the ground up</string>
 </resources>

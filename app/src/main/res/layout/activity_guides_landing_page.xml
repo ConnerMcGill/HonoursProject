@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".GuidesLandingPage">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/create_list_card"
+        android:id="@+id/how_to_use_app_card"
         android:layout_width="match_parent"
         android:layout_height="173dp"
         android:layout_marginStart="15dp"
@@ -34,12 +34,12 @@
 
 
                 <ImageView
-                    android:layout_width="75dp"
+                    android:layout_width="65dp"
                     android:layout_height="230dp"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginEnd="270dp"
+                    android:layout_marginStart="280dp"
+                    android:layout_marginEnd="310dp"
                     android:contentDescription="@string/create_list_card_icon_description"
-                    android:src="@drawable/cpu_for_build_list_card" />
+                    android:src="@drawable/mobile_app" />
 
             </RelativeLayout>
 
@@ -64,7 +64,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_list_card_title"
+                    android:text="@string/how_to_use_the_app"
                     android:textColor="#ffff"
                     android:textSize="28sp">
 
@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_list_card_description"
+                    android:text="@string/learn_how_to_navigate_through_the_app"
                     android:textColor="#ffff"
                     android:textSize="14sp" />
 
@@ -86,7 +86,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/view_created_lists_card"
+        android:id="@+id/learn_more_about_parts"
         android:layout_width="match_parent"
         android:layout_height="173dp"
         android:layout_marginStart="15dp"
@@ -108,12 +108,12 @@
 
 
                 <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="230dp"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginEnd="270dp"
+                    android:layout_width="65dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginEnd="310dp"
                     android:contentDescription="@string/view_lists_icon_description"
-                    android:src="@drawable/list_for_view_lists_card" />
+                    android:src="@drawable/parts_icon"/>
 
             </RelativeLayout>
 
@@ -138,7 +138,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/view_lists_card_title"
+                    android:text="@string/learn_more_about_parts"
                     android:textColor="#ffff"
                     android:textSize="28sp">
 
@@ -147,7 +147,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/view_lists_card_description"
+                    android:text="@string/learn_more_about_each_individual_component"
                     android:textColor="#ffff"
                     android:textSize="14sp" />
 
@@ -160,7 +160,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/view_guides_card"
+        android:id="@+id/learn_how_to_build_pc"
         android:layout_width="match_parent"
         android:layout_height="173dp"
         android:layout_marginStart="15dp"
@@ -182,12 +182,12 @@
 
 
                 <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="230dp"
-                    android:layout_marginStart="250dp"
-                    android:layout_marginEnd="270dp"
+                    android:layout_width="65dp"
+                    android:layout_height="210dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginEnd="310dp"
                     android:contentDescription="@string/png_icon_for_guide_card"
-                    android:src="@drawable/guide_for_view_guides_card" />
+                    android:src="@drawable/build"/>
 
             </RelativeLayout>
 
@@ -212,7 +212,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/view_guides_card_title"
+                    android:text="@string/learn_how_to_build_a_pc"
                     android:textColor="#ffff"
                     android:textSize="28sp">
 
@@ -221,7 +221,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/view_guides_card_description"
+                    android:text="@string/learn_how_to_build_a_pc_from_the_ground_up"
                     android:textColor="#ffff"
                     android:textSize="14sp" />
 
@@ -232,5 +232,8 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
+

@@ -1,15 +1,17 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/titleBar</item>
+        <item name="colorPrimaryDark">@color/titleBar</item>
+        <item name="colorAccent">@color/titleBar</item>
     </style>
 
     <style name="error_message_appearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorError</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+
 
 </resources>
