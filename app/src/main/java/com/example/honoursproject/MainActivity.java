@@ -5,8 +5,11 @@ Author: Conner McGill - B00320975
 Date: 2020/08/18
 
 Summary of file:
-Currently this is just a temp class setup to make sure that I can logout a user
-properly. I will update this in due course
+This class is the landing page of the app once the user has logged into their account. From here
+the user will be able to access a range of different options within the app such as creating a list
+of components or viewing their lists, etc. This class is a Superclass - Parent class of the
+GuidesLandingPage due to how similar they are. This allows the subclass to reuse methods
+such as logging the user out
 
  */
 
