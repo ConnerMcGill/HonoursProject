@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LearnMoreAboutPartsOptionsActivity"
+    android:layout_marginBottom="15dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <Button
+            android:id="@+id/learn_more_about_the_cpu_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_cpu_btn_text"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_cpu_cooler_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_cpu_cooler"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_motherboard_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_motherboard_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_memory_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_memory_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_storage_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_storage_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_video_card_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_video_card_gpu_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_case_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_case_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_more_about_the_power_supply_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_more_about_the_power_supply_psu_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+    </LinearLayout>
+
+
+
+
+</androidx.core.widget.NestedScrollView>

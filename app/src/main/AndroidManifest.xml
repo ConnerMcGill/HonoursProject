@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".GuidesLandingPage"
+            android:name=".LearnMoreAboutPartsOptionsActivity"
+            android:parentActivityName=".GuidesLandingPageActivity" />
+        <activity
+            android:name=".GuidesLandingPageActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ForgotPasswordActivity"

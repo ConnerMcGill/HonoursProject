@@ -11,15 +11,19 @@ rest of the options within the app. It's a subclass due to how similar it is to 
 class considering it just leads to other menus. It ends up reusing code from the MainActivity
 that deals with letting the user logout
 
- */
+*/
 
 
 package com.example.honoursproject;
+
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-public class GuidesLandingPage extends MainActivity {
+public class GuidesLandingPageActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +36,21 @@ public class GuidesLandingPage extends MainActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Guides Landing Page");
+
+        CardView learnMoreAboutPartsCard = findViewById(R.id.learn_more_about_parts);
+
+        learnMoreAboutPartsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLearnMoreAboutPartsGuides();
+            }
+        });
+
+    }
+
+    private void openLearnMoreAboutPartsGuides() {
+        Intent openGuideLandingPage = new Intent(GuidesLandingPageActivity.this,
+                LearnMoreAboutPartsOptionsActivity.class);
+        startActivity(openGuideLandingPage);
     }
 }

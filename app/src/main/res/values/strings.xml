@@ -35,4 +35,15 @@
     <string name="learn_more_about_each_individual_component">Learn more about each individual component</string>
     <string name="learn_how_to_build_a_pc">Learn how to build a PC</string>
     <string name="learn_how_to_build_a_pc_from_the_ground_up">Learn how to build a PC from the ground up</string>
+    <string name="icon_for_learn_how_to_navigate_the_app">icon for learn how to navigate the app</string>
+    <string name="learn_more_about_parts_icon">learn more about parts icon</string>
+    <string name="learn_more_about_building_a_pc_icon">learn more about building a pc icon</string>
+    <string name="learn_more_about_the_cpu_btn_text">Learn more about the CPU</string>
+    <string name="learn_more_about_the_cpu_cooler">Learn more about the cpu cooler</string>
+    <string name="learn_more_about_the_motherboard_btn">Learn more about the motherboard</string>
+    <string name="learn_more_about_the_memory_btn">Learn more about the memory</string>
+    <string name="learn_more_about_the_storage_btn">Learn more about the storage</string>
+    <string name="learn_more_about_the_video_card_gpu_btn">Learn more about the video card (GPU)</string>
+    <string name="learn_more_about_the_case_btn">Learn more about the case</string>
+    <string name="learn_more_about_the_power_supply_psu_btn">Learn more about the power supply (PSU)</string>
 </resources>
