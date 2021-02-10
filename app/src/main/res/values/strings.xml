@@ -46,4 +46,7 @@
     <string name="learn_more_about_the_video_card_gpu_btn">Learn more about the video card (GPU)</string>
     <string name="learn_more_about_the_case_btn">Learn more about the case</string>
     <string name="learn_more_about_the_power_supply_psu_btn">Learn more about the power supply (PSU)</string>
+    <string name="description_for_guide">Description for guide</string>
+    <string name="title_for_guide">Title For Guide</string>
+    <string name="image_of_the_guide">image of the guide</string>
 </resources>

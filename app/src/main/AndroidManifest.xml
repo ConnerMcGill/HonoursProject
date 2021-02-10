@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ViewGuideActivity"
+            android:parentActivityName=".GuidesLandingPageActivity" />
+        <activity
             android:name=".LearnMoreAboutPartsOptionsActivity"
             android:parentActivityName=".GuidesLandingPageActivity" />
         <activity

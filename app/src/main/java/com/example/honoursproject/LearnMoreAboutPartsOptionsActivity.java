@@ -18,7 +18,10 @@ package com.example.honoursproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivity {
 
@@ -35,5 +38,21 @@ public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivit
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Learn about different parts");
 
+        Button learnAboutTheCpu = findViewById(R.id.learn_more_about_the_cpu_btn);
+
+        learnAboutTheCpu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGuideActivity();
+            }
+        });
+
+
+    }
+
+    private void openGuideActivity() {
+        Intent openGuideActivity = new Intent(LearnMoreAboutPartsOptionsActivity.this,
+                ViewGuideActivity.class);
+        startActivity(openGuideActivity);
     }
 }
