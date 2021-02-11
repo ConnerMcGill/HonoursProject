@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class ViewGuideActivity extends AppCompatActivity {
 
@@ -27,6 +28,12 @@ public class ViewGuideActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        TextView titleForGuide = findViewById(R.id.titleForGuide);
+        TextView descriptionForGuide = findViewById(R.id.textForGuideDescription);
+
+        titleForGuide.setText(getIntent().getStringExtra("TITLE"));
+        descriptionForGuide.setText(getIntent().getStringExtra("DESCRIPTION"));
 
 
     }

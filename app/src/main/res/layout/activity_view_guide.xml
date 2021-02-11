@@ -37,7 +37,7 @@
         android:src="@drawable/desktop_yellow_version" />
 
     <TextView
-        android:id="@+id/textForDescription"
+        android:id="@+id/textForGuideDescription"
         android:layout_width="391dp"
         android:layout_height="403dp"
         android:layout_marginStart="11dp"
