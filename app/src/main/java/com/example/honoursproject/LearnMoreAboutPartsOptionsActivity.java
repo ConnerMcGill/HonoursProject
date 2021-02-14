@@ -6,7 +6,11 @@ Date: 2021/02/09
 
 Summary of file:
 This class is the landing page as an option to take the users to specific guides about individual
-components. This class is a subclass of the GuidesLandingPageActivity class which is a landing page
+components. When a user clicks on a button to view the guide they would like to view they are taken
+to a new activity with the data being retrieved first before being passed to the new activity
+through an intent
+
+This class is a subclass of the GuidesLandingPageActivity class which is a landing page
 for the rest of the guides within the app. It's a subclass due to how similar it is to the
 GuidesLandingPage class considering it just leads to other guides.
 It ends up reusing code from the GuidesLandingPage which inherits from the MainActivity
@@ -31,7 +35,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivity {
+public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivity implements View.OnClickListener {
 
     //Tag used for debugging the firestore data retrieval
     private static final String TAG = "LearnMoreAboutPartsOptionsTAG";
@@ -49,12 +53,16 @@ public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivit
     private String title;
     private String description;
 
+    //This variable stores the string in the button that is used to retrieve the document name in
+    //the firestore database
+    private String buttonText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_more_about_parts_options);
 
-
+        //References to UI elements in the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,27 +70,64 @@ public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivit
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Learn about different parts");
 
-        final Button learnAboutTheCpu = findViewById(R.id.learn_more_about_the_cpu_btn);
+        //References to the buttons within the activity
+        final Button learnMoreAboutTheCPU = findViewById(R.id.learn_more_about_the_cpu_btn);
+        learnMoreAboutTheCPU.setOnClickListener(this); //Call the onClick method below
 
-        learnAboutTheCpu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                learnAboutTheCpuData();
-                //openGuideActivity();
-            }
-        });
+        final Button learnMoreAboutTheCPUCooler = findViewById(R.id.learn_more_about_the_cpu_cooler_btn);
+        learnMoreAboutTheCPUCooler.setOnClickListener(this); //Call the onClick method below
 
+        final Button learnMoreAboutTheMotherboard = findViewById(R.id.learn_more_about_the_motherboard_btn);
+        learnMoreAboutTheMotherboard.setOnClickListener(this); //Call the onClick method below
+
+        final Button learnMoreAboutTheMemory = findViewById(R.id.learn_more_about_the_memory_btn);
+        learnMoreAboutTheMemory.setOnClickListener(this); //Call the onClick method below
+
+        final Button learnMoreAboutTheStorage = findViewById(R.id.learn_more_about_the_storage_btn);
+        learnMoreAboutTheStorage.setOnClickListener(this); //Call the onClick method below
+
+        final Button learnMoreAboutTheGPU = findViewById(R.id.learn_more_about_the_video_card_btn);
+        learnMoreAboutTheGPU.setOnClickListener(this); //Call the onClick method below
+
+        final Button learnMoreAboutTheCase = findViewById(R.id.learn_more_about_the_case_btn);
+        learnMoreAboutTheCase.setOnClickListener(this); //Call the onClick method below
+
+        final Button learnMoreAboutThePowerSupply = findViewById(R.id.learn_more_about_the_power_supply_btn);
+        learnMoreAboutThePowerSupply.setOnClickListener(this); //Call the onClick method below
 
     }
 
-    private void learnAboutTheCpuData() {
-        //Create reference to the cpu guide document in the guides collection
-        String documentName = "Learn about the CPU";
-        DocumentReference guidesRef = db.collection("guides").document(documentName);
+    //OnClickListener for multiple buttons in the guide page gets the text for the button pressed
+    //and then call the getPartGuideData() method
 
-        //For the future I need to see if I can get some name or tag from the button itself to act
-        //as the document name to make the code cleaner and have one function instead of having
-        //tons of little functions trying to gather all the data
+    //https://stackoverflow.com/questions/5620772/get-text-from-pressed-button
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.learn_more_about_the_cpu_btn:
+            case R.id.learn_more_about_the_cpu_cooler_btn:
+            case R.id.learn_more_about_the_motherboard_btn:
+            case R.id.learn_more_about_the_memory_btn:
+            case R.id.learn_more_about_the_storage_btn:
+            case R.id.learn_more_about_the_video_card_btn:
+            case R.id.learn_more_about_the_case_btn:
+            case R.id.learn_more_about_the_power_supply_btn:
+                Button btn = (Button) view;
+                buttonText = btn.getText().toString();
+                //testing that I can get the data for the button
+                Log.d("my btn text", buttonText);
+                getPartGuideData();
+                break;
+            default:
+                Log.d("my switch statement failed", "Something went wrong with the switch statement");
+                Toast.makeText(LearnMoreAboutPartsOptionsActivity.this, "There has been an error with selecting a button...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getPartGuideData() {
+        //Create reference for retrieving the guide document from the guides collection
+        String documentName = buttonText;
+        DocumentReference guidesRef = db.collection("guides").document(documentName);
 
         guidesRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -96,13 +141,19 @@ public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivit
                             title = documentSnapshot.getString(KEY_TITLE);
                             description = documentSnapshot.getString(KEY_DESCRIPTION);
 
-                            //Testing that firestore can get the data which it seems to be able to
+                            //As firestore console does not recognise the \n regex command I have
+                            //to manually change a string and add in a new line manually...
+                            description = description.replace("newline", "\n\n");
+
+                            //Testing that firestore can get the data
                             Log.d("my title", title);
                             Log.d("my description", description);
 
+                            //Call the method below
                             openGuideActivity();
 
                         } else {
+                            //Display toast as error message if the document can't be retrieved
                             Toast.makeText(LearnMoreAboutPartsOptionsActivity.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -114,15 +165,17 @@ public class LearnMoreAboutPartsOptionsActivity extends GuidesLandingPageActivit
                         Log.d(TAG, e.toString());
                     }
                 });
-
-
     }
 
+    //Pass the relevant data into the new activity as an intent as well as opening the ViewGuideActivity
     private void openGuideActivity() {
         Intent openGuideActivity = new Intent(LearnMoreAboutPartsOptionsActivity.this,
                 ViewGuideActivity.class);
         openGuideActivity.putExtra("TITLE", title);
         openGuideActivity.putExtra("DESCRIPTION", description);
+        openGuideActivity.putExtra("IMAGE NAME", buttonText);
         startActivity(openGuideActivity);
     }
+
+
 }

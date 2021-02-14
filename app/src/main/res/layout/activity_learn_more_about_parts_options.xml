@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LearnMoreAboutPartsOptionsActivity"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="15dp"
+    android:fadeScrollbars="false"
+    tools:context=".LearnMoreAboutPartsOptionsActivity">
 
 
     <LinearLayout
@@ -130,8 +131,6 @@
         </Button>
 
     </LinearLayout>
-
-
 
 
 </androidx.core.widget.NestedScrollView>
