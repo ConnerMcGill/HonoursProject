@@ -39,6 +39,8 @@ public class GuidesLandingPageActivity extends MainActivity {
 
         CardView learnMoreAboutPartsCard = findViewById(R.id.learn_more_about_parts);
 
+        CardView learnHowToBuildAPC = findViewById(R.id.learn_how_to_build_pc);
+
         learnMoreAboutPartsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,11 +48,27 @@ public class GuidesLandingPageActivity extends MainActivity {
             }
         });
 
+        learnHowToBuildAPC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLearnHowToBuildAPCGuides();
+            }
+        });
+
+        //Change the setOnClickListener into a switch statement as it will look more cleaner
+
     }
 
     private void openLearnMoreAboutPartsGuides() {
-        Intent openGuideLandingPage = new Intent(GuidesLandingPageActivity.this,
+        Intent openLearnMoreAboutPartsGuideLandingPage = new Intent(GuidesLandingPageActivity.this,
                 LearnMoreAboutPartsOptionsActivity.class);
-        startActivity(openGuideLandingPage);
+        startActivity(openLearnMoreAboutPartsGuideLandingPage);
     }
+
+    private void openLearnHowToBuildAPCGuides() {
+        Intent openLearnHowToBuildPCGuideLandingPage = new Intent(GuidesLandingPageActivity.this,
+                LearnHowToBuildPCOptionsActivity.class);
+        startActivity(openLearnHowToBuildPCGuideLandingPage);
+    }
+
 }

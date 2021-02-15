@@ -49,4 +49,18 @@
     <string name="description_for_guide">Description for guide</string>
     <string name="title_for_guide">Title For Guide</string>
     <string name="image_of_the_guide">image of the guide</string>
+    <string name="prep_one_pc_build_tools">Prep 1 - PC Build Tools</string>
+    <string name="prep_two_pc_cases">Prep 2 - PC Cases</string>
+    <string name="prep_three_pc_parts">Prep 3 - PC Parts</string>
+    <string name="step_one_installing_the_cpu">Step 1 - Installing The CPU</string>
+    <string name="step_two_optional_install_m_2_ssds">Step 2 - (Optional) Install M.2 SSDs</string>
+    <string name="step_three_install_cpu_cooling">Step 3 - Install CPU Cooling</string>
+    <string name="step_four_install_memory_ram">Step 4 - Install Memory (RAM)</string>
+    <string name="step_five_optional_do_a_test_outside_the_case">Step 5 - (Optional) Do a test outside the case</string>
+    <string name="step_six_mount_power_supply">Step 6 - Mount power supply</string>
+    <string name="step_seven_install_motherboard">Step 7 - Install Motherboard</string>
+    <string name="step_eight_install_gpu">Step 8 - Install GPU</string>
+    <string name="step_nine_install_storage">Step 9 - Install Storage</string>
+    <string name="step_ten_install_operating_system">Step 10 - Install Operating System</string>
+    <string name="step_eleven_learn_more">Step 11 - Learn More</string>
 </resources>

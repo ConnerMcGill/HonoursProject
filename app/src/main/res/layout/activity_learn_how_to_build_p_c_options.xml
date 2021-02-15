@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="15dp"
+    android:fadeScrollbars="false"
+    tools:context=".LearnHowToBuildPCOptionsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <Button
+            android:id="@+id/prep_stage_one_pc_build_tools"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/prep_one_pc_build_tools"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/prep_stage_two_pc_cases"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/prep_two_pc_cases"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/prep_stage_three_pc_parts"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/prep_three_pc_parts"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_one_install_cpu"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_one_installing_the_cpu"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_two_optional_install_m2_drive"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_two_optional_install_m_2_ssds"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_three_install_cpu_cooling"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_three_install_cpu_cooling"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_four_install_memory"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_four_install_memory_ram"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_five_optional_test_run_outside_case"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_five_optional_do_a_test_outside_the_case"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_six_mount_power_supply"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_six_mount_power_supply"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_seven_install_motherboard"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_seven_install_motherboard"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_eight_install_gpu"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_eight_install_gpu"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_nine_install_storage"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_nine_install_storage"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_ten_install_os"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_ten_install_operating_system"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/step_eleven_learn_more"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/step_eleven_learn_more"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

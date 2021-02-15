@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ViewGuideActivity" />
+        <activity android:name=".LearnHowToBuildPCOptionsActivity"
+            android:parentActivityName=".GuidesLandingPageActivity"/>
+        <activity android:name=".ViewGuideActivity" />
         <activity
             android:name=".LearnMoreAboutPartsOptionsActivity"
             android:parentActivityName=".GuidesLandingPageActivity" />
