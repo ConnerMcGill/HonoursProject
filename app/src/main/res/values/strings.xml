@@ -63,4 +63,5 @@
     <string name="step_nine_install_storage">Step 9 - Install Storage</string>
     <string name="step_ten_install_operating_system">Step 10 - Install Operating System</string>
     <string name="step_eleven_learn_more">Step 11 - Learn More</string>
+    <string name="return_to_main_activity_text_toolbar">Return to Main Activity</string>
 </resources>

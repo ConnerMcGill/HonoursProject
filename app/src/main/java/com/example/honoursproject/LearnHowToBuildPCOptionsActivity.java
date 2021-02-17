@@ -24,6 +24,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -145,6 +148,41 @@ public class LearnHowToBuildPCOptionsActivity extends GuidesLandingPageActivity 
                 Log.d("my switch statement failed", "Something went wrong with the switch statement");
                 Toast.makeText(LearnHowToBuildPCOptionsActivity.this, "There has been an error with selecting a button...", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    //Overriding the inflater menu with a shortcut back to the MainActivity class here
+    //Create the inflater menu (three dots) in the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.example_menu, menu);
+        return true;
+    }
+
+    //Add an option in the inflater menu (three dots) to let the user logout of their account by
+    //calling the logoutUserFromAccount method or return to the MainActivity(Homepage) as a shortcut
+    //for the guides screen
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                logoutUserFromAccount();
+                return true;
+            case R.id.item2:
+                returnToMainActivity();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //Return to the main activity shortcuts intent option in the inflater menu for the guides
+    private void returnToMainActivity() {
+        Toast.makeText(getApplicationContext(), "Returning to Home Page!",
+                Toast.LENGTH_SHORT).show();
+
+        Intent returnToMainActivityIntent = new Intent(LearnHowToBuildPCOptionsActivity.this,
+                MainActivity.class);
+        startActivity(returnToMainActivityIntent);
     }
 
     private void getLearnBuildStageGuideData() {
