@@ -19,6 +19,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="157dp"
         android:text="@string/title_for_guide"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +27,8 @@
 
     <ImageView
         android:id="@+id/imageForGuide"
-        android:layout_width="248dp"
-        android:layout_height="202dp"
+        android:layout_width="311dp"
+        android:layout_height="207dp"
         android:layout_marginStart="111dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="111dp"

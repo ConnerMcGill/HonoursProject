@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     //Create the inflater menu (three dots) in the toolbar

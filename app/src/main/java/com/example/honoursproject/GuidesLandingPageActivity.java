@@ -21,9 +21,11 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-public class GuidesLandingPageActivity extends MainActivity {
+public class GuidesLandingPageActivity extends MainActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +40,26 @@ public class GuidesLandingPageActivity extends MainActivity {
         getSupportActionBar().setTitle("Guides Landing Page");
 
         CardView learnMoreAboutPartsCard = findViewById(R.id.learn_more_about_parts);
+        learnMoreAboutPartsCard.setOnClickListener(this);
 
         CardView learnHowToBuildAPC = findViewById(R.id.learn_how_to_build_pc);
+        learnHowToBuildAPC.setOnClickListener(this);
 
-        learnMoreAboutPartsCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.learn_more_about_parts:
                 openLearnMoreAboutPartsGuides();
-            }
-        });
-
-        learnHowToBuildAPC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.learn_how_to_build_pc:
                 openLearnHowToBuildAPCGuides();
-            }
-        });
-
-        //Change the setOnClickListener into a switch statement as it will look more cleaner
-
+                break;
+            default:
+                Log.d("my switch statement failed", "Something went wrong with the switch statement");
+                Toast.makeText(GuidesLandingPageActivity.this, "There has been an error with selecting a button...", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void openLearnMoreAboutPartsGuides() {
