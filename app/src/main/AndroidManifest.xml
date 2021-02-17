@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GuidesLandingPage"></activity>
+        <activity android:name=".LearnHowToBuildPCOptionsActivity"
+            android:parentActivityName=".GuidesLandingPageActivity"/>
+        <activity android:name=".ViewGuideActivity" />
+        <activity
+            android:name=".LearnMoreAboutPartsOptionsActivity"
+            android:parentActivityName=".GuidesLandingPageActivity" />
+        <activity
+            android:name=".GuidesLandingPageActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

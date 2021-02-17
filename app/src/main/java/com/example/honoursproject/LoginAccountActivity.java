@@ -63,7 +63,7 @@ public class LoginAccountActivity extends AppCompatActivity {
     //Text view that will be used to allow the user to switch to ForgotPasswordActivity
     private TextView forgotPasswordForAccountTextView;
 
-    //Declare an instance of FirebaseAuth
+    //Declare an instance of firebaseAuthentication
     private FirebaseAuth mAuth;
 
 

@@ -5,8 +5,11 @@ Author: Conner McGill - B00320975
 Date: 2020/08/18
 
 Summary of file:
-Currently this is just a temp class setup to make sure that I can logout a user
-properly. I will update this in due course
+This class is the landing page of the app once the user has logged into their account. From here
+the user will be able to access a range of different options within the app such as creating a list
+of components or viewing their lists, etc. This class is a Superclass - Parent class of the
+GuidesLandingPageActivity due to how similar they are. This allows the subclass to reuse methods
+such as logging the user out
 
  */
 
@@ -19,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,20 +33,25 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    //Declare an instance of firebaseAuthentication
+    protected FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Initialise the firebaseAuthentication instance
         mAuth = FirebaseAuth.getInstance();
 
+        //Initialise the Toolbar interface element
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Initialise user interface elements
         CardView guidesCard = findViewById(R.id.view_guides_card);
 
+        //When the user 'clicks' the view guides card call the openGuidesLandingPageActivity method
         guidesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
+    //Create the inflater menu (three dots) in the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -62,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Add an option in the inflater menu (three dots) to let the user logout of their account by
+    //calling the logoutUserFromAccount method
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -73,14 +82,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void logoutUserFromAccount() {
+    //When the method is called by the user sign out the user with the firebase authentication
+    //instance and then return the user to the login activity
+    protected void logoutUserFromAccount() {
 
         mAuth.signOut();
         returnToLoginActivity();
 
     }
 
-    private void returnToLoginActivity() {
+    //When the user logs out of their account display a toast message alerting the user and then
+    //switch from the current activity to the LoginAccountActivity
+    protected void returnToLoginActivity() {
 
         Toast.makeText(getApplicationContext(), "Logging out!",
                 Toast.LENGTH_SHORT).show();
@@ -90,9 +103,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(returnToLoginIntent);
     }
 
+    //If the user 'clicks' the openGuides button then switch the user from the MainActivity to the
+    //openGuideLandingPageActivity
     private void openGuideLandingPageActivity() {
         Intent openGuideLandingPage = new Intent(MainActivity.this,
-                GuidesLandingPage.class);
+                GuidesLandingPageActivity.class);
         startActivity(openGuideLandingPage);
     }
 
