@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 public class GuidesLandingPageActivity extends MainActivity implements View.OnClickListener {
 
+    //Initialise UI elements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class GuidesLandingPageActivity extends MainActivity implements View.OnCl
 
     }
 
+    //Take user to respective activity for the button they click
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -62,12 +64,14 @@ public class GuidesLandingPageActivity extends MainActivity implements View.OnCl
         }
     }
 
+    //Open the learn more about parts guides activity
     private void openLearnMoreAboutPartsGuides() {
         Intent openLearnMoreAboutPartsGuideLandingPage = new Intent(GuidesLandingPageActivity.this,
                 LearnMoreAboutPartsOptionsActivity.class);
         startActivity(openLearnMoreAboutPartsGuideLandingPage);
     }
 
+    //Open the learn how to build a pc guides activity
     private void openLearnHowToBuildAPCGuides() {
         Intent openLearnHowToBuildPCGuideLandingPage = new Intent(GuidesLandingPageActivity.this,
                 LearnHowToBuildPCOptionsActivity.class);

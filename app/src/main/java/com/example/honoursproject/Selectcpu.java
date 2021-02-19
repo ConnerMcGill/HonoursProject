@@ -1,0 +1,106 @@
+/*
+Honours Project - PC part Builder
+File: Selectcpu Class
+Author: Conner McGill - B00320975
+Date: 2021/02/19
+
+Summary of file:
+
+    This class setups the recyclerview and populates the recyclerview with the relevant data
+    from the CPUs firestore collection documents. The user can then either view the part in more
+    detail which will open a new activity with all the relevant data for the CPU or add the cpu to
+    their list which will return the selected CPU to the CreateComputerListActivity
+
+ */
+
+package com.example.honoursproject;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+public class Selectcpu extends AppCompatActivity {
+
+
+    //Reference to firestore database
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    //Reference to CPU Collection in firestore
+    private CollectionReference cpuReference = db.collection("CPUs");
+
+    //RecyclerView Adapter for the CPU data
+    private CPUAdapter cpuAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_selectcpu);
+
+        //Connect recyclerView to adapter
+        setupRecyclerView();
+
+        //Setup references to UI elements within the activity
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Select CPU");
+
+        //Go back to the previous activity in the activity backstack
+        //https://stackoverflow.com/questions/49350686/back-to-previous-activity-arrow-button
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                finish();
+            }
+        });
+
+    }
+
+    private void setupRecyclerView() {
+        //Create query against the cpu collection which sorts the data by the price from lowest price
+        //to highest price i.e. ascending order
+        Query query = cpuReference.orderBy("price", Query.Direction.ASCENDING);
+
+        //Create FirestoreRecyclerOptions and bind query into the adapter
+        FirestoreRecyclerOptions<CPU> options = new FirestoreRecyclerOptions.Builder<CPU>()
+                .setQuery(query, CPU.class)
+                .build();
+
+        //Assign RecyclerOptions to the adapter
+        cpuAdapter = new CPUAdapter(options);
+
+        //Reference the recyclerView and assign the adapter to the RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_cpu);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(cpuAdapter);
+        
+    }
+
+    //When the app goes into the foreground the recyclerview listen for database changes
+    @Override
+    protected void onStart() {
+        super.onStart();
+        cpuAdapter.startListening();
+    }
+
+    //When the app goes into the background the recyclerview will not update anything
+    @Override
+    protected void onStop() {
+        super.onStop();
+        cpuAdapter.stopListening();
+    }
+}
