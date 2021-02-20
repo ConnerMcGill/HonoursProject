@@ -17,6 +17,7 @@ within each item row. The viewHolder is defined as an innerclass
 
 The following guides were helpful in learning more about Recyclerview and firebaseUI:
 https://codinginflow.com/tutorials/android/firebaseui-firestorerecycleradapter/part-3-firestorerecycleradapter
+https://codinginflow.com/tutorials/android/firebaseui-firestorerecycleradapter/part-6-onitemclicklistener
 https://firebaseopensource.com/projects/firebase/firebaseui-android/database/readme/#using_firebaseui%20to%20populate%20a%20recyclerview
 https://guides.codepath.com/android/using-the-recyclerview
  */
@@ -41,6 +42,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,7 +51,10 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
+import io.grpc.Context;
+
 public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHolder> {
+    private OnItemClickListener listener;
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -151,7 +156,31 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
             integratedGraphicsOfCPUValue = itemView.findViewById(R.id.integratedGraphicsOfCPUValue);
             smtOfCPUValue = itemView.findViewById(R.id.smtOfCPUValue);
             imageOfCPU = itemView.findViewById(R.id.image_of_cpu);
+
+            //OnClickListener for the card
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Distinguish between different cards in the recycler view by their position
+                    int position = getAdapterPosition();
+                    Log.d("click card", "card was clicked");
+                    //Call the interface method below on the OnItemClickListener listener
+                    if (listener != null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
+
         }
     }
 
+    //Send the click event to the SelectCPU activity which will then deal with the firestore stuff
+    //I will reword this comment later with better details of what I end up doing
+    public interface OnItemClickListener {
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
 }

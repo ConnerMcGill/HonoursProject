@@ -15,6 +15,7 @@ Summary of file:
 
 package com.example.honoursproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,12 +26,23 @@ import android.util.Log;
 import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Selectcpu extends AppCompatActivity {
 
+    //Tag used for debugging the firestore data retrieval
+    private static final String TAG = "SelectcpuTAG";
 
     //Reference to firestore database
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -87,7 +99,37 @@ public class Selectcpu extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cpuAdapter);
-        
+
+
+        //Implement the OnClickListener interface from the CPUAdapter CPUHolder innerclass constructor
+        cpuAdapter.setOnItemClickListener(new CPUAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(final DocumentSnapshot documentSnapshot, int position) {
+                //Get the document ID from the clicked card
+                String documentName = documentSnapshot.getId();
+                Log.d(TAG, "Document ID: " + documentName);
+
+                //Get all the data I need from the document now that I have the specific path and open the new activity:
+                DocumentReference cpuRef = db.collection("CPUs").document(documentName);
+                cpuRef.get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            Map<String, Object> cpu = documentSnapshot.getData();
+
+
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Log.d(TAG, "On Success: " + cpu);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e(TAG, e.toString());
+                            }
+                        });
+            }
+        });
+
     }
 
     //When the app goes into the foreground the recyclerview listen for database changes
