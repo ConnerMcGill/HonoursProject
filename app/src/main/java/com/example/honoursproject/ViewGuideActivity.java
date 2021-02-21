@@ -58,7 +58,6 @@ public class ViewGuideActivity extends GuidesLandingPageActivity {
         titleForGuide.setText(getIntent().getStringExtra("TITLE"));
         descriptionForGuide.setText(getIntent().getStringExtra("DESCRIPTION"));
 
-
         //Setup references to UI elements within the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

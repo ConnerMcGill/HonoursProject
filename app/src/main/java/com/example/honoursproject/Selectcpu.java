@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,10 +35,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Selectcpu extends AppCompatActivity {
 
@@ -113,12 +111,16 @@ public class Selectcpu extends AppCompatActivity {
                 DocumentReference cpuRef = db.collection("CPUs").document(documentName);
                 cpuRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            Map<String, Object> cpu = documentSnapshot.getData();
-
-
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Log.d(TAG, "On Success: " + cpu);
+                                HashMap<String, Object> cpuDetails = (HashMap<String, Object>) documentSnapshot.getData();
+                                Log.d(TAG, "On Success: " + cpuDetails);
+                                Log.d(TAG, "On Success: " + cpuDetails);
+
+                                Intent intent = new Intent(Selectcpu.this, ViewCPUDetails.class);
+                                intent.putExtra("hashMap", cpuDetails);
+                                startActivity(intent);
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
