@@ -25,6 +25,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +55,7 @@ public class ViewCPUDetails extends AppCompatActivity {
 
         //Get all the data for the CPU firestore document that was selected as a HashMap
         Intent intent = getIntent();
-        HashMap<String, Object> cpuHashMapData = (HashMap<String, Object>) intent.getSerializableExtra("hashMap");
+        final HashMap<String, Object> cpuHashMapData = (HashMap<String, Object>) intent.getSerializableExtra("hashMap");
         //Randomly testing I can get some data here
         Log.d(TAG, "onCreate: " + cpuHashMapData.get("l1 cache"));
         Log.d(TAG, "values: " + cpuHashMapData.keySet());
@@ -214,6 +215,28 @@ public class ViewCPUDetails extends AppCompatActivity {
         //External Review of CPU:
         TextView externalReviewOfCPU = findViewById(R.id.cpuExternalReviewClickedValue);
         externalReviewOfCPU.setText((CharSequence) cpuHashMapData.get("external review"));
+
+        //Add CPU Details to CreateComputerListActivity if add button is clicked:
+        Button addCPUtoListBtn = findViewById(R.id.addClickedCPUtoListBtn);
+        addCPUtoListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Pass the data back to the CreateComputerListActivity:
+
+                String cpuName = (String) cpuHashMapData.get("name");
+                Double cpuPriceDouble = (Double) cpuHashMapData.get("price");
+                String cpuPrice = Double.toString(cpuPriceDouble);
+                String cpuSocket = (String) cpuHashMapData.get("socket");
+
+                Intent passCPUDataToCreateComputerActivity = new Intent
+                        (ViewCPUDetails.this, CreateComputerListActivity.class);
+                passCPUDataToCreateComputerActivity.putExtra("CPU NAME", cpuName);
+                passCPUDataToCreateComputerActivity.putExtra("CPU PRICE", cpuPrice);
+                passCPUDataToCreateComputerActivity.putExtra("CPU SOCKET", cpuSocket);
+                startActivity(passCPUDataToCreateComputerActivity);
+
+            }
+        });
 
 
     }

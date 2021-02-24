@@ -31,6 +31,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -137,6 +138,7 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
         TextView integratedGraphicsOfCPUValue;
         TextView smtOfCPUValue;
         ImageView imageOfCPU;
+        Button addCPUToList;
 
         //Constructor accepts the entire item row and does the view lookups to find each subview
         public CPUHolder(@NonNull View itemView) {
@@ -156,6 +158,7 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
             integratedGraphicsOfCPUValue = itemView.findViewById(R.id.integratedGraphicsOfCPUValue);
             smtOfCPUValue = itemView.findViewById(R.id.smtOfCPUValue);
             imageOfCPU = itemView.findViewById(R.id.image_of_cpu);
+            addCPUToList = itemView.findViewById(R.id.addCPUtoListButton);
 
             //OnClickListener for the card
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +174,19 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
                 }
             });
 
+            //OnClickListener for Add button
+            addCPUToList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Distinguish between different cards in the recycler view by their position
+                    int position = getAdapterPosition();
+                    Log.d("button on card", "button on card was clicked");
+                    //Call the interface method below on the OnItemClickListener listener
+                    if (listener != null){
+                        listener.onAddButtonClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
         }
     }
 
@@ -178,6 +194,7 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
     //I will reword this comment later with better details of what I end up doing
     public interface OnItemClickListener {
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
+        void onAddButtonClick(DocumentSnapshot documentSnapshot, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){

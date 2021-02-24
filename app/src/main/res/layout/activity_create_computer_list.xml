@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFF">
 
         <include
             android:id="@+id/toolbar"
@@ -21,8 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:textSize="24sp"
             android:text="@string/enter_title_for_list_header"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -42,11 +44,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:hint="@string/enter_title_for_your_list_hint"
                 android:inputType="text"
-                android:textSize="16sp"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,8 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:textSize="18sp"
             android:text="@string/select_cpu_title_header"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineDivider1" />
 
@@ -89,18 +91,18 @@
             android:layout_height="76dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
+            android:contentDescription="@string/image_of_selected_cpu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectCPUTitleHeader"
-            android:contentDescription="@string/image_of_selected_cpu">
+            app:layout_constraintTop_toBottomOf="@+id/selectCPUTitleHeader">
 
         </ImageView>
 
         <TextView
             android:id="@+id/nameOfSelectedCPU"
             android:layout_width="311dp"
-            android:layout_height="44dp"
+            android:layout_height="34dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="4dp"
             android:text="@string/name_of_selected_cpu_here"
             android:textSize="18sp"
@@ -110,50 +112,39 @@
             app:layout_constraintTop_toBottomOf="@+id/lineDivider1" />
 
         <TextView
-            android:id="@+id/priceOfCPUTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Price"
-            android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPU" />
-
-        <TextView
             android:id="@+id/priceValueOfSelectedCPU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:text="£00.00"
             android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/priceOfCPUTitle" />
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPU"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCPU" />
 
         <Button
             android:id="@+id/addCPUButton"
             android:layout_width="185dp"
             android:layout_height="38dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
             android:text="Add CPU"
             android:textSize="10dp"
             app:layout_constraintBottom_toTopOf="@+id/lineDivider2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedCPU" />
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPU" />
 
         <Button
             android:id="@+id/RemoveCPUButton"
             android:layout_width="185dp"
             android:layout_height="38dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
             android:text="Remove"
             android:textSize="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/lineDivider2"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPU" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

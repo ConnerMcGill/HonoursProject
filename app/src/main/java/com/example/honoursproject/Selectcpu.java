@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -129,6 +130,50 @@ public class Selectcpu extends AppCompatActivity {
                                 Log.e(TAG, e.toString());
                             }
                         });
+            }
+
+            @Override
+            public void onAddButtonClick(DocumentSnapshot documentSnapshot, int position) {
+                //Get the document ID from the clicked button on the card as a test
+                //Just to see if I can make sure the button click is separated from the card
+                String documentName = documentSnapshot.getId();
+                Log.d(TAG, "Btn Add Document ID: " + documentName);
+
+                //Get the required data I am wanting from the document
+                DocumentReference cpuRef = db.collection("CPUs").document(documentName);
+                cpuRef.get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                String cpuName = (String) documentSnapshot.get("name");
+                                Log.d(TAG, "CPU Name: " + cpuName);
+                                //Convert the price double into a string for later
+                                Double cpuPriceLong = (Double) documentSnapshot.get("price");
+                                String cpuPriceString = Double.toString(cpuPriceLong);
+                                Log.d(TAG, "CPU Price: " + cpuPriceString);
+                                //I will need this later for validation so a user can't have a
+                                //amd cpu on a intel motherboard for example
+                                String cpuSocket = (String) documentSnapshot.get("socket");
+                                Log.d(TAG, "CPU Socket: " + cpuSocket);
+
+                                //Pass the data back to the CreateComputerListActivity:
+                                Intent passCPUDataToCreateComputerActivity = new Intent
+                                        (Selectcpu.this, CreateComputerListActivity.class);
+                                passCPUDataToCreateComputerActivity.putExtra("CPU NAME", cpuName);
+                                passCPUDataToCreateComputerActivity.putExtra("CPU PRICE", cpuPriceString);
+                                passCPUDataToCreateComputerActivity.putExtra("CPU SOCKET", cpuSocket);
+                                startActivity(passCPUDataToCreateComputerActivity);
+
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e(TAG, e.toString());
+                            }
+                        });
+
             }
         });
 

@@ -64,9 +64,10 @@
     <string name="step_ten_install_operating_system">Step 10 - Install Operating System</string>
     <string name="step_eleven_learn_more">Step 11 - Learn More</string>
     <string name="return_to_main_activity_text_toolbar">Return to Main Activity</string>
-    <string name="enter_title_for_list_header">Enter Title for List</string>
-    <string name="enter_title_for_your_list_hint">Enter Title for Your List</string>
+    <string name="enter_title_for_list_header">Enter Title for List: </string>
+    <string name="enter_title_for_your_list_hint">Type In Title....</string>
     <string name="select_cpu_title_header">CPU:</string>
     <string name="name_of_selected_cpu_here">Select a CPU!</string>
     <string name="image_of_selected_cpu">image of selected CPU</string>
+    <string name="price_of_product" formatted="true">Price: %s</string>
 </resources>
