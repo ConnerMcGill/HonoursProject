@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewCPUDetails"></activity>
+        <activity android:name=".ViewCPUCoolerDetails"></activity>
+        <activity android:name=".ViewCPUDetails" />
         <activity android:name=".Selectcpu" />
+        <activity android:name=".SelectCPUCooler" />
         <activity
             android:name=".CreateComputerListActivity"
             android:parentActivityName=".MainActivity" />

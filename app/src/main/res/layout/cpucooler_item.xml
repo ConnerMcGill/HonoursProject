@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/image_of_cpu_cooler"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameOfCPUCooler"
+            android:layout_width="183dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="CPU Cooler Product Name"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/image_of_cpu_cooler"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceOfCPUCooler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="£160.64"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/addCPUCoolerToListButton"
+            android:layout_width="73dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/titleBar"
+            android:text="Add "
+            android:textColor="#FFFF"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceOfCPUCooler" />
+
+        <TextView
+            android:id="@+id/fanRpmOfCPUCoolerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Fan RPM"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_cpu_cooler" />
+
+        <TextView
+            android:id="@+id/fanRpmOfCPUCoolerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="600 - 1200 RPM"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fanRpmOfCPUCoolerTitle" />
+
+        <TextView
+            android:id="@+id/noiseLevelOfCPUCoolerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:text="Noise Level"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/fanRpmOfCPUCoolerTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_cpu_cooler" />
+
+        <TextView
+            android:id="@+id/noiseLevelOfCPUCoolerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:text="9 - 36 dB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/fanRpmOfCPUCoolerTitle"
+            app:layout_constraintTop_toBottomOf="@+id/noiseLevelOfCPUCoolerTitle" />
+
+        <TextView
+            android:id="@+id/colourOfCPUCoolerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:text="Colour"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/noiseLevelOfCPUCoolerTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_cpu_cooler" />
+
+        <TextView
+            android:id="@+id/colourOfCPUCoolerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:text="Black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/noiseLevelOfCPUCoolerTitle"
+            app:layout_constraintTop_toBottomOf="@+id/colourOfCPUCoolerTitle" />
+
+        <TextView
+            android:id="@+id/radiatorSizeOfCPUCoolerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Radiator Size"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fanRpmOfCPUCoolerValue" />
+
+        <TextView
+            android:id="@+id/radiatorSizeOfCPUCoolerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="240 mm"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radiatorSizeOfCPUCoolerTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

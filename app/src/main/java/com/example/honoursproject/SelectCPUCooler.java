@@ -1,31 +1,16 @@
-/*
-Honours Project - PC part Builder
-File: Selectcpu Class
-Author: Conner McGill - B00320975
-Date: 2021/02/19
-
-Summary of file:
-
-    This class setups the recyclerview and populates the recyclerview with the relevant data
-    from the CPUs firestore collection documents. The user can then either view the part in more
-    detail which will open a new activity with all the relevant data for the CPU or add the cpu to
-    their list which will return the selected CPU to the CreateComputerListActivity
-
- */
-
 package com.example.honoursproject;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,7 +23,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 
-public class Selectcpu extends AppCompatActivity {
+public class SelectCPUCooler extends AppCompatActivity {
 
     //Tag used for debugging the firestore data retrieval
     private static final String TAG = "SelectcpuTAG";
@@ -47,15 +32,15 @@ public class Selectcpu extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //Reference to CPU Collection in firestore
-    private CollectionReference cpuReference = db.collection("CPUs");
+    private CollectionReference cpuCoolerReference = db.collection("cpu-coolers");
 
     //RecyclerView Adapter for the CPU data
-    private CPUAdapter cpuAdapter;
+    private CPUCoolerAdapter cpuCoolerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selectcpu);
+        setContentView(R.layout.activity_select_cpu_cooler);
 
         //Connect recyclerView to adapter
         setupRecyclerView();
@@ -66,7 +51,7 @@ public class Selectcpu extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Select CPU");
+        getSupportActionBar().setTitle("Select CPU Cooler");
 
         //Go back to the previous activity in the activity backstack
         //https://stackoverflow.com/questions/49350686/back-to-previous-activity-arrow-button
@@ -83,25 +68,25 @@ public class Selectcpu extends AppCompatActivity {
     private void setupRecyclerView() {
         //Create query against the cpu collection which sorts the data by the price from lowest price
         //to highest price i.e. ascending order
-        Query query = cpuReference.orderBy("price", Query.Direction.ASCENDING);
+        Query query = cpuCoolerReference.orderBy("price", Query.Direction.ASCENDING);
 
         //Create FirestoreRecyclerOptions and bind query into the adapter
-        FirestoreRecyclerOptions<CPU> options = new FirestoreRecyclerOptions.Builder<CPU>()
-                .setQuery(query, CPU.class)
+        FirestoreRecyclerOptions<CPUCooler> options = new FirestoreRecyclerOptions.Builder<CPUCooler>()
+                .setQuery(query, CPUCooler.class)
                 .build();
 
         //Assign RecyclerOptions to the adapter
-        cpuAdapter = new CPUAdapter(options);
+        cpuCoolerAdapter = new CPUCoolerAdapter(options);
 
         //Reference the recyclerView and assign the adapter to the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_cpu);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_cpu_cooler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(cpuAdapter);
+        recyclerView.setAdapter(cpuCoolerAdapter);
 
 
-        //Implement the OnClickListener interface from the CPUAdapter CPUHolder innerclass constructor
-        cpuAdapter.setOnItemClickListener(new CPUAdapter.OnItemClickListener() {
+        //Implement the OnClickListener interface from the CPUCoolerAdapter CPUCoolerHolder innerclass constructor
+        cpuCoolerAdapter.setOnItemClickListener(new CPUCoolerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final DocumentSnapshot documentSnapshot, int position) {
                 //Get the document ID from the clicked card
@@ -109,18 +94,18 @@ public class Selectcpu extends AppCompatActivity {
                 Log.d(TAG, "Document ID: " + documentName);
 
                 //Get all the data I need from the document now that I have the specific path and open the new activity:
-                DocumentReference cpuRef = db.collection("CPUs").document(documentName);
-                cpuRef.get()
+                DocumentReference cpuCoolerRef = db.collection("cpu-coolers").document(documentName);
+                cpuCoolerRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                HashMap<String, Object> cpuDetails = (HashMap<String, Object>) documentSnapshot.getData();
-                                Log.d(TAG, "On Success: " + cpuDetails);
+                                HashMap<String, Object> cpuCoolerDetails = (HashMap<String, Object>) documentSnapshot.getData();
+                                Log.d(TAG, "On Success: " + cpuCoolerDetails);
 
 
-                                Intent intent = new Intent(Selectcpu.this, ViewCPUDetails.class);
-                                intent.putExtra("hashMap", cpuDetails);
-                                startActivity(intent);
+                               Intent intent = new Intent(SelectCPUCooler.this, ViewCPUCoolerDetails.class);
+                               intent.putExtra("hashMap", cpuCoolerDetails);
+                               startActivity(intent);
 
                             }
                         })
@@ -140,31 +125,25 @@ public class Selectcpu extends AppCompatActivity {
                 Log.d(TAG, "Btn Add Document ID: " + documentName);
 
                 //Get the required data I am wanting from the document
-                DocumentReference cpuRef = db.collection("CPUs").document(documentName);
-                cpuRef.get()
+                DocumentReference cpuCoolerRef = db.collection("cpu-coolers").document(documentName);
+                cpuCoolerRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                String cpuName = (String) documentSnapshot.get("name");
-                                Log.d(TAG, "CPU Name: " + cpuName);
+                                String cpuCoolerName = (String) documentSnapshot.get("name");
+                                Log.d(TAG, "CPU Cooler Name: " + cpuCoolerName);
                                 //Convert the price double into a string for later
-                                Double cpuPriceLong = (Double) documentSnapshot.get("price");
-                                String cpuPriceString = Double.toString(cpuPriceLong);
-                                Log.d(TAG, "CPU Price: " + cpuPriceString);
-                                //I will need this later for validation so a user can't have a
-                                //amd cpu on a intel motherboard for example
-                                String cpuSocket = (String) documentSnapshot.get("socket");
-                                Log.d(TAG, "CPU Socket: " + cpuSocket);
+                                Double cpuCoolerPriceLong = (Double) documentSnapshot.get("price");
+                                String cpuCoolerPriceString = Double.toString(cpuCoolerPriceLong);
+                                Log.d(TAG, "CPU Cooler Price: " + cpuCoolerPriceString);
+
 
                                 //Pass the data back to the CreateComputerListActivity:
-                                Intent passCPUDataToCreateComputerActivity = new Intent
-                                        (Selectcpu.this, CreateComputerListActivity.class);
-                                passCPUDataToCreateComputerActivity.putExtra("CPU NAME", cpuName);
-                                passCPUDataToCreateComputerActivity.putExtra("CPU PRICE", cpuPriceString);
-                                passCPUDataToCreateComputerActivity.putExtra("CPU SOCKET", cpuSocket);
-                                startActivity(passCPUDataToCreateComputerActivity);
-
-
+                                Intent passCPUCoolerDataToCreateComputerActivity = new Intent
+                                        (SelectCPUCooler.this, CreateComputerListActivity.class);
+                                passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER NAME", cpuCoolerName);
+                                passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER PRICE", cpuCoolerPriceString);
+                                startActivity(passCPUCoolerDataToCreateComputerActivity);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -177,19 +156,22 @@ public class Selectcpu extends AppCompatActivity {
             }
         });
 
+
     }
 
     //When the app goes into the foreground the recyclerview listen for database changes
     @Override
     protected void onStart() {
         super.onStart();
-        cpuAdapter.startListening();
+        cpuCoolerAdapter.startListening();
     }
 
     //When the app goes into the background the recyclerview will not update anything
     @Override
     protected void onStop() {
         super.onStop();
-        cpuAdapter.stopListening();
+        cpuCoolerAdapter.stopListening();
     }
+
+
 }

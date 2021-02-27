@@ -82,7 +82,7 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
 
         //In order to get the image for the guide a storage reference needs to be created
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(model.getName() + ".jpg");
-        Log.d("my image", String.valueOf(storageReference));
+        Log.d("my image of cpu", String.valueOf(storageReference));
 
         try {
             //Create a placeholder that will store the image for the activity
@@ -190,8 +190,7 @@ public class CPUAdapter extends FirestoreRecyclerAdapter<CPU, CPUAdapter.CPUHold
         }
     }
 
-    //Send the click event to the SelectCPU activity which will then deal with the firestore stuff
-    //I will reword this comment later with better details of what I end up doing
+    //Send the click event to the SelectCPU activity which is then handled there
     public interface OnItemClickListener {
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
         void onAddButtonClick(DocumentSnapshot documentSnapshot, int position);

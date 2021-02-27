@@ -28,40 +28,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_enter_list_title">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:hint="@string/enter_title_for_your_list_hint"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <!--Line Divider-->
+        <EditText
+            android:id="@+id/enterTitleForListEditText"
+            android:layout_width="268dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_enter_list_title"
+            android:autofillHints=""
+            android:hint="@string/add_your_title_here">
+
+        </EditText>
+
         <View
             android:id="@+id/lineDivider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="18dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/enterTitleForListEditText" />
 
         <View
             android:id="@+id/lineDivider2"
@@ -90,10 +80,22 @@
             android:layout_width="79dp"
             android:layout_height="76dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_cpu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectCPUTitleHeader">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/imageOfSelectedCPUCooler"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_cpu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectCPUCoolerTitle">
 
         </ImageView>
 
@@ -102,14 +104,23 @@
             android:layout_width="311dp"
             android:layout_height="34dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="38dp"
             android:text="@string/name_of_selected_cpu_here"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPU"
             app:layout_constraintTop_toBottomOf="@+id/lineDivider1" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedCPUCooler"
+            android:layout_width="310dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_a_cpu_cooler"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUCooler"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider2" />
 
         <TextView
             android:id="@+id/priceValueOfSelectedCPU"
@@ -121,6 +132,17 @@
             android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPU"
             app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCPU" />
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedCPUCooler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUCooler"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCPUCooler" />
 
         <Button
             android:id="@+id/addCPUButton"
@@ -136,7 +158,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPU" />
 
         <Button
-            android:id="@+id/RemoveCPUButton"
+            android:id="@+id/removeCPUButton"
             android:layout_width="185dp"
             android:layout_height="38dp"
             android:layout_marginTop="24dp"
@@ -145,6 +167,49 @@
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPU" />
+
+        <TextView
+            android:id="@+id/selectCPUCoolerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="CPU Cooler:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider2" />
+
+        <Button
+            android:id="@+id/addCPUCoolerButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:text="Add CPU Cooler"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPUCooler" />
+
+        <Button
+            android:id="@+id/removeCPUCoolerButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
+            android:text="Remove"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPUCooler" />
+
+        <View
+            android:id="@+id/lineDivider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCPUCoolerButton" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
