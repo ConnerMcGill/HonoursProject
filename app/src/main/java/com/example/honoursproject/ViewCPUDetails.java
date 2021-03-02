@@ -48,6 +48,9 @@ public class ViewCPUDetails extends AppCompatActivity {
     //Tag used for debugging the firestore data retrieval
     private static final String TAG = "ViewCPUDetailsTAG";
 
+    //DataStorage instance
+    DataStorage cpuData = new DataStorage();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +80,7 @@ public class ViewCPUDetails extends AppCompatActivity {
                 finish();
             }
         });
+
 
 
         //Get the image of the CPU and set it to the imageView. First though store the name of the
@@ -221,19 +225,27 @@ public class ViewCPUDetails extends AppCompatActivity {
         addCPUtoListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Pass the data back to the CreateComputerListActivity:
+                //Pass the data back to the CreateComputerListActivity by storing the data in the
+                // DataStorage hashmap and then going back to the CreateComputerListActivity:
 
                 String cpuName = (String) cpuHashMapData.get("name");
                 Double cpuPriceDouble = (Double) cpuHashMapData.get("price");
-                String cpuPrice = Double.toString(cpuPriceDouble);
+                String cpuPriceString = Double.toString(cpuPriceDouble);
                 String cpuSocket = (String) cpuHashMapData.get("socket");
 
                 Intent passCPUDataToCreateComputerActivity = new Intent
                         (ViewCPUDetails.this, CreateComputerListActivity.class);
-                passCPUDataToCreateComputerActivity.putExtra("CPU NAME", cpuName);
-                passCPUDataToCreateComputerActivity.putExtra("CPU PRICE", cpuPrice);
-                passCPUDataToCreateComputerActivity.putExtra("CPU SOCKET", cpuSocket);
+
+                cpuData.getComputerList().put("CPU NAME", cpuName);
+                cpuData.getComputerList().put("CPU PRICE", cpuPriceString);
+                cpuData.getComputerList().put("CPU SOCKET", cpuSocket);
+                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU NAME"));
+                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU PRICE"));
+                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU SOCKET"));
+
                 startActivity(passCPUDataToCreateComputerActivity);
+
+
 
             }
         });

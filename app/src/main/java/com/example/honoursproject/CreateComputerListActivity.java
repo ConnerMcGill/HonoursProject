@@ -89,6 +89,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         enterTitleForPCList = findViewById(R.id.enterTitleForListEditText);
 
 
+        //Random debug logs I will remove this later on
         Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU COOLER NAME"));
         Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU COOLER PRICE"));
         Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU NAME"));

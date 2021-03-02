@@ -159,12 +159,11 @@ public class Selectcpu extends AppCompatActivity {
                                 String cpuSocket = (String) documentSnapshot.get("socket");
                                 Log.d(TAG, "CPU Socket: " + cpuSocket);
 
-                                //Pass the data back to the CreateComputerListActivity:
+                                //Pass the data back to the CreateComputerListActivity by storing the
+                                // data in the DataStorage Hashmap and then returning to the CreateComputerListActivity:
                                 Intent passCPUDataToCreateComputerActivity = new Intent
                                         (Selectcpu.this, CreateComputerListActivity.class);
-                                passCPUDataToCreateComputerActivity.putExtra("CPU NAME", cpuName);
-                                passCPUDataToCreateComputerActivity.putExtra("CPU PRICE", cpuPriceString);
-                                passCPUDataToCreateComputerActivity.putExtra("CPU SOCKET", cpuSocket);
+
 
                                 cpuData.getComputerList().put("CPU NAME", cpuName);
                                 cpuData.getComputerList().put("CPU PRICE", cpuPriceString);

@@ -143,21 +143,15 @@ public class SelectCPUCooler extends AppCompatActivity {
 
 
 
-                                //Pass the data back to the CreateComputerListActivity:
+                                //Pass the data back to the CreateComputerListActivity by storing the data
+                                // into the DataStorage hashmap and then returning to the CreateComputerListActivity:
                                 Intent passCPUCoolerDataToCreateComputerActivity = new Intent
                                         (SelectCPUCooler.this, CreateComputerListActivity.class);
-                                passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER NAME", cpuCoolerName);
-                                passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER PRICE", cpuCoolerPriceString);
 
                                 cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
                                 cpuCoolerData.getComputerList().put("CPU COOLER PRICE", cpuCoolerPriceString);
                                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
-
-                                //cpuCooler.put("CPU COOLER NAME", cpuCoolerName);
-                                //cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
-                                //cpuCooler.put("CPU COOLER PRICE", cpuCoolerPriceString);
-                                //Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
-                                //Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
+                                Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
 
 
                                 startActivity(passCPUCoolerDataToCreateComputerActivity);

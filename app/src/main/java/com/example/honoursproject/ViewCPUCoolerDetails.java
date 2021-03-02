@@ -46,6 +46,9 @@ public class ViewCPUCoolerDetails extends AppCompatActivity {
     //Tag used for debugging the firestore data retrieval
     private static final String TAG = "ViewCPUCoolerDetailsTAG";
 
+    //DataStorage Instance:
+    DataStorage cpuCoolerData = new DataStorage();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,16 +185,23 @@ public class ViewCPUCoolerDetails extends AppCompatActivity {
         addCPUCoolerToListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Pass the data back to the CreateComputerListActivity:
+                //Pass the data back to the CreateComputerListActivity by storing the data in the DataStorage
+                //hashmap and then returning to the CreateComputerListActivity:
 
-                String cpuSocketName = (String) cpuCoolerHashMapData.get("name");
-                Double cpuPriceDouble = (Double) cpuCoolerHashMapData.get("price");
-                String cpuSocketPrice = Double.toString(cpuPriceDouble);
+                String cpuCoolerName = (String) cpuCoolerHashMapData.get("name");
+                Double cpuCoolerPriceDouble = (Double) cpuCoolerHashMapData.get("price");
+                String cpuCoolerPriceString = Double.toString(cpuCoolerPriceDouble);
 
                 Intent passCPUCoolerDataToCreateComputerActivity = new Intent
                         (ViewCPUCoolerDetails.this, CreateComputerListActivity.class);
-                passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER NAME", cpuSocketName);
-                passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER PRICE", cpuSocketPrice);
+
+                cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
+                cpuCoolerData.getComputerList().put("CPU COOLER PRICE", cpuCoolerPriceString);
+                Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
+                Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
+
+
+
                 startActivity(passCPUCoolerDataToCreateComputerActivity);
 
             }
