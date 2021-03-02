@@ -52,6 +52,9 @@ public class Selectcpu extends AppCompatActivity {
     //RecyclerView Adapter for the CPU data
     private CPUAdapter cpuAdapter;
 
+    //DataStorage instance
+    DataStorage cpuData = new DataStorage();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +165,16 @@ public class Selectcpu extends AppCompatActivity {
                                 passCPUDataToCreateComputerActivity.putExtra("CPU NAME", cpuName);
                                 passCPUDataToCreateComputerActivity.putExtra("CPU PRICE", cpuPriceString);
                                 passCPUDataToCreateComputerActivity.putExtra("CPU SOCKET", cpuSocket);
+
+                                cpuData.getComputerList().put("CPU NAME", cpuName);
+                                cpuData.getComputerList().put("CPU PRICE", cpuPriceString);
+                                cpuData.getComputerList().put("CPU SOCKET", cpuSocket);
+                                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU NAME"));
+                                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU PRICE"));
+                                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU SOCKET"));
+
+
+
                                 startActivity(passCPUDataToCreateComputerActivity);
 
 

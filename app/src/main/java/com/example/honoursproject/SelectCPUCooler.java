@@ -37,6 +37,10 @@ public class SelectCPUCooler extends AppCompatActivity {
     //RecyclerView Adapter for the CPU data
     private CPUCoolerAdapter cpuCoolerAdapter;
 
+    //DataStorage instance
+    DataStorage cpuCoolerData = new DataStorage();
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,11 +142,24 @@ public class SelectCPUCooler extends AppCompatActivity {
                                 Log.d(TAG, "CPU Cooler Price: " + cpuCoolerPriceString);
 
 
+
                                 //Pass the data back to the CreateComputerListActivity:
                                 Intent passCPUCoolerDataToCreateComputerActivity = new Intent
                                         (SelectCPUCooler.this, CreateComputerListActivity.class);
                                 passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER NAME", cpuCoolerName);
                                 passCPUCoolerDataToCreateComputerActivity.putExtra("CPU COOLER PRICE", cpuCoolerPriceString);
+
+                                cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
+                                cpuCoolerData.getComputerList().put("CPU COOLER PRICE", cpuCoolerPriceString);
+                                Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
+
+                                //cpuCooler.put("CPU COOLER NAME", cpuCoolerName);
+                                //cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
+                                //cpuCooler.put("CPU COOLER PRICE", cpuCoolerPriceString);
+                                //Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
+                                //Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
+
+
                                 startActivity(passCPUCoolerDataToCreateComputerActivity);
                             }
                         })

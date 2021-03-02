@@ -38,6 +38,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class CreateComputerListActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,9 +53,19 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     EditText enterTitleForPCList;
     String listTitleName;
 
-    //I am going to need to use sharedPreferences in order to save the UI state when switching
-    //between activities as I ain't gonna be able to do it with savedInstances due to the
-    //way the android lifecycle works
+    //DataStorage instance
+    DataStorage computerComponentData = new DataStorage();
+
+    //Setup view references:
+
+    //CPU:
+    TextView cpuNameField;
+    TextView cpuPriceField;
+
+    //CPU Cooler:
+    TextView cpuCoolerNameField;
+    TextView cpuCoolerPriceField;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,136 +89,34 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         enterTitleForPCList = findViewById(R.id.enterTitleForListEditText);
 
 
-        //I will need to clean this part up into its own functions
-        //and find a way to pull the data from that storage thing I forgot the name of it
+        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU COOLER NAME"));
+        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU COOLER PRICE"));
+        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU NAME"));
+        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU PRICE"));
+        Log.d(TAG, "conner: " + computerComponentData.getComputerList().keySet());
+        Log.d(TAG, "conner: " + computerComponentData.getComputerList().values());
 
 
-        //Get CPU Data from intent
-        String cpuName = getIntent().getStringExtra("CPU NAME");
-        Log.d(TAG, "is cpu name null: " + cpuName);
-        String cpuPrice = getIntent().getStringExtra("CPU PRICE");
-        String cpuSocket = getIntent().getStringExtra("CPU SOCKET");
-        Log.d(TAG, "CPU Socket Name: " + cpuSocket);
+        //Retrieve reference to view elements:
 
+        //CPU References:
+        cpuNameField = findViewById(R.id.nameOfSelectedCPU);
+        cpuPriceField = findViewById(R.id.priceValueOfSelectedCPU);
 
-        //Setup relevant cpu interface fields
-        TextView cpuNameField = findViewById(R.id.nameOfSelectedCPU);
-        TextView cpuPriceField = findViewById(R.id.priceValueOfSelectedCPU);
+        //CPU Cooler References:
+        cpuCoolerNameField = findViewById(R.id.nameOfSelectedCPUCooler);
+        cpuCoolerPriceField = findViewById(R.id.priceValueOfSelectedCPUCooler);
 
-        //Assign CPU data to fields:
-        cpuNameField.setText(cpuName);
+        retrieveCPUData();
+        retrieveCPUCoolerData();
 
-        /*
-            If I don't wrap this in a if statement and have the "Price: " concatenated at the start
-            then the view shows "Price: Null" instead of nothing at first which looks out of place
-            in my opinion
-        */
-
-        if (cpuPrice == null) {
-            cpuPriceField.setText(cpuPrice);
-        } else {
-            cpuPriceField.setText(String.format(getResources().getString(R.string.price_of_product), cpuPrice));
-        }
-
-        //Get the image for the selected CPU if there's a selected cpu:
-        if (cpuName != null) {
-
-            //In order to get the image for the guide a storage reference needs to be created
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(cpuName + ".jpg");
-            Log.d(TAG, "getting storage reference name " + storageReference);
-
-            try {
-                //Create a placeholder that will store the image for the activity
-                final File tempFile = File.createTempFile(cpuName, "jpg");
-                //Try to retrieve the image from the firestore cloud storage
-                storageReference.getFile(tempFile)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                //Temp toast message for testing
-                                //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
-                                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
-                                ((ImageView) findViewById(R.id.imageOfSelectedCPU)).setImageBitmap(bitmap);
-                                Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
-                        Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
-                        Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
-                    }
-                });
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //Get CPU Cooler Data from intent
-        String cpuCoolerName = getIntent().getStringExtra("CPU COOLER NAME");
-        Log.d(TAG, "is cpu cooler name null: " + cpuCoolerName);
-        String cpuCoolerPrice = getIntent().getStringExtra("CPU COOLER PRICE");
-
-        //Setup relevant cpu interface fields
-        TextView cpuCoolerNameField = findViewById(R.id.nameOfSelectedCPUCooler);
-        TextView cpuCoolerPriceField = findViewById(R.id.priceValueOfSelectedCPUCooler);
-
-        //Assign CPU Cooler data to fields:
-        cpuCoolerNameField.setText(cpuCoolerName);
-
-            /*
-            If I don't wrap this in a if statement and have the "Price: " concatenated at the start
-            then the view shows "Price: Null" instead of nothing at first which looks out of place
-            in my opinion
-            */
-
-        if (cpuCoolerPrice == null) {
-            cpuCoolerPriceField.setText(cpuCoolerPrice);
-        } else {
-            cpuCoolerPriceField.setText(String.format(getResources().getString(R.string.price_of_product), cpuCoolerPrice));
-        }
-
-        //Get the image for the selected CPU if there's a selected cpu:
-        if (cpuCoolerName != null) {
-
-            //In order to get the image for the guide a storage reference needs to be created
-            StorageReference storageReferenceCPUCooler = FirebaseStorage.getInstance().getReference().child(cpuCoolerName + ".jpg");
-            Log.d(TAG, "getting storage reference name " + storageReferenceCPUCooler);
-
-            try {
-                //Create a placeholder that will store the image for the activity
-                final File tempFile = File.createTempFile(cpuCoolerName, "jpg");
-                //Try to retrieve the image from the firestore cloud storage
-                storageReferenceCPUCooler.getFile(tempFile)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                //Temp toast message for testing
-                                //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
-                                Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
-                                ((ImageView) findViewById(R.id.imageOfSelectedCPUCooler)).setImageBitmap(bitmap);
-                                Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
-                        Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
-                        Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
-                    }
-                });
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         loadData();
         updateViews();
 
 
     }
+
 
     @Override
     public void onClick(View view) {
@@ -235,6 +144,119 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         startActivity(openSelectCPUCoolerOptions);
     }
 
+    private void retrieveCPUData() {
+
+        //Set the fields with the relevant data
+        cpuNameField.setText(computerComponentData.getComputerList().get("CPU NAME"));
+        if (computerComponentData.getComputerList().get("CPU PRICE") == null) {
+            cpuPriceField.setText("");
+        } else {
+            cpuPriceField.setText((String.format(getResources().getString(R.string.price_of_product), computerComponentData.getComputerList().get("CPU PRICE"))));
+        }
+
+
+        //String that is used to check if a product has been selected and to get the associated image for the product
+        String cpuName = cpuNameField.getText().toString();
+
+
+        //Image retrieval is wrapped in a try catch statement. If no product is selected then a IllegalArgumentException
+        //is thrown so this prevents the app from crashing
+        try {
+            //Get the image for the selected CPU if there's a selected cpu:
+            if (cpuName != null) {
+
+                //In order to get the image for the guide a storage reference needs to be created
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(cpuName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReference);
+
+                try {
+                    //Create a placeholder that will store the image for the activity
+                    final File tempFile = File.createTempFile(cpuName, "jpg");
+                    //Try to retrieve the image from the firestore cloud storage
+                    storageReference.getFile(tempFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    //Temp toast message for testing
+                                    //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
+                                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+                                    ((ImageView) findViewById(R.id.imageOfSelectedCPU)).setImageBitmap(bitmap);
+                                    Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
+                            Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
+                            Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "retrieveCPUData: " + "something went wrong!");
+        }
+
+    }
+
+    private void retrieveCPUCoolerData() {
+
+        //Set the fields with the relevant data
+        cpuCoolerNameField.setText(computerComponentData.getComputerList().get("CPU COOLER NAME"));
+        if (computerComponentData.getComputerList().get("CPU COOLER PRICE") == null) {
+            cpuCoolerPriceField.setText("");
+        } else {
+            cpuCoolerPriceField.setText((String.format(getResources().getString(R.string.price_of_product), computerComponentData.getComputerList().get("CPU COOLER PRICE"))));
+        }
+
+        //String that is used to check if a product has been selected and to get the associated image for the product
+        String cpuCoolerName = cpuCoolerNameField.getText().toString();
+
+        //Image retrieval is wrapped in a try catch statement. If no product is selected then a IllegalArgumentException
+        //is thrown so this prevents the app from crashing
+        try {
+            //Get the image for the selected CPU if there's a selected cpu:
+            if (cpuCoolerName != null) {
+
+                //In order to get the image for the guide a storage reference needs to be created
+                StorageReference storageReferenceCPUCooler = FirebaseStorage.getInstance().getReference().child(cpuCoolerName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReferenceCPUCooler);
+
+                try {
+                    //Create a placeholder that will store the image for the activity
+                    final File tempFile = File.createTempFile(cpuCoolerName, "jpg");
+                    //Try to retrieve the image from the firestore cloud storage
+                    storageReferenceCPUCooler.getFile(tempFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    //Temp toast message for testing
+                                    //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
+                                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+                                    ((ImageView) findViewById(R.id.imageOfSelectedCPUCooler)).setImageBitmap(bitmap);
+                                    Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
+                            Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
+                            Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "retrieveCPUCoolerData: " + "Something went wrong or the catch statement is working as intended");
+        }
+
+    }
 
     public void saveData() {
         listTitleName = enterTitleForPCList.getText().toString();
