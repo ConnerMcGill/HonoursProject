@@ -72,4 +72,14 @@
     <string name="price_of_product" formatted="true">Price: £%s</string>
     <string name="add_your_title_here">Add your title here!</string>
     <string name="select_a_cpu_cooler">Select a CPU Cooler</string>
+    <string name="motherboard">Motherboard:</string>
+    <string name="cpu_cooler">CPU Cooler:</string>
+    <string name="add_cpu_cooler">Add CPU Cooler</string>
+    <string name="remove1">Remove</string>
+    <string name="remove2">Remove</string>
+    <string name="remove3">Remove</string>
+    <string name="add_cpu">Add CPU</string>
+    <string name="image_of_selected_motherboard">image of selected motherboard</string>
+    <string name="select_a_motherboard">Select a Motherboard</string>
+    <string name="add_motherboard">add motherboard</string>
 </resources>

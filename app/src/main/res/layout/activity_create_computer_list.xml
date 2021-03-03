@@ -35,11 +35,11 @@
             android:layout_height="43dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:hint="@string/add_your_title_here"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_enter_list_title"
-            android:autofillHints=""
-            android:hint="@string/add_your_title_here">
+            app:layout_constraintTop_toBottomOf="@+id/text_enter_list_title">
 
         </EditText>
 
@@ -99,10 +99,11 @@
 
         </ImageView>
 
+
         <TextView
             android:id="@+id/nameOfSelectedCPU"
             android:layout_width="311dp"
-            android:layout_height="34dp"
+            android:layout_height="49dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="38dp"
             android:text="@string/name_of_selected_cpu_here"
@@ -121,6 +122,7 @@
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUCooler"
             app:layout_constraintTop_toBottomOf="@+id/lineDivider2" />
+
 
         <TextView
             android:id="@+id/priceValueOfSelectedCPU"
@@ -144,6 +146,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUCooler"
             app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCPUCooler" />
 
+
         <Button
             android:id="@+id/addCPUButton"
             android:layout_width="185dp"
@@ -151,7 +154,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="Add CPU"
+            android:text="@string/add_cpu"
             android:textSize="10dp"
             app:layout_constraintBottom_toTopOf="@+id/lineDivider2"
             app:layout_constraintStart_toStartOf="parent"
@@ -163,7 +166,7 @@
             android:layout_height="38dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="4dp"
-            android:text="Remove"
+            android:text="@string/remove1"
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPU" />
@@ -174,10 +177,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="CPU Cooler:"
+            android:text="@string/cpu_cooler"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineDivider2" />
+
 
         <Button
             android:id="@+id/addCPUCoolerButton"
@@ -185,7 +189,7 @@
             android:layout_height="38dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
-            android:text="Add CPU Cooler"
+            android:text="@string/add_cpu_cooler"
             android:textSize="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPUCooler" />
@@ -196,7 +200,7 @@
             android:layout_height="38dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="4dp"
-            android:text="Remove"
+            android:text="@string/remove2"
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCPUCooler" />
@@ -210,6 +214,85 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addCPUCoolerButton" />
+
+        <View
+            android:id="@+id/lineDivider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addMotherboardButton" />
+
+        <TextView
+            android:id="@+id/selectMotherboardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/motherboard"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider3" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedMotherboard"
+            android:layout_width="310dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_a_motherboard"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedMotherboard"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider3" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedMotherboard"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_motherboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectMotherboardTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedMotherboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedMotherboard"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedMotherboard" />
+
+        <Button
+            android:id="@+id/addMotherboardButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/add_motherboard"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedMotherboard" />
+
+        <Button
+            android:id="@+id/removeMotherboardButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/remove3"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedMotherboard" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

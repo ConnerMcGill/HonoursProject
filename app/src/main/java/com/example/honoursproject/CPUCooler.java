@@ -54,7 +54,6 @@ public class CPUCooler {
         return name;
     }
 
-
     @PropertyName("price")
     public double getCPUCoolerPrice() {
         return price;

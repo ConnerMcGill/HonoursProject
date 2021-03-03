@@ -49,14 +49,14 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String LIST_NAME = "list name";
 
-    //EditText that lets the user enter a title for the list
-    EditText enterTitleForPCList;
-    String listTitleName;
-
     //DataStorage instance
     DataStorage computerComponentData = new DataStorage();
 
     //Setup view references:
+
+    //EditText that lets the user enter a title for the list
+    EditText enterTitleForPCList;
+    String listTitleName;
 
     //CPU:
     TextView cpuNameField;
@@ -66,27 +66,23 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     TextView cpuCoolerNameField;
     TextView cpuCoolerPriceField;
 
+    //Motherboard:
+    TextView motherboardNameFiled;
+    TextView motherboardPriceField;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_computer_list);
 
+        //Setup Toolbar elements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Create List");
-
-        final Button selectCPU = findViewById(R.id.addCPUButton);
-        selectCPU.setOnClickListener(this);
-
-        final Button selectCPUCooler = findViewById(R.id.addCPUCoolerButton);
-        selectCPUCooler.setOnClickListener(this);
-
-        //EditText that lets user enter a title:
-        enterTitleForPCList = findViewById(R.id.enterTitleForListEditText);
 
 
         //Random debug logs I will remove this later on
@@ -100,17 +96,31 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
         //Retrieve reference to view elements:
 
+        //EditText that lets user enter a title:
+        enterTitleForPCList = findViewById(R.id.enterTitleForListEditText);
+
         //CPU References:
         cpuNameField = findViewById(R.id.nameOfSelectedCPU);
         cpuPriceField = findViewById(R.id.priceValueOfSelectedCPU);
+        final Button selectCPU = findViewById(R.id.addCPUButton);
+        selectCPU.setOnClickListener(this);
 
         //CPU Cooler References:
         cpuCoolerNameField = findViewById(R.id.nameOfSelectedCPUCooler);
         cpuCoolerPriceField = findViewById(R.id.priceValueOfSelectedCPUCooler);
+        final Button selectCPUCooler = findViewById(R.id.addCPUCoolerButton);
+        selectCPUCooler.setOnClickListener(this);
 
+        //Motherboard References:
+        motherboardNameFiled = findViewById(R.id.nameOfSelectedMotherboard);
+        motherboardPriceField = findViewById(R.id.priceValueOfSelectedMotherboard);
+        final Button selectMotherboard = findViewById(R.id.addMotherboardButton);
+        selectMotherboard.setOnClickListener(this);
+
+        //Retrieve relevant item data
         retrieveCPUData();
         retrieveCPUCoolerData();
-
+        retrieveMotherboardData();
 
         loadData();
         updateViews();
@@ -119,6 +129,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     }
 
 
+    //Take user to new activity or run method depending on which button was clicked
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -127,6 +138,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.addCPUCoolerButton:
                 openSelectCPUCoolerOptions();
+                break;
+            case R.id.addMotherboardButton:
+                openSelectMotherboardOptions();
+                break;
         }
     }
 
@@ -143,6 +158,13 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                 SelectCPUCooler.class);
         saveData();
         startActivity(openSelectCPUCoolerOptions);
+    }
+
+    private void openSelectMotherboardOptions() {
+        Intent openSelectMotherboardOptions = new Intent(CreateComputerListActivity.this,
+                SelectMotherboard.class);
+        saveData();
+        startActivity(openSelectMotherboardOptions);
     }
 
     private void retrieveCPUData() {
@@ -256,6 +278,62 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         } catch (IllegalArgumentException e) {
             Log.d(TAG, "retrieveCPUCoolerData: " + "Something went wrong or the catch statement is working as intended");
         }
+
+    }
+
+    private void retrieveMotherboardData(){
+        //Set the fields with the relevant data
+        motherboardNameFiled.setText(computerComponentData.getComputerList().get("MOTHERBOARD NAME"));
+        if (computerComponentData.getComputerList().get("MOTHERBOARD PRICE") == null) {
+            motherboardPriceField.setText("");
+        } else {
+            motherboardPriceField.setText((String.format(getResources().getString(R.string.price_of_product), computerComponentData.getComputerList().get("MOTHERBOARD PRICE"))));
+        }
+
+        //String that is used to check if a product has been selected and to get the associated image for the product
+        String motherboardName = motherboardNameFiled.getText().toString();
+
+        //Image retrieval is wrapped in a try catch statement. If no product is selected then a IllegalArgumentException
+        //is thrown so this prevents the app from crashing
+        try {
+            //Get the image for the selected CPU if there's a selected cpu:
+            if (motherboardName != null) {
+
+                //In order to get the image for the guide a storage reference needs to be created
+                StorageReference storageReferenceCPUCooler = FirebaseStorage.getInstance().getReference().child(motherboardName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReferenceCPUCooler);
+
+                try {
+                    //Create a placeholder that will store the image for the activity
+                    final File tempFile = File.createTempFile(motherboardName, "jpg");
+                    //Try to retrieve the image from the firestore cloud storage
+                    storageReferenceCPUCooler.getFile(tempFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    //Temp toast message for testing
+                                    //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
+                                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+                                    ((ImageView) findViewById(R.id.imageOfSelectedMotherboard)).setImageBitmap(bitmap);
+                                    Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
+                            Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
+                            Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "retrieveCPUCoolerData: " + "Something went wrong or the catch statement is working as intended");
+        }
+
 
     }
 

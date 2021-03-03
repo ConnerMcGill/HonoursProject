@@ -22,12 +22,13 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 
-public class CPUCoolerAdapter extends FirestoreRecyclerAdapter<CPUCooler, CPUCoolerAdapter.CPUCoolerHolder> {
+public class MotherboardAdapter extends FirestoreRecyclerAdapter<Motherboard, MotherboardAdapter.MotherboardHolder> {
     private OnItemClickListener listener;
-
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -35,26 +36,27 @@ public class CPUCoolerAdapter extends FirestoreRecyclerAdapter<CPUCooler, CPUCoo
      *
      * @param options
      */
-    public CPUCoolerAdapter(@NonNull FirestoreRecyclerOptions<CPUCooler> options) {
+    public MotherboardAdapter(@NonNull FirestoreRecyclerOptions<Motherboard> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final CPUCoolerAdapter.CPUCoolerHolder holder, int position, @NonNull CPUCooler model) {
-        holder.nameOfCPUCooler.setText(model.getCPUCoolerName());
-        holder.priceOfCPUCooler.setText(String.format("£%s", String.valueOf(model.getCPUCoolerPrice())));
-        holder.fanRpmOfCPUCoolerValue.setText(model.getFanrpm());
-        holder.noiseLevelOfCPUCoolerValue.setText(model.getNoiselevel());
-        holder.colourOfCPUCoolerValue.setText(model.getColour());
-        holder.radiatorSizeOfCPUCoolerValue.setText(model.getRadsize());
+    protected void onBindViewHolder(@NonNull final MotherboardHolder holder, int position, @NonNull Motherboard model) {
+        holder.nameOfMotherboard.setText(model.getMotherboardName());
+        holder.priceOfMotherboard.setText(String.format("£%s", String.valueOf(model.getMotherboardPrice())));
+        holder.motherboardSocketValue.setText(model.getMotherboardSocket());
+        holder.motherboardFormFactorValue.setText(model.getFormFactor());
+        holder.motherboardMemoryMaxValue.setText(String.valueOf(model.getMemoryMax() + " GB"));
+        holder.motherboardMemorySlotsValue.setText(String.valueOf(model.getMemorySlots()));
+        holder.motherboardColourValue.setText(model.getColour());
 
         //In order to get the image for the guide a storage reference needs to be created
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(model.getCPUCoolerName() + ".jpg");
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(model.getMotherboardName() + ".jpg");
         Log.d("my image of cpu cooler", String.valueOf(storageReference));
 
         try {
             //Create a placeholder that will store the image for the activity
-            final File tempFile = File.createTempFile(model.getCPUCoolerName(), "jpg");
+            final File tempFile = File.createTempFile(model.getMotherboardName(), "jpg");
             //Try to retrieve the image from the firestore cloud storage
             storageReference.getFile(tempFile)
                     .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -62,7 +64,7 @@ public class CPUCoolerAdapter extends FirestoreRecyclerAdapter<CPUCooler, CPUCoo
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             //Create a bitmap object and set the image view item with the relevant image
                             Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
-                            holder.imageOfCPUCooler.setImageBitmap(bitmap);
+                            holder.imageOfMotherboard.setImageBitmap(bitmap);
                             Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -76,50 +78,54 @@ public class CPUCoolerAdapter extends FirestoreRecyclerAdapter<CPUCooler, CPUCoo
             e.printStackTrace();
         }
 
-
     }
 
     @NonNull
     @Override
-    public CPUCoolerAdapter.CPUCoolerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cpucooler_item, parent, false);
-        return new CPUCoolerHolder(view);
+    public MotherboardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.motherboard_item, parent, false);
+        return new MotherboardHolder(view);
     }
 
-
-    //Innerclass for viewHolder that provides a reference to the required views
-    class CPUCoolerHolder extends RecyclerView.ViewHolder {
+    public class MotherboardHolder extends RecyclerView.ViewHolder {
 
         //Reference variables for each view within each data item
-        TextView nameOfCPUCooler;
-        TextView priceOfCPUCooler;
-        TextView fanRpmOfCPUCoolerTitle;
-        TextView noiseLevelOfCPUCoolerTitle;
-        TextView colourOfCPUCoolerTitle;
-        TextView radiatorSizeOfCPUCoolerTitle;
-        TextView fanRpmOfCPUCoolerValue;
-        TextView noiseLevelOfCPUCoolerValue;
-        TextView colourOfCPUCoolerValue;
-        TextView radiatorSizeOfCPUCoolerValue;
-        ImageView imageOfCPUCooler;
-        Button addCPUCoolerToList;
+        TextView nameOfMotherboard;
+        TextView priceOfMotherboard;
+        TextView motherboardSocketTitle;
+        TextView motherboardSocketValue;
+        TextView motherboardFormFactorTitle;
+        TextView motherboardFormFactorValue;
+        TextView motherboardMemoryMaxTitle;
+        TextView motherboardMemoryMaxValue;
+        TextView motherboardMemorySlotsTitle;
+        TextView motherboardMemorySlotsValue;
+        TextView motherboardColourTitle;
+        TextView motherboardColourValue;
+        ImageView imageOfMotherboard;
+        Button addMotherboardToList;
+
+
 
 
         //Constructor accepts the entire item row and does the view lookups to find each subview
-        public CPUCoolerHolder(@NonNull View itemView) {
+        public MotherboardHolder(@NonNull View itemView) {
             super(itemView);
-            nameOfCPUCooler = itemView.findViewById(R.id.nameOfCPUCooler);
-            priceOfCPUCooler = itemView.findViewById(R.id.priceOfCPUCooler);
-            fanRpmOfCPUCoolerTitle = itemView.findViewById(R.id.fanRpmOfCPUCoolerTitle);
-            noiseLevelOfCPUCoolerTitle = itemView.findViewById(R.id.noiseLevelOfCPUCoolerTitle);
-            colourOfCPUCoolerTitle = itemView.findViewById(R.id.colourOfCPUCoolerTitle);
-            radiatorSizeOfCPUCoolerTitle = itemView.findViewById(R.id.radiatorSizeOfCPUCoolerTitle);
-            fanRpmOfCPUCoolerValue = itemView.findViewById(R.id.fanRpmOfCPUCoolerValue);
-            noiseLevelOfCPUCoolerValue = itemView.findViewById(R.id.noiseLevelOfCPUCoolerValue);
-            colourOfCPUCoolerValue = itemView.findViewById(R.id.colourOfCPUCoolerValue);
-            radiatorSizeOfCPUCoolerValue = itemView.findViewById(R.id.radiatorSizeOfCPUCoolerValue);
-            imageOfCPUCooler = itemView.findViewById(R.id.image_of_cpu_cooler);
-            addCPUCoolerToList = itemView.findViewById(R.id.addCPUCoolerToListButton);
+
+            nameOfMotherboard = itemView.findViewById(R.id.nameOfMotherboard);
+            priceOfMotherboard = itemView.findViewById(R.id.priceOfMotherboard);
+            motherboardSocketTitle = itemView.findViewById(R.id.motherboardSocketTitle);
+            motherboardSocketValue = itemView.findViewById(R.id.motherboardSocketValue);
+            motherboardFormFactorTitle = itemView.findViewById(R.id.motherboardFormFactorTitle);
+            motherboardFormFactorValue = itemView.findViewById(R.id.motherboardFormFactorValue);
+            motherboardMemoryMaxTitle = itemView.findViewById(R.id.motherboardMemoryMaxTitle);
+            motherboardMemoryMaxValue = itemView.findViewById(R.id.motherboardMemoryMaxValue);
+            motherboardMemorySlotsTitle = itemView.findViewById(R.id.motherboardMemorySlotsTitle);
+            motherboardMemorySlotsValue = itemView.findViewById(R.id.motherboardMemorySlotsValue);
+            motherboardColourTitle = itemView.findViewById(R.id.motherboardColourTitle);
+            motherboardColourValue = itemView.findViewById(R.id.motherboardColourValue);
+            imageOfMotherboard = itemView.findViewById(R.id.image_of_motherboard);
+            addMotherboardToList = itemView.findViewById(R.id.addMotherboardToListButton);
 
 
             //OnClickListener for the card
@@ -137,7 +143,7 @@ public class CPUCoolerAdapter extends FirestoreRecyclerAdapter<CPUCooler, CPUCoo
             });
 
             //OnClickListener for Add button
-            addCPUCoolerToList.setOnClickListener(new View.OnClickListener() {
+            addMotherboardToList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //Distinguish between different cards in the recycler view by their position
@@ -150,21 +156,21 @@ public class CPUCoolerAdapter extends FirestoreRecyclerAdapter<CPUCooler, CPUCoo
                 }
             });
 
-        }
 
+        }
     }
 
-
-    //Send the click event to the SelectCPUCooler activity which is then handled there
+    //Send the click event to the SelectMotherboard activity which is then handled there
     public interface OnItemClickListener {
         void onItemClick(DocumentSnapshot documentSnapshot, int position);
 
         void onAddButtonClick(DocumentSnapshot documentSnapshot, int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(MotherboardAdapter.OnItemClickListener listener) {
         this.listener = listener;
     }
+
 
 
 }
