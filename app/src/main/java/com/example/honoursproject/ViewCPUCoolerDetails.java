@@ -54,7 +54,7 @@ public class ViewCPUCoolerDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_cpu_cooler_details);
 
-        //Get all the data for the CPU firestore document that was selected as a HashMap
+        //Get all the data for the CPUCooler firestore document that was selected as a HashMap
         Intent intent = getIntent();
         final HashMap<String, Object> cpuCoolerHashMapData = (HashMap<String, Object>) intent.getSerializableExtra("hashMap");
         //Randomly testing I can get some data here
@@ -67,7 +67,7 @@ public class ViewCPUCoolerDetails extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("CPU Details:");
+        getSupportActionBar().setTitle("CPU Cooler Details:");
 
         //Go back to the previous activity in the activity backstack
         //https://stackoverflow.com/questions/49350686/back-to-previous-activity-arrow-button
