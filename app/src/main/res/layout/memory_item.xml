@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/image_of_memory"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameOfMemory"
+            android:layout_width="169dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="Memory Product Name"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/image_of_memory"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceOfMemory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="£160.64"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addMemoryToListButton"
+            android:layout_width="73dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/titleBar"
+            android:text="Add "
+            android:textColor="#FFFF"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceOfMemory" />
+
+        <TextView
+            android:id="@+id/memorySpeedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Speed"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_of_memory" />
+
+        <TextView
+            android:id="@+id/memorySpeedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="DDR4-3200"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/memorySpeedTitle" />
+
+        <TextView
+            android:id="@+id/memoryModulesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:text="Modules"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memorySpeedTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_memory" />
+
+        <TextView
+            android:id="@+id/memoryModulesValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:text="2 x 8GB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memorySpeedTitle"
+            app:layout_constraintTop_toBottomOf="@+id/memoryModulesTitle" />
+
+        <TextView
+            android:id="@+id/memoryPricePerGBTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="16dp"
+            android:text="Price / GB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memoryModulesTitle"
+            app:layout_constraintTop_toBottomOf="@id/image_of_memory" />
+
+        <TextView
+            android:id="@+id/memoryPricePerGBValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:text="£5.249"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memoryModulesTitle"
+            app:layout_constraintTop_toBottomOf="@+id/memoryPricePerGBTitle" />
+
+        <TextView
+            android:id="@+id/memoryColourTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Colour"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memorySpeedValue" />
+
+        <TextView
+            android:id="@+id/memoryColourValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Black / Yellow"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memoryColourTitle" />
+
+        <TextView
+            android:id="@+id/memoryFirstWordLatencyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="First Word Latency"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memoryColourTitle"
+            app:layout_constraintTop_toBottomOf="@+id/memoryModulesValue" />
+
+        <TextView
+            android:id="@+id/memoryFirstWordLatencyValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="10 ns"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memoryColourTitle"
+            app:layout_constraintTop_toBottomOf="@+id/memoryFirstWordLatencyTitle" />
+
+        <TextView
+            android:id="@+id/memoryCASLatencyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:text="CAS Latency"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memoryFirstWordLatencyTitle"
+            app:layout_constraintTop_toBottomOf="@+id/memoryPricePerGBValue" />
+
+        <TextView
+            android:id="@+id/memoryCASLatencyValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:text="16"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/memoryFirstWordLatencyTitle"
+            app:layout_constraintTop_toBottomOf="@+id/memoryCASLatencyTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

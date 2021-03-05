@@ -70,6 +70,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     TextView motherboardNameFiled;
     TextView motherboardPriceField;
 
+    //Memory:
+    TextView memoryNameField;
+    TextView memoryPriceField;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,10 +121,17 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         final Button selectMotherboard = findViewById(R.id.addMotherboardButton);
         selectMotherboard.setOnClickListener(this);
 
+        //Memory References:
+        memoryNameField = findViewById(R.id.nameOfSelectedMemory);
+        memoryPriceField = findViewById(R.id.priceValueOfSelectedMemory);
+        final Button selectMemory = findViewById(R.id.addMemoryButton);
+        selectMemory.setOnClickListener(this);
+
         //Retrieve relevant item data
         retrieveCPUData();
         retrieveCPUCoolerData();
         retrieveMotherboardData();
+        retrieveMemoryData();
 
         loadData();
         updateViews();
@@ -141,6 +152,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.addMotherboardButton:
                 openSelectMotherboardOptions();
+                break;
+            case R.id.addMemoryButton:
+                openSelectMemoryOptions();
                 break;
         }
     }
@@ -165,6 +179,13 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                 SelectMotherboard.class);
         saveData();
         startActivity(openSelectMotherboardOptions);
+    }
+
+    private void openSelectMemoryOptions() {
+        Intent openSelectMemoryOptions = new Intent(CreateComputerListActivity.this,
+                SelectMemory.class);
+        saveData();
+        startActivity(openSelectMemoryOptions);
     }
 
     private void retrieveCPUData() {
@@ -300,14 +321,14 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             if (motherboardName != null) {
 
                 //In order to get the image for the guide a storage reference needs to be created
-                StorageReference storageReferenceCPUCooler = FirebaseStorage.getInstance().getReference().child(motherboardName + ".jpg");
-                Log.d(TAG, "getting storage reference name " + storageReferenceCPUCooler);
+                StorageReference storageReferenceMotherboard = FirebaseStorage.getInstance().getReference().child(motherboardName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReferenceMotherboard);
 
                 try {
                     //Create a placeholder that will store the image for the activity
                     final File tempFile = File.createTempFile(motherboardName, "jpg");
                     //Try to retrieve the image from the firestore cloud storage
-                    storageReferenceCPUCooler.getFile(tempFile)
+                    storageReferenceMotherboard.getFile(tempFile)
                             .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -331,8 +352,65 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                 }
             }
         } catch (IllegalArgumentException e) {
-            Log.d(TAG, "retrieveCPUCoolerData: " + "Something went wrong or the catch statement is working as intended");
+            Log.d(TAG, "retrieveMotherboardData: " + "Something went wrong or the catch statement is working as intended");
         }
+
+
+    }
+
+    private void retrieveMemoryData() {
+        //Set the fields with the relevant data
+        memoryNameField.setText(computerComponentData.getComputerList().get("MEMORY NAME"));
+        if (computerComponentData.getComputerList().get("MEMORY PRICE") == null) {
+            memoryPriceField.setText("");
+        } else {
+            memoryPriceField.setText((String.format(getResources().getString(R.string.price_of_product), computerComponentData.getComputerList().get("MEMORY PRICE"))));
+        }
+
+        //String that is used to check if a product has been selected and to get the associated image for the product
+        String memoryName = memoryNameField.getText().toString();
+
+        //Image retrieval is wrapped in a try catch statement. If no product is selected then a IllegalArgumentException
+        //is thrown so this prevents the app from crashing
+        try {
+            //Get the image for the selected CPU if there's a selected cpu:
+            if (memoryName != null) {
+
+                //In order to get the image for the guide a storage reference needs to be created
+                StorageReference storageReferenceMemory = FirebaseStorage.getInstance().getReference().child(memoryName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReferenceMemory);
+
+                try {
+                    //Create a placeholder that will store the image for the activity
+                    final File tempFile = File.createTempFile(memoryName, "jpg");
+                    //Try to retrieve the image from the firestore cloud storage
+                    storageReferenceMemory.getFile(tempFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    //Temp toast message for testing
+                                    //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
+                                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+                                    ((ImageView) findViewById(R.id.imageOfSelectedMemory)).setImageBitmap(bitmap);
+                                    Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
+                            Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
+                            Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "retrieveMemoryData: " + "Something went wrong or the catch statement is working as intended");
+        }
+
 
 
     }

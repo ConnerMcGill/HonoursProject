@@ -1,6 +1,6 @@
 /*
 Honours Project - PC part Builder
-File: Selectcpu Class
+File: ViewMotherboardDetails Class
 Author: Conner McGill - B00320975
 Date: 2021/03/04
 
@@ -79,7 +79,7 @@ public class ViewMotherboardDetails extends AppCompatActivity {
         });
 
         //Get the image of the motherboard and set it to the imageView. First though store the name of the
-        //cpu cooler which is the name of the image file in a String variable
+        //motherboard which is the name of the image file in a String variable
         String motherboardImageName = (String) motherboardHashMapData.get("name");
         Log.d(TAG, "motherboard Name: " + motherboardImageName);
 
@@ -319,40 +319,6 @@ public class ViewMotherboardDetails extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
