@@ -79,6 +79,7 @@
     <string name="remove2">Remove</string>
     <string name="remove3">Remove</string>
     <string name="remove4">Remove</string>
+    <string name="remove5">Remove</string>
     <string name="add_cpu">Add CPU</string>
     <string name="image_of_selected_motherboard">image of selected motherboard</string>
     <string name="select_a_motherboard">Select a Motherboard</string>
@@ -89,4 +90,11 @@
     <string name="add_memory">add memory</string>
     <string name="image_of_memory">image_of_memory</string>
     <string name="image_of_motherboard">image_of_motherboard</string>
+    <string name="storage">Storage</string>
+    <string name="select_storage">Select Storage</string>
+    <string name="image_of_selected_storage">image of selected storage</string>
+    <string name="video_card">Video Card</string>
+    <string name="select_video_card">select video card</string>
+    <string name="image_of_selected_gpu">image of selected gpu</string>
+    <string name="add_video_card">add video card</string>
 </resources>

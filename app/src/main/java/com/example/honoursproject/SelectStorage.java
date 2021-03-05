@@ -1,15 +1,15 @@
 /*
 Honours Project - PC part Builder
-File: SelectMotherboard Class
+File: SelectStorage Class
 Author: Conner McGill - B00320975
-Date: 2021/03/04
+Date: 2021/03/05
 
 Summary of file:
 
     This class setups the recyclerview and populates the recyclerview with the relevant data
-    from the Memory firestore collection documents. The user can then either view the part in more
-    detail which will open a new activity with all the relevant data for the Memory or add the Memory to
-    their list which will return the selected Memory to the CreateComputerListActivity
+    from the Storage firestore collection documents. The user can then either view the part in more
+    detail which will open a new activity with all the relevant data for the Storage or add the Storage to
+    their list which will return the selected Storage to the CreateComputerListActivity
 
  */
 
@@ -37,28 +37,27 @@ import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 
-public class SelectMemory extends AppCompatActivity {
+public class SelectStorage extends AppCompatActivity {
 
     //Tag used for debugging the firestore data retrieval
-    private static final String TAG = "SelectMemoryTAG";
+    private static final String TAG = "SelectStorageTAG";
 
     //Reference to firestore database
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //Reference to CPU Collection in firestore
-    private CollectionReference memoryReference = db.collection("memory");
+    private CollectionReference storageReference = db.collection("storage");
 
     //RecyclerView Adapter for the motherboard data
-    private MemoryAdapter memoryAdapter;
+    private StorageAdapter storageAdapter;
 
     //DataStorage instance
-    DataStorage memoryData = new DataStorage();
-
+    DataStorage storageData = new DataStorage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_memory);
+        setContentView(R.layout.activity_select_storage);
 
         //Connect recyclerView to adapter
         setupRecyclerView();
@@ -69,7 +68,7 @@ public class SelectMemory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Select Memory");
+        getSupportActionBar().setTitle("Select Storage");
 
         //Go back to the previous activity in the activity backstack
         //https://stackoverflow.com/questions/49350686/back-to-previous-activity-arrow-button
@@ -81,30 +80,29 @@ public class SelectMemory extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void setupRecyclerView() {
-        //Create query against the memory collection which sorts the data by the price from lowest price
+        //Create query against the storage collection which sorts the data by the price from lowest price
         //to highest price i.e. ascending order
-        Query query = memoryReference.orderBy("price", Query.Direction.ASCENDING);
+        Query query = storageReference.orderBy("price", Query.Direction.ASCENDING);
 
         //Create FirestoreRecyclerOptions and bind query into the adapter
-        FirestoreRecyclerOptions<Memory> options = new FirestoreRecyclerOptions.Builder<Memory>()
-                .setQuery(query, Memory.class)
+        FirestoreRecyclerOptions<Storage> options = new FirestoreRecyclerOptions.Builder<Storage>()
+                .setQuery(query, Storage.class)
                 .build();
 
         //Assign RecyclerOptions to the adapter
-        memoryAdapter = new MemoryAdapter(options);
+        storageAdapter = new StorageAdapter(options);
 
         //Reference the recyclerView and assign the adapter to the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_memory);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_storage);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(memoryAdapter);
+        recyclerView.setAdapter(storageAdapter);
 
-        //Implement the OnClickListener interface from the MotherboardAdapter MotherboardHolder innerclass constructor
-        memoryAdapter.setOnItemClickListener(new MemoryAdapter.OnItemClickListener() {
+        //Implement the OnClickListener interface from the StorageAdapter StorageHolder innerclass constructor
+        storageAdapter.setOnItemClickListener(new StorageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 //Get the document ID from the clicked card
@@ -112,17 +110,17 @@ public class SelectMemory extends AppCompatActivity {
                 Log.d(TAG, "Document ID: " + documentName);
 
                 //Get all the data I need from the document now that I have the specific path and open the new activity:
-                DocumentReference memoryRef = db.collection("memory").document(documentName);
-                memoryRef.get()
+                DocumentReference storageRef = db.collection("storage").document(documentName);
+                storageRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                HashMap<String, Object> memoryDetails = (HashMap<String, Object>) documentSnapshot.getData();
-                                Log.d(TAG, "On Success: " + memoryDetails);
+                                HashMap<String, Object> storageDetails = (HashMap<String, Object>) documentSnapshot.getData();
+                                Log.d(TAG, "On Success: " + storageDetails);
 
 
-                                Intent intent = new Intent(SelectMemory.this, ViewMemoryDetails.class);
-                                intent.putExtra("hashMap", memoryDetails);
+                                Intent intent = new Intent(SelectStorage.this, ViewStorageDetails.class);
+                                intent.putExtra("hashMap", storageDetails);
                                 startActivity(intent);
 
                             }
@@ -143,31 +141,31 @@ public class SelectMemory extends AppCompatActivity {
                 Log.d(TAG, "Btn Add Document ID: " + documentName);
 
                 //Get the required data I am wanting from the document
-                DocumentReference memoryRef = db.collection("memory").document(documentName);
-                memoryRef.get()
+                DocumentReference storageRef = db.collection("storage").document(documentName);
+                storageRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                String memoryName = (String) documentSnapshot.get("name");
-                                Log.d(TAG, "Memory Name: " + memoryName);
+                                String storageName = (String) documentSnapshot.get("name");
+                                Log.d(TAG, "Storage Name: " + storageName);
                                 //Convert the price double into a string for later
-                                Double memoryPriceDouble = (Double) documentSnapshot.get("price");
-                                String memoryPriceString = Double.toString(memoryPriceDouble);
-                                Log.d(TAG, "Memory Price: " + memoryPriceString);
+                                Double storagePriceDouble = (Double) documentSnapshot.get("price");
+                                String storagePriceString = Double.toString(storagePriceDouble);
+                                Log.d(TAG, "Storage Price: " + storagePriceString);
 
 
                                 //Pass the data back to the CreateComputerListActivity by storing the data
                                 // into the DataStorage hashmap and then returning to the CreateComputerListActivity:
-                                Intent passMemoryDataToCreateComputerActivity = new Intent
-                                        (SelectMemory.this, CreateComputerListActivity.class);
+                                Intent passStorageDataToCreateComputerActivity = new Intent
+                                        (SelectStorage.this, CreateComputerListActivity.class);
 
-                                memoryData.getComputerList().put("MEMORY NAME", memoryName);
-                                memoryData.getComputerList().put("MEMORY PRICE", memoryPriceString);
-                                Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY NAME"));
-                                Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY PRICE"));
+                                storageData.getComputerList().put("STORAGE NAME", storageName);
+                                storageData.getComputerList().put("STORAGE PRICE", storagePriceString);
+                                Log.d(TAG, "onSuccess: " + storageData.getComputerList().get("STORAGE NAME"));
+                                Log.d(TAG, "onSuccess: " + storageData.getComputerList().get("STORAGE PRICE"));
 
 
-                                startActivity(passMemoryDataToCreateComputerActivity);
+                                startActivity(passStorageDataToCreateComputerActivity);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -178,20 +176,19 @@ public class SelectMemory extends AppCompatActivity {
                         });
             }
         });
-
     }
 
     //When the app goes into the foreground the recyclerview listen for database changes
     @Override
     protected void onStart() {
         super.onStart();
-        memoryAdapter.startListening();
+        storageAdapter.startListening();
     }
 
     //When the app goes into the background the recyclerview will not update anything
     @Override
     protected void onStop() {
         super.onStop();
-        memoryAdapter.stopListening();
+        storageAdapter.stopListening();
     }
 }

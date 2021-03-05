@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewMemoryDetails"></activity>
+        <activity android:name=".ViewGPUDetails"></activity>
+        <activity android:name=".SelectGPU" />
+        <activity android:name=".ViewStorageDetails" />
+        <activity android:name=".SelectStorage" />
+        <activity android:name=".ViewMemoryDetails" />
         <activity android:name=".SelectMemory" />
         <activity android:name=".ViewMotherboardDetails" />
         <activity android:name=".SelectMotherboard" />
