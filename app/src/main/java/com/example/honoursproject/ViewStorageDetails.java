@@ -77,8 +77,8 @@ public class ViewStorageDetails extends AppCompatActivity {
             }
         });
 
-        //Get the image of the motherboard and set it to the imageView. First though store the name of the
-        //memory which is the name of the image file in a String variable
+        //Get the image of the storage and set it to the imageView. First though store the name of the
+        //storage which is the name of the image file in a String variable
         String storageImageName = (String) storageHashMapData.get("name");
         Log.d(TAG, "storage Name: " + storageImageName);
 
@@ -115,11 +115,11 @@ public class ViewStorageDetails extends AppCompatActivity {
 
         //Assign the values into their respective text views:
 
-        //Name of the memory:
+        //Name of the storage:
         TextView titleOfClickedStorage = findViewById(R.id.nameOfClickedStorage);
         titleOfClickedStorage.setText((CharSequence) storageHashMapData.get("name"));
 
-        //Price of the memory:
+        //Price of the storage:
         TextView priceOfClickedStorage = findViewById(R.id.priceOfClickedStorage);
         Log.d(TAG, "onCreate: " + storageHashMapData.get("price"));
         //Convert the price from the HashMap into a string so that it can be assigned into the TextView

@@ -8,14 +8,13 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/image_of_gpu"
+            android:id="@+id/image_of_case"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="4dp"
@@ -24,20 +23,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/nameOfGPU"
+            android:id="@+id/nameOfCase"
             android:layout_width="169dp"
             android:layout_height="62dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:maxLines="4"
             android:singleLine="false"
-            android:text="GPU Product Name"
+            android:text="Case Product Name"
             android:textSize="16dp"
-            app:layout_constraintStart_toEndOf="@+id/image_of_gpu"
+            app:layout_constraintStart_toEndOf="@+id/image_of_case"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/priceOfGPU"
+            android:id="@+id/priceOfCase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -48,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/addGPUToListButton"
+            android:id="@+id/addCaseToListButton"
             android:layout_width="73dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
@@ -58,142 +57,117 @@
             android:textColor="#FFFF"
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/priceOfGPU" />
+            app:layout_constraintTop_toBottomOf="@+id/priceOfCase" />
 
         <TextView
-            android:id="@+id/gpuChipsetTitle"
+            android:id="@+id/caseTypeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Chipset"
+            android:text="Type"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_of_gpu" />
+            app:layout_constraintTop_toBottomOf="@id/image_of_case" />
 
         <TextView
-            android:id="@+id/gpuChipsetValue"
-            android:layout_width="100dp"
-            android:layout_height="28dp"
+            android:id="@+id/caseTypeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:lines="2"
-            android:singleLine="false"
-            android:text="Geforce GTX 1050 TI"
+            android:text="ATX Mid Tower"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gpuChipsetTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/caseTypeTitle" />
 
         <TextView
-            android:id="@+id/gpuMemoryTitle"
+            android:id="@+id/caseColourTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="108dp"
             android:layout_marginTop="16dp"
-            android:text="Memory"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuChipsetTitle"
-            app:layout_constraintTop_toBottomOf="@+id/image_of_gpu" />
-
-        <TextView
-            android:id="@+id/gpuMemoryValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="108dp"
-            android:layout_marginTop="8dp"
-            android:text="8 GB"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuChipsetTitle"
-            app:layout_constraintTop_toBottomOf="@+id/gpuMemoryTitle" />
-
-        <TextView
-            android:id="@+id/gpuCoreClockTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="16dp"
-            android:text="Core Clock"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuMemoryTitle"
-            app:layout_constraintTop_toBottomOf="@id/image_of_gpu" />
-
-        <TextView
-            android:id="@+id/gpuCoreClockValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="8dp"
-            android:text="1500 MHz"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuMemoryTitle"
-            app:layout_constraintTop_toBottomOf="@+id/gpuCoreClockTitle" />
-
-        <TextView
-            android:id="@+id/gpuLengthTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="92dp"
-            android:layout_marginTop="20dp"
-            android:text="Length"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuColourTitle"
-            app:layout_constraintTop_toBottomOf="@+id/gpuCoreClockValue" />
-
-        <TextView
-            android:id="@+id/gpuLengthValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="92dp"
-            android:layout_marginTop="8dp"
-            android:text="242 mm"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuColourTitle"
-            app:layout_constraintTop_toBottomOf="@+id/gpuLengthTitle" />
-
-
-        <TextView
-            android:id="@+id/gpuBoostClockTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Boost Clock"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gpuChipsetValue" />
-
-        <TextView
-            android:id="@+id/gpuBoostClockValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="1730 MHz"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gpuBoostClockTitle" />
-
-        <TextView
-            android:id="@+id/gpuColourTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="20dp"
             android:text="Colour"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuBoostClockTitle"
-            app:layout_constraintTop_toBottomOf="@+id/gpuMemoryValue" />
+            app:layout_constraintStart_toEndOf="@+id/caseTypeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_case" />
 
         <TextView
-            android:id="@+id/gpuColourValue"
+            android:id="@+id/caseColourValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
+            android:layout_marginStart="108dp"
             android:layout_marginTop="8dp"
-            android:text="Black"
+            android:text="White"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/gpuBoostClockTitle"
-            app:layout_constraintTop_toBottomOf="@+id/gpuColourTitle" />
+            app:layout_constraintStart_toEndOf="@+id/caseTypeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/caseColourTitle" />
+
+        <TextView
+            android:id="@+id/caseSidePanelTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:text="Side Panel Window"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/caseColourTitle"
+            app:layout_constraintTop_toBottomOf="@id/image_of_case" />
+
+        <TextView
+            android:id="@+id/caseSidePanelValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:text="Tempered Glass"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/caseColourTitle"
+            app:layout_constraintTop_toBottomOf="@+id/caseSidePanelTitle" />
+
+        <TextView
+            android:id="@+id/caseInternal3InchBaysTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text='Internal 3.5" Bays'
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/caseTypeValue" />
+
+        <TextView
+            android:id="@+id/caseInternal3InchBaysValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="4"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/caseInternal3InchBaysTitle" />
+
+        <TextView
+            android:id="@+id/caseInternal2InchBaysTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:text='Internal 2.5" Bays'
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/caseInternal3InchBaysTitle"
+            app:layout_constraintTop_toBottomOf="@+id/caseColourValue" />
+
+        <TextView
+            android:id="@+id/caseInternal2InchBaysValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:text="2"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/caseInternal3InchBaysTitle"
+            app:layout_constraintTop_toBottomOf="@+id/caseInternal2InchBaysTitle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

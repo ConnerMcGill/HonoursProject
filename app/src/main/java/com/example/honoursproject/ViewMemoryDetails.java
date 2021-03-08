@@ -78,7 +78,7 @@ public class ViewMemoryDetails extends AppCompatActivity {
             }
         });
 
-        //Get the image of the motherboard and set it to the imageView. First though store the name of the
+        //Get the image of the memory and set it to the imageView. First though store the name of the
         //memory which is the name of the image file in a String variable
         String memoryImageName = (String) memoryHashMapData.get("name");
         Log.d(TAG, "memory Name: " + memoryImageName);

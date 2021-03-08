@@ -1,17 +1,18 @@
 /*
 Honours Project - PC part Builder
-File: SelectGPU Class
+File: SelectPSU Class
 Author: Conner McGill - B00320975
-Date: 2021/03/05
+Date: 2021/03/08
 
 Summary of file:
 
     This class setups the recyclerview and populates the recyclerview with the relevant data
-    from the gpu firestore collection documents. The user can then either view the part in more
-    detail which will open a new activity with all the relevant data for the gpu or add the gpu to
-    their list which will return the selected Storage to the CreateComputerListActivity
+    from the case firestore collection documents. The user can then either view the part in more
+    detail which will open a new activity with all the relevant data for the case or add the case to
+    their list which will return the selected case to the CreateComputerListActivity
 
  */
+
 
 package com.example.honoursproject;
 
@@ -37,28 +38,27 @@ import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 
-public class SelectGPU extends AppCompatActivity {
+public class SelectPowerSupply extends AppCompatActivity {
 
     //Tag used for debugging the firestore data retrieval
-    private static final String TAG = "SelectGPUTAG";
+    private static final String TAG = "SelectPSUTAG";
 
     //Reference to firestore database
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //Reference to CPU Collection in firestore
-    private CollectionReference gpuReference = db.collection("gpu");
+    private CollectionReference psuReference = db.collection("psu");
 
     //RecyclerView Adapter for the motherboard data
-    private GPUAdapter gpuAdapter;
+    private PSUAdapter psuAdapter;
 
     //DataStorage instance
-    DataStorage gpuData = new DataStorage();
-
+    DataStorage psuData = new DataStorage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_gpu);
+        setContentView(R.layout.activity_select_power_supply);
 
         //Connect recyclerView to adapter
         setupRecyclerView();
@@ -69,7 +69,7 @@ public class SelectGPU extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Select GPU");
+        getSupportActionBar().setTitle("Select PSU");
 
         //Go back to the previous activity in the activity backstack
         //https://stackoverflow.com/questions/49350686/back-to-previous-activity-arrow-button
@@ -84,26 +84,26 @@ public class SelectGPU extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        //Create query against the gpu collection which sorts the data by the price from lowest price
+        //Create query against the power supplies collection which sorts the data by the price from lowest price
         //to highest price i.e. ascending order
-        Query query = gpuReference.orderBy("price", Query.Direction.ASCENDING);
+        Query query = psuReference.orderBy("price", Query.Direction.ASCENDING);
 
         //Create FirestoreRecyclerOptions and bind query into the adapter
-        FirestoreRecyclerOptions<GPU> options = new FirestoreRecyclerOptions.Builder<GPU>()
-                .setQuery(query, GPU.class)
+        FirestoreRecyclerOptions<PSU> options = new FirestoreRecyclerOptions.Builder<PSU>()
+                .setQuery(query, PSU.class)
                 .build();
 
         //Assign RecyclerOptions to the adapter
-        gpuAdapter = new GPUAdapter(options);
+        psuAdapter = new PSUAdapter(options);
 
         //Reference the recyclerView and assign the adapter to the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_gpu);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_psu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(gpuAdapter);
+        recyclerView.setAdapter(psuAdapter);
 
-        //Implement the OnClickListener interface from the GPUAdapter GPUHolder innerclass constructor
-        gpuAdapter.setOnItemClickListener(new GPUAdapter.OnItemClickListener() {
+        //Implement the OnClickListener interface from the CaseAdapter CaseHolder innerclass constructor
+        psuAdapter.setOnItemClickListener(new PSUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 //Get the document ID from the clicked card
@@ -111,17 +111,17 @@ public class SelectGPU extends AppCompatActivity {
                 Log.d(TAG, "Document ID: " + documentName);
 
                 //Get all the data I need from the document now that I have the specific path and open the new activity:
-                DocumentReference gpuRef = db.collection("gpu").document(documentName);
-                gpuRef.get()
+                DocumentReference psuRef = db.collection("psu").document(documentName);
+                psuRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                HashMap<String, Object> gpuDetails = (HashMap<String, Object>) documentSnapshot.getData();
-                                Log.d(TAG, "On Success: " + gpuDetails);
+                                HashMap<String, Object> psuDetails = (HashMap<String, Object>) documentSnapshot.getData();
+                                Log.d(TAG, "On Success: " + psuDetails);
 
 
-                                Intent intent = new Intent(SelectGPU.this, ViewGPUDetails.class);
-                                intent.putExtra("hashMap", gpuDetails);
+                                Intent intent = new Intent(SelectPowerSupply.this, ViewPowerSupplyDetails.class);
+                                intent.putExtra("hashMap", psuDetails);
                                 startActivity(intent);
 
                             }
@@ -142,31 +142,31 @@ public class SelectGPU extends AppCompatActivity {
                 Log.d(TAG, "Btn Add Document ID: " + documentName);
 
                 //Get the required data I am wanting from the document
-                DocumentReference gpuRef = db.collection("gpu").document(documentName);
-                gpuRef.get()
+                DocumentReference psuRef = db.collection("psu").document(documentName);
+                psuRef.get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                String gpuName = (String) documentSnapshot.get("name");
-                                Log.d(TAG, "GPU Name: " + gpuName);
+                                String psuName = (String) documentSnapshot.get("name");
+                                Log.d(TAG, "PSU Name: " + psuName);
                                 //Convert the price double into a string for later
-                                Double gpuPriceDouble = (Double) documentSnapshot.get("price");
-                                String gpuPriceString = Double.toString(gpuPriceDouble);
-                                Log.d(TAG, "GPU Price: " + gpuPriceString);
+                                Double psuPriceDouble = (Double) documentSnapshot.get("price");
+                                String psuPriceString = Double.toString(psuPriceDouble);
+                                Log.d(TAG, "PSU Price: " + psuPriceString);
 
 
                                 //Pass the data back to the CreateComputerListActivity by storing the data
                                 // into the DataStorage hashmap and then returning to the CreateComputerListActivity:
-                                Intent passGPUDataToCreateComputerActivity = new Intent
-                                        (SelectGPU.this, CreateComputerListActivity.class);
+                                Intent passPSUDataToCreateComputerActivity = new Intent
+                                        (SelectPowerSupply.this, CreateComputerListActivity.class);
 
-                                gpuData.getComputerList().put("GPU NAME", gpuName);
-                                gpuData.getComputerList().put("GPU PRICE", gpuPriceString);
-                                Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU NAME"));
-                                Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU PRICE"));
+                                psuData.getComputerList().put("PSU NAME", psuName);
+                                psuData.getComputerList().put("PSU PRICE", psuPriceString);
+                                Log.d(TAG, "onSuccess: " + psuData.getComputerList().get("PSU NAME"));
+                                Log.d(TAG, "onSuccess: " + psuData.getComputerList().get("PSU PRICE"));
 
 
-                                startActivity(passGPUDataToCreateComputerActivity);
+                                startActivity(passPSUDataToCreateComputerActivity);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -178,20 +178,21 @@ public class SelectGPU extends AppCompatActivity {
             }
         });
 
+
     }
 
     //When the app goes into the foreground the recyclerview listen for database changes
     @Override
     protected void onStart() {
         super.onStart();
-        gpuAdapter.startListening();
+        psuAdapter.startListening();
     }
 
     //When the app goes into the background the recyclerview will not update anything
     @Override
     protected void onStop() {
         super.onStop();
-        gpuAdapter.stopListening();
+        psuAdapter.stopListening();
     }
 
 

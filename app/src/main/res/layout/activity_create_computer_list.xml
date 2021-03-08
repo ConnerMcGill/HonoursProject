@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:layout_marginBottom="24dp">
+    android:layout_marginBottom="24dp"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -327,8 +327,7 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_memory"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectMemoryTitle">
-        </ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectMemoryTitle"></ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedMemory"
@@ -405,8 +404,7 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_storage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectStorageTitle">
-        </ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectStorageTitle"></ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedStorage"
@@ -483,8 +481,7 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_gpu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectGPUTitle">
-        </ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectGPUTitle"></ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedGPU"
@@ -519,12 +516,248 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedGPU" />
 
+        <View
+            android:id="@+id/lineDivider7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addGPUButton" />
 
+        <TextView
+            android:id="@+id/selectCaseTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/pc_case"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider7" />
 
+        <TextView
+            android:id="@+id/nameOfSelectedCase"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_case"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCase"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider7" />
 
+        <ImageView
+            android:id="@+id/imageOfSelectedCase"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_case"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectCaseTitle"></ImageView>
 
+        <TextView
+            android:id="@+id/priceValueOfSelectedCase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCase"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCase" />
 
+        <Button
+            android:id="@+id/addCaseButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/add_case"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCase" />
 
+        <Button
+            android:id="@+id/removeCaseButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/remove6"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedCase" />
+
+        <View
+            android:id="@+id/lineDivider8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addCaseButton" />
+
+        <TextView
+            android:id="@+id/selectPowerSupplyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/power_supply"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider8" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedPowerSupply"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_case"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedPowerSupply"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider8" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedPowerSupply"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_power_supply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectPowerSupplyTitle" />
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedPowerSupply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedPowerSupply"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedPowerSupply" />
+
+        <Button
+            android:id="@+id/addPowerSupplyButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/add_power_supply"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedPowerSupply" />
+
+        <Button
+            android:id="@+id/removePowerSupplyButton"
+            android:layout_width="185dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/remove7"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfSelectedPowerSupply" />
+
+        <View
+            android:id="@+id/lineDivider9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addPowerSupplyButton" />
+
+        <TextView
+            android:id="@+id/EstimatedWattageOfList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/estimated_wattage_of_list"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider9" />
+
+        <TextView
+            android:id="@+id/EstimatedPriceOfList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/estimated_price_of_list"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EstimatedWattageOfList" />
+
+        <View
+            android:id="@+id/lineDivider10"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EstimatedPriceOfList" />
+
+        <TextView
+            android:id="@+id/EnterDescriptionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/enter_list_description"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider10" />
+
+        <EditText
+            android:id="@+id/userDescriptionForList"
+            android:layout_width="389dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/enter_description_about_the_list"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="5000"
+            android:maxLines="10"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EnterDescriptionTitle" />
+
+        <Button
+            android:id="@+id/saveUsersListToFirestore"
+            android:layout_width="388dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFC107"
+            android:text="Save List"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userDescriptionForList" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

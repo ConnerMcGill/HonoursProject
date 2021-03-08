@@ -8,7 +8,7 @@ Summary of file:
 
     This class assigns the HashMap data that is retrieved from the SelectGPU class and displays
     the detailed information in a nestedScrollView showing the extra details that the user would
-    not see on the SelectStorage recycler view
+    not see on the SelectGPU recycler view
 
  */
 
@@ -52,7 +52,7 @@ public class ViewGPUDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_gpu_details);
 
-        //Get all the data for the motherboard firestore document that was selected as a HashMap
+        //Get all the data for the GPU firestore document that was selected as a HashMap
         Intent intent = getIntent();
         final HashMap<String, Object> gpuHashMapData = (HashMap<String, Object>) intent.getSerializableExtra("hashMap");
         //Randomly testing I can get some data here

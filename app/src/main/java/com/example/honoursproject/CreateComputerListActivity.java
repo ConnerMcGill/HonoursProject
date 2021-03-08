@@ -80,6 +80,14 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     TextView gpuNameField;
     TextView gpuPriceField;
 
+    //Case:
+    TextView caseNameField;
+    TextView casePriceField;
+
+    //PSU:
+    TextView psuNameField;
+    TextView psuPriceField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,16 +100,6 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Create List");
-
-
-        //Random debug logs I will remove this later on
-        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU COOLER NAME"));
-        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU COOLER PRICE"));
-        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU NAME"));
-        Log.d(TAG, "conner: " + computerComponentData.getComputerList().get("CPU PRICE"));
-        Log.d(TAG, "conner: " + computerComponentData.getComputerList().keySet());
-        Log.d(TAG, "conner: " + computerComponentData.getComputerList().values());
-
 
         //Retrieve reference to view elements:
 
@@ -144,6 +142,17 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         final Button selectGPU = findViewById(R.id.addGPUButton);
         selectGPU.setOnClickListener(this);
 
+        //Case References:
+        caseNameField = findViewById(R.id.nameOfSelectedCase);
+        casePriceField = findViewById(R.id.priceValueOfSelectedCase);
+        final Button selectCase = findViewById(R.id.addCaseButton);
+        selectCase.setOnClickListener(this);
+
+        //PSU References:
+        psuNameField = findViewById(R.id.nameOfSelectedPowerSupply);
+        psuPriceField = findViewById(R.id.priceValueOfSelectedPowerSupply);
+        final Button selectPSU = findViewById(R.id.addPowerSupplyButton);
+        selectPSU.setOnClickListener(this);
 
         //Retrieve relevant item data
         retrieveCPUData();
@@ -152,13 +161,14 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         retrieveMemoryData();
         retrieveStorageData();
         retrieveGPUData();
+        retrieveCaseData();
+        retrievePSUData();
 
         loadData();
         updateViews();
 
 
     }
-
 
 
     //Take user to new activity or run method depending on which button was clicked
@@ -183,9 +193,14 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             case R.id.addGPUButton:
                 openSelectGPUOptions();
                 break;
+            case R.id.addCaseButton:
+                openSelectCaseOptions();
+                break;
+            case R.id.addPowerSupplyButton:
+                openSelectPSUOptions();
+                break;
         }
     }
-
 
 
     private void openSelectCPUOptions() {
@@ -229,6 +244,21 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         saveData();
         startActivity(openSelectGPUOptions);
     }
+
+    private void openSelectCaseOptions() {
+        Intent openSelectCaseOptions = new Intent(CreateComputerListActivity.this,
+                SelectCase.class);
+        saveData();
+        startActivity(openSelectCaseOptions);
+    }
+
+    private void openSelectPSUOptions() {
+        Intent openSelectPSUOptions = new Intent(CreateComputerListActivity.this,
+                SelectPowerSupply.class);
+        saveData();
+        startActivity(openSelectPSUOptions);
+    }
+
 
     private void retrieveCPUData() {
 
@@ -344,7 +374,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
     }
 
-    private void retrieveMotherboardData(){
+    private void retrieveMotherboardData() {
         //Set the fields with the relevant data
         motherboardNameFiled.setText(computerComponentData.getComputerList().get("MOTHERBOARD NAME"));
         if (computerComponentData.getComputerList().get("MOTHERBOARD PRICE") == null) {
@@ -454,7 +484,6 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         }
 
 
-
     }
 
     private void retrieveStorageData() {
@@ -509,7 +538,6 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         } catch (IllegalArgumentException e) {
             Log.d(TAG, "retrieveStorageData: " + "Something went wrong or the catch statement is working as intended");
         }
-
 
 
     }
@@ -567,6 +595,117 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             Log.d(TAG, "retrieveStorageData: " + "Something went wrong or the catch statement is working as intended");
         }
 
+
+    }
+
+    private void retrieveCaseData() {
+        //Set the fields with the relevant data
+        caseNameField.setText(computerComponentData.getComputerList().get("CASE NAME"));
+        if (computerComponentData.getComputerList().get("CASE PRICE") == null) {
+            casePriceField.setText("");
+        } else {
+            casePriceField.setText((String.format(getResources().getString(R.string.price_of_product), computerComponentData.getComputerList().get("CASE PRICE"))));
+        }
+
+        //String that is used to check if a product has been selected and to get the associated image for the product
+        String caseName = caseNameField.getText().toString();
+
+        //Image retrieval is wrapped in a try catch statement. If no product is selected then a IllegalArgumentException
+        //is thrown so this prevents the app from crashing
+        try {
+            //Get the image for the selected storage if there's a selected storage:
+            if (caseName != null) {
+
+                //In order to get the image for the guide a storage reference needs to be created
+                StorageReference storageReferenceMemory = FirebaseStorage.getInstance().getReference().child(caseName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReferenceMemory);
+
+                try {
+                    //Create a placeholder that will store the image for the activity
+                    final File tempFile = File.createTempFile(caseName, "jpg");
+                    //Try to retrieve the image from the firestore cloud storage
+                    storageReferenceMemory.getFile(tempFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    //Temp toast message for testing
+                                    //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
+                                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+                                    ((ImageView) findViewById(R.id.imageOfSelectedCase)).setImageBitmap(bitmap);
+                                    Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
+                            Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
+                            Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "retrieveStorageData: " + "Something went wrong or the catch statement is working as intended");
+        }
+
+
+    }
+
+    private void retrievePSUData() {
+        //Set the fields with the relevant data
+        psuNameField.setText(computerComponentData.getComputerList().get("PSU NAME"));
+        if (computerComponentData.getComputerList().get("PSU PRICE") == null) {
+            psuPriceField.setText("");
+        } else {
+            psuPriceField.setText((String.format(getResources().getString(R.string.price_of_product), computerComponentData.getComputerList().get("PSU PRICE"))));
+        }
+
+        //String that is used to check if a product has been selected and to get the associated image for the product
+        String psuName = psuNameField.getText().toString();
+
+        //Image retrieval is wrapped in a try catch statement. If no product is selected then a IllegalArgumentException
+        //is thrown so this prevents the app from crashing
+        try {
+            //Get the image for the selected storage if there's a selected storage:
+            if (psuName != null) {
+
+                //In order to get the image for the guide a storage reference needs to be created
+                StorageReference storageReferenceMemory = FirebaseStorage.getInstance().getReference().child(psuName + ".jpg");
+                Log.d(TAG, "getting storage reference name " + storageReferenceMemory);
+
+                try {
+                    //Create a placeholder that will store the image for the activity
+                    final File tempFile = File.createTempFile(psuName, "jpg");
+                    //Try to retrieve the image from the firestore cloud storage
+                    storageReferenceMemory.getFile(tempFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    //Temp toast message for testing
+                                    //Toast.makeText(ViewGuideActivity.this, "Image retrieved", Toast.LENGTH_SHORT).show();
+                                    Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
+                                    ((ImageView) findViewById(R.id.imageOfSelectedPowerSupply)).setImageBitmap(bitmap);
+                                    Log.d("image retrieved", "The image has been retrieved successfully. Which makes sense if you can actually see it");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //If the image can't be retrieved for whatever reason then display the toast as an error message and write a log statement to the console
+                            Toast.makeText(CreateComputerListActivity.this, "Image failed to be retrieved", Toast.LENGTH_SHORT).show();
+                            Log.d("image not retrieved", "The image has failed to be retrieved successfully. Which makes sense as you can't see the image");
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            Log.d(TAG, "retrieveStorageData: " + "Something went wrong or the catch statement is working as intended");
+        }
 
 
     }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/image_of_psu"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameOfPSU"
+            android:layout_width="169dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="Power Supply Product Name"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/image_of_psu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceOfPSU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="£160.64"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addPSUToListButton"
+            android:layout_width="73dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/titleBar"
+            android:text="Add "
+            android:textColor="#FFFF"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceOfPSU" />
+
+        <TextView
+            android:id="@+id/psuFormFactorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Form Factor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_of_psu" />
+
+        <TextView
+            android:id="@+id/psuFormFactorValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="ATX"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/psuFormFactorTitle" />
+
+        <TextView
+            android:id="@+id/psuEfficiencyRatingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="16dp"
+            android:text="Efficiency Rating"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/psuFormFactorTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_psu" />
+
+        <TextView
+            android:id="@+id/psuEfficiencyRatingValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="8dp"
+            android:text="80+ Gold"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/psuFormFactorTitle"
+            app:layout_constraintTop_toBottomOf="@+id/psuEfficiencyRatingTitle" />
+
+        <TextView
+            android:id="@+id/psuWattageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="16dp"
+            android:text="Wattage"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/psuEfficiencyRatingTitle"
+            app:layout_constraintTop_toBottomOf="@id/image_of_psu" />
+
+        <TextView
+            android:id="@+id/psuWattageValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="8dp"
+            android:text="750 W"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/psuEfficiencyRatingTitle"
+            app:layout_constraintTop_toBottomOf="@+id/psuWattageTitle" />
+
+        <TextView
+            android:id="@+id/psuModularTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Modular"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/psuFormFactorValue" />
+
+        <TextView
+            android:id="@+id/psuModularValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Full"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/psuModularTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
