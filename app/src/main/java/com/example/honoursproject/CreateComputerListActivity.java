@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -42,10 +41,6 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
     //Tag used for debugging and log comments
     private static final String TAG = "CreateComputerListActivity";
-
-
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String LIST_NAME = "list name";
 
     //DataStorage instance
     DataStorage computerComponentData = new DataStorage();
@@ -87,6 +82,12 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     //PSU:
     TextView psuNameField;
     TextView psuPriceField;
+
+    //Estimated Price and Wattage
+    TextView estimatedPriceView;
+    Double estimatedPrice = 0.00;
+    String estimatedPriceString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +155,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         final Button selectPSU = findViewById(R.id.addPowerSupplyButton);
         selectPSU.setOnClickListener(this);
 
+        //Estimated Price and Wattage:
+        estimatedPriceView = findViewById(R.id.estimatedPriceOfList);
+
+
         //Retrieve relevant item data
         retrieveCPUData();
         retrieveCPUCoolerData();
@@ -164,8 +169,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         retrieveCaseData();
         retrievePSUData();
 
-        loadData();
-        updateViews();
+        calculateEstimatedPrice();
+
+        loadUserTitleData();
+        updateUserTitleView();
 
 
     }
@@ -206,59 +213,58 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     private void openSelectCPUOptions() {
         Intent openSelectCPUOptions = new Intent(CreateComputerListActivity.this,
                 Selectcpu.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectCPUOptions);
     }
 
     private void openSelectCPUCoolerOptions() {
         Intent openSelectCPUCoolerOptions = new Intent(CreateComputerListActivity.this,
                 SelectCPUCooler.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectCPUCoolerOptions);
     }
 
     private void openSelectMotherboardOptions() {
         Intent openSelectMotherboardOptions = new Intent(CreateComputerListActivity.this,
                 SelectMotherboard.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectMotherboardOptions);
     }
 
     private void openSelectMemoryOptions() {
         Intent openSelectMemoryOptions = new Intent(CreateComputerListActivity.this,
                 SelectMemory.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectMemoryOptions);
     }
 
     private void openSelectStorageOptions() {
         Intent openSelectStorageOptions = new Intent(CreateComputerListActivity.this,
                 SelectStorage.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectStorageOptions);
     }
 
     private void openSelectGPUOptions() {
         Intent openSelectGPUOptions = new Intent(CreateComputerListActivity.this,
                 SelectGPU.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectGPUOptions);
     }
 
     private void openSelectCaseOptions() {
         Intent openSelectCaseOptions = new Intent(CreateComputerListActivity.this,
                 SelectCase.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectCaseOptions);
     }
 
     private void openSelectPSUOptions() {
         Intent openSelectPSUOptions = new Intent(CreateComputerListActivity.this,
                 SelectPowerSupply.class);
-        saveData();
+        saveUserTitleData();
         startActivity(openSelectPSUOptions);
     }
-
 
     private void retrieveCPUData() {
 
@@ -710,27 +716,100 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
     }
 
-    public void saveData() {
+    //If a price is not null then retrieve the part cost in the DataStorage Hashmap and assign the total
+    //cost to the relevant view. This is a bit inefficient though I must say
+    private void calculateEstimatedPrice() {
+        if (computerComponentData.getComputerList().get("CPU PRICE") != null){
+            double cpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + cpuPrice);
+            estimatedPrice = estimatedPrice + cpuPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("CPU COOLER PRICE") != null){
+            double cpuCoolerPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU COOLER PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + cpuCoolerPrice);
+            estimatedPrice = estimatedPrice + cpuCoolerPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("MOTHERBOARD PRICE") != null){
+            double motherboardPrice = Double.parseDouble(computerComponentData.getComputerList().get("MOTHERBOARD PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + motherboardPrice);
+            estimatedPrice = estimatedPrice + motherboardPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("MEMORY PRICE") != null){
+            double memoryPrice = Double.parseDouble(computerComponentData.getComputerList().get("MEMORY PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + memoryPrice);
+            estimatedPrice = estimatedPrice + memoryPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("STORAGE PRICE") != null){
+            double storagePrice = Double.parseDouble(computerComponentData.getComputerList().get("STORAGE PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + storagePrice);
+            estimatedPrice = estimatedPrice + storagePrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("GPU PRICE") != null){
+            double gpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("GPU PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + gpuPrice);
+            estimatedPrice = estimatedPrice + gpuPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("CASE PRICE") != null){
+            double casePrice = Double.parseDouble(computerComponentData.getComputerList().get("CASE PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + casePrice);
+            estimatedPrice = estimatedPrice + casePrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+        if (computerComponentData.getComputerList().get("PSU PRICE") != null){
+            double psuPrice = Double.parseDouble(computerComponentData.getComputerList().get("PSU PRICE"));
+            Log.d(TAG, "calculateEstimatedPrice: " + psuPrice);
+            estimatedPrice = estimatedPrice + psuPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
+        }
+
+
+
+
+
+
+
+    }
+
+    //Store the users title into the DataStorage hashmap
+    public void saveUserTitleData() {
         listTitleName = enterTitleForPCList.getText().toString();
 
-
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putString(LIST_NAME, listTitleName);
-
-        editor.apply();
+        computerComponentData.getComputerList().put("USER TITLE", listTitleName);
+        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("USER TITLE"));
 
         Toast.makeText(this, "data saved debug msg", Toast.LENGTH_SHORT).show();
     }
 
-    public void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        listTitleName = sharedPreferences.getString(LIST_NAME, "");
+    //When the user opens the activity load the potential data from the DataStorage hashmap
+    public void loadUserTitleData() {
+        listTitleName = computerComponentData.getComputerList().get("USER TITLE");
+        Log.d(TAG, "loadData: " + computerComponentData.getComputerList().get("USER TITLE"));
+        estimatedPriceString = computerComponentData.getComputerList().get("LIST COSTS");
+
     }
 
-    public void updateViews() {
+    //Update the users title view with the data from the hashmap
+    public void updateUserTitleView() {
         enterTitleForPCList.setText(listTitleName);
+        if (estimatedPrice == 0.0){
+            estimatedPriceString = "";
+        } else {
+            estimatedPriceView.setText((getResources().getString(R.string.cost_of_list) + estimatedPriceString));;
+        }
     }
 
 }

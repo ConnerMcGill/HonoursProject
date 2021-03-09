@@ -693,7 +693,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lineDivider9" />
 
         <TextView
-            android:id="@+id/EstimatedPriceOfList"
+            android:id="@+id/estimatedPriceOfList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -712,7 +712,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EstimatedPriceOfList" />
+            app:layout_constraintTop_toBottomOf="@+id/estimatedPriceOfList" />
 
         <TextView
             android:id="@+id/EnterDescriptionTitle"
