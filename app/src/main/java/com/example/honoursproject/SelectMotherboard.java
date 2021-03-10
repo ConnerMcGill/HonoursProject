@@ -154,6 +154,8 @@ public class SelectMotherboard extends AppCompatActivity {
                                 Double motherboardPriceDouble = (Double) documentSnapshot.get("price");
                                 String motherboardPriceString = Double.toString(motherboardPriceDouble);
                                 Log.d(TAG, "Motherboard Price: " + motherboardPriceString);
+                                Long motherboardTDP = (Long) documentSnapshot.get("tdp");
+                                Log.d(TAG, "Motherboard tdp: " + motherboardTDP);
 
 
                                 //Pass the data back to the CreateComputerListActivity by storing the data
@@ -163,8 +165,10 @@ public class SelectMotherboard extends AppCompatActivity {
 
                                 motherboardData.getComputerList().put("MOTHERBOARD NAME", motherboardName);
                                 motherboardData.getComputerList().put("MOTHERBOARD PRICE", motherboardPriceString);
+                                motherboardData.getComputerList().put("MOTHERBOARD TDP", String.valueOf(motherboardTDP));
                                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD NAME"));
                                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD PRICE"));
+                                Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD TDP"));
 
 
                                 startActivity(passMotherboardDataToCreateComputerActivity);

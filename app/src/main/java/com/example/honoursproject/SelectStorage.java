@@ -152,6 +152,7 @@ public class SelectStorage extends AppCompatActivity {
                                 Double storagePriceDouble = (Double) documentSnapshot.get("price");
                                 String storagePriceString = Double.toString(storagePriceDouble);
                                 Log.d(TAG, "Storage Price: " + storagePriceString);
+                                Long storageTDP = (Long) documentSnapshot.get("tdp");
 
 
                                 //Pass the data back to the CreateComputerListActivity by storing the data
@@ -161,8 +162,10 @@ public class SelectStorage extends AppCompatActivity {
 
                                 storageData.getComputerList().put("STORAGE NAME", storageName);
                                 storageData.getComputerList().put("STORAGE PRICE", storagePriceString);
+                                storageData.getComputerList().put("STORAGE TDP", String.valueOf(storageTDP));
                                 Log.d(TAG, "onSuccess: " + storageData.getComputerList().get("STORAGE NAME"));
                                 Log.d(TAG, "onSuccess: " + storageData.getComputerList().get("STORAGE PRICE"));
+                                Log.d(TAG, "onSuccess: " + storageData.getComputerList().get("STORAGE TDP"));
 
 
                                 startActivity(passStorageDataToCreateComputerActivity);

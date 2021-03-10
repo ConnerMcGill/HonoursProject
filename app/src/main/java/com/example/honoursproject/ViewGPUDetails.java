@@ -244,14 +244,17 @@ public class ViewGPUDetails extends AppCompatActivity {
                 String gpuName = (String) gpuHashMapData.get("name");
                 Double gpuPrice = (Double) gpuHashMapData.get("price");
                 String gpuPriceString = Double.toString(gpuPrice);
+                Long gpuTDP = (Long) gpuHashMapData.get("tdp");
 
                 Intent passGPUDataToCreateComputerActivity = new Intent
                         (ViewGPUDetails.this, CreateComputerListActivity.class);
 
                 gpuData.getComputerList().put("GPU NAME", gpuName);
                 gpuData.getComputerList().put("GPU PRICE", gpuPriceString);
+                gpuData.getComputerList().put("GPU TDP", String.valueOf(gpuTDP));
                 Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU NAME"));
                 Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU PRICE"));
+                Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU TDP"));
 
                 startActivity(passGPUDataToCreateComputerActivity);
 

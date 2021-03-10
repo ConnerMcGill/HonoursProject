@@ -304,14 +304,17 @@ public class ViewMotherboardDetails extends AppCompatActivity {
                 String motherboardName = (String) motherboardHashMapData.get("name");
                 Double motherboardPrice = (Double) motherboardHashMapData.get("price");
                 String motherboardPriceString = Double.toString(motherboardPrice);
+                Long motherboardTDP = (Long) motherboardHashMapData.get("tdp");
 
                 Intent passMotherboardDataToCreateComputerActivity = new Intent
                         (ViewMotherboardDetails.this, CreateComputerListActivity.class);
 
                 motherboardData.getComputerList().put("MOTHERBOARD NAME", motherboardName);
                 motherboardData.getComputerList().put("MOTHERBOARD PRICE", motherboardPriceString);
+                motherboardData.getComputerList().put("MOTHERBOARD TDP", String.valueOf(motherboardTDP));
                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD NAME"));
                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD PRICE"));
+                Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD TDP"));
 
 
 

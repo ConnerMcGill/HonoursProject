@@ -153,6 +153,7 @@ public class SelectGPU extends AppCompatActivity {
                                 Double gpuPriceDouble = (Double) documentSnapshot.get("price");
                                 String gpuPriceString = Double.toString(gpuPriceDouble);
                                 Log.d(TAG, "GPU Price: " + gpuPriceString);
+                                Long gpuTDP = (Long) documentSnapshot.get("tdp");
 
 
                                 //Pass the data back to the CreateComputerListActivity by storing the data
@@ -162,8 +163,10 @@ public class SelectGPU extends AppCompatActivity {
 
                                 gpuData.getComputerList().put("GPU NAME", gpuName);
                                 gpuData.getComputerList().put("GPU PRICE", gpuPriceString);
+                                gpuData.getComputerList().put("GPU TDP", String.valueOf(gpuTDP));
                                 Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU NAME"));
                                 Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU PRICE"));
+                                Log.d(TAG, "onSuccess: " + gpuData.getComputerList().get("GPU TDP"));
 
 
                                 startActivity(passGPUDataToCreateComputerActivity);

@@ -191,15 +191,17 @@ public class ViewCPUCoolerDetails extends AppCompatActivity {
                 String cpuCoolerName = (String) cpuCoolerHashMapData.get("name");
                 Double cpuCoolerPriceDouble = (Double) cpuCoolerHashMapData.get("price");
                 String cpuCoolerPriceString = Double.toString(cpuCoolerPriceDouble);
+                Long cpuCoolerTDP = (Long) cpuCoolerHashMapData.get("tdp");
 
                 Intent passCPUCoolerDataToCreateComputerActivity = new Intent
                         (ViewCPUCoolerDetails.this, CreateComputerListActivity.class);
 
                 cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
                 cpuCoolerData.getComputerList().put("CPU COOLER PRICE", cpuCoolerPriceString);
+                cpuCoolerData.getComputerList().put("CPU COOLER TDP", String.valueOf(cpuCoolerTDP));
                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
-
+                Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER TDP"));
 
 
                 startActivity(passCPUCoolerDataToCreateComputerActivity);

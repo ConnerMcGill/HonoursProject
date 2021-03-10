@@ -232,6 +232,7 @@ public class ViewCPUDetails extends AppCompatActivity {
                 Double cpuPriceDouble = (Double) cpuHashMapData.get("price");
                 String cpuPriceString = Double.toString(cpuPriceDouble);
                 String cpuSocket = (String) cpuHashMapData.get("socket");
+                Long cpuTDP = (Long) cpuHashMapData.get("tdp");
 
                 Intent passCPUDataToCreateComputerActivity = new Intent
                         (ViewCPUDetails.this, CreateComputerListActivity.class);
@@ -239,9 +240,11 @@ public class ViewCPUDetails extends AppCompatActivity {
                 cpuData.getComputerList().put("CPU NAME", cpuName);
                 cpuData.getComputerList().put("CPU PRICE", cpuPriceString);
                 cpuData.getComputerList().put("CPU SOCKET", cpuSocket);
+                cpuData.getComputerList().put("CPU TDP", String.valueOf(cpuTDP));
                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU NAME"));
                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU PRICE"));
                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU SOCKET"));
+                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU TDP"));
 
                 startActivity(passCPUDataToCreateComputerActivity);
 

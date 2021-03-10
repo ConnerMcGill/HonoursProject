@@ -140,6 +140,8 @@ public class SelectCPUCooler extends AppCompatActivity {
                                 Double cpuCoolerPriceLong = (Double) documentSnapshot.get("price");
                                 String cpuCoolerPriceString = Double.toString(cpuCoolerPriceLong);
                                 Log.d(TAG, "CPU Cooler Price: " + cpuCoolerPriceString);
+                                Long cpuCoolerTDP = (Long) documentSnapshot.get("tdp");
+                                Log.d(TAG, "CPU Cooler TDP: " + cpuCoolerTDP);
 
 
 
@@ -150,8 +152,10 @@ public class SelectCPUCooler extends AppCompatActivity {
 
                                 cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
                                 cpuCoolerData.getComputerList().put("CPU COOLER PRICE", cpuCoolerPriceString);
+                                cpuCoolerData.getComputerList().put("CPU COOLER TDP", String.valueOf(cpuCoolerTDP));
                                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
                                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
+                                Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER TDP"));
 
 
                                 startActivity(passCPUCoolerDataToCreateComputerActivity);

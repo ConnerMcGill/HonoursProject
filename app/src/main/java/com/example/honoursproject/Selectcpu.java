@@ -158,6 +158,8 @@ public class Selectcpu extends AppCompatActivity {
                                 //amd cpu on a intel motherboard for example
                                 String cpuSocket = (String) documentSnapshot.get("socket");
                                 Log.d(TAG, "CPU Socket: " + cpuSocket);
+                                Long cpuTDP = (Long) documentSnapshot.get("tdp");
+                                Log.d(TAG, "CPU TDP: " + cpuTDP);
 
                                 //Pass the data back to the CreateComputerListActivity by storing the
                                 // data in the DataStorage Hashmap and then returning to the CreateComputerListActivity:
@@ -168,9 +170,11 @@ public class Selectcpu extends AppCompatActivity {
                                 cpuData.getComputerList().put("CPU NAME", cpuName);
                                 cpuData.getComputerList().put("CPU PRICE", cpuPriceString);
                                 cpuData.getComputerList().put("CPU SOCKET", cpuSocket);
+                                cpuData.getComputerList().put("CPU TDP", String.valueOf(cpuTDP));
                                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU NAME"));
                                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU PRICE"));
                                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU SOCKET"));
+                                Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU TDP"));
 
 
 

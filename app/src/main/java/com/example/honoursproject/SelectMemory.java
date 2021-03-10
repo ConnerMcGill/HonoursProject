@@ -154,6 +154,8 @@ public class SelectMemory extends AppCompatActivity {
                                 Double memoryPriceDouble = (Double) documentSnapshot.get("price");
                                 String memoryPriceString = Double.toString(memoryPriceDouble);
                                 Log.d(TAG, "Memory Price: " + memoryPriceString);
+                                Long memoryTDP = (Long) documentSnapshot.get("tdp");
+
 
 
                                 //Pass the data back to the CreateComputerListActivity by storing the data
@@ -163,8 +165,10 @@ public class SelectMemory extends AppCompatActivity {
 
                                 memoryData.getComputerList().put("MEMORY NAME", memoryName);
                                 memoryData.getComputerList().put("MEMORY PRICE", memoryPriceString);
+                                memoryData.getComputerList().put("MEMORY TDP", String.valueOf(memoryTDP));
                                 Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY NAME"));
                                 Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY PRICE"));
+                                Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY TDP"));
 
 
                                 startActivity(passMemoryDataToCreateComputerActivity);

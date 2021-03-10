@@ -36,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 public class CreateComputerListActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -87,6 +88,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     TextView estimatedPriceView;
     Double estimatedPrice = 0.00;
     String estimatedPriceString;
+    TextView estimatedWattageView;
+    int estimatedWattage = 0;
+    String estimatedWattageString;
 
 
     @Override
@@ -157,6 +161,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
         //Estimated Price and Wattage:
         estimatedPriceView = findViewById(R.id.estimatedPriceOfList);
+        estimatedWattageView = findViewById(R.id.estimatedWattageOfList);
 
 
         //Retrieve relevant item data
@@ -170,9 +175,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         retrievePSUData();
 
         calculateEstimatedPrice();
+        calculateEstimatedWattage();
 
-        loadUserTitleData();
-        updateUserTitleView();
+        loadUserData();
+        updateUserDataViews();
 
 
     }
@@ -723,63 +729,100 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             double cpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + cpuPrice);
             estimatedPrice = estimatedPrice + cpuPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("CPU COOLER PRICE") != null){
             double cpuCoolerPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU COOLER PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + cpuCoolerPrice);
             estimatedPrice = estimatedPrice + cpuCoolerPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("MOTHERBOARD PRICE") != null){
             double motherboardPrice = Double.parseDouble(computerComponentData.getComputerList().get("MOTHERBOARD PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + motherboardPrice);
             estimatedPrice = estimatedPrice + motherboardPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("MEMORY PRICE") != null){
             double memoryPrice = Double.parseDouble(computerComponentData.getComputerList().get("MEMORY PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + memoryPrice);
             estimatedPrice = estimatedPrice + memoryPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("STORAGE PRICE") != null){
             double storagePrice = Double.parseDouble(computerComponentData.getComputerList().get("STORAGE PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + storagePrice);
             estimatedPrice = estimatedPrice + storagePrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("GPU PRICE") != null){
             double gpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("GPU PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + gpuPrice);
             estimatedPrice = estimatedPrice + gpuPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("CASE PRICE") != null){
             double casePrice = Double.parseDouble(computerComponentData.getComputerList().get("CASE PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + casePrice);
             estimatedPrice = estimatedPrice + casePrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
         if (computerComponentData.getComputerList().get("PSU PRICE") != null){
             double psuPrice = Double.parseDouble(computerComponentData.getComputerList().get("PSU PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + psuPrice);
             estimatedPrice = estimatedPrice + psuPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.valueOf(estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
 
+    }
 
-
-
-
+    //If a product has been selected then get its tdp value if it has one and assign that value to
+    //the counting total wattage count
+    private void calculateEstimatedWattage() {
+        if (computerComponentData.getComputerList().get("CPU TDP") != null){
+            int cpuTDP = Integer.parseInt(computerComponentData.getComputerList().get("CPU TDP"));
+            estimatedWattage = estimatedWattage + cpuTDP;
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
+            Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+        }
+        if (computerComponentData.getComputerList().get("CPU COOLER TDP") != null){
+            int cpuCoolerTDP = Integer.parseInt(computerComponentData.getComputerList().get("CPU COOLER TDP"));
+            estimatedWattage = estimatedWattage + cpuCoolerTDP;
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
+            Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+        }
+        if (computerComponentData.getComputerList().get("MOTHERBOARD TDP") != null){
+            int motherboardTDP = Integer.parseInt(computerComponentData.getComputerList().get("MOTHERBOARD TDP"));
+            estimatedWattage = estimatedWattage + motherboardTDP;
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
+            Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+        }
+        if (computerComponentData.getComputerList().get("GPU TDP") != null){
+            int gpuTDP = Integer.parseInt(computerComponentData.getComputerList().get("GPU TDP"));
+            estimatedWattage = estimatedWattage + gpuTDP;
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
+            Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+        }
+        if (computerComponentData.getComputerList().get("MEMORY TDP") != null){
+            int memoryTDP = Integer.parseInt(computerComponentData.getComputerList().get("MEMORY TDP"));
+            estimatedWattage = estimatedWattage + memoryTDP;
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
+            Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+        }
+        if (computerComponentData.getComputerList().get("STORAGE TDP") != null){
+            int storageTDP = Integer.parseInt(computerComponentData.getComputerList().get("STORAGE TDP"));
+            estimatedWattage = estimatedWattage + storageTDP;
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
+            Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+        }
 
 
     }
@@ -795,20 +838,26 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     }
 
     //When the user opens the activity load the potential data from the DataStorage hashmap
-    public void loadUserTitleData() {
+    public void loadUserData() {
         listTitleName = computerComponentData.getComputerList().get("USER TITLE");
         Log.d(TAG, "loadData: " + computerComponentData.getComputerList().get("USER TITLE"));
         estimatedPriceString = computerComponentData.getComputerList().get("LIST COSTS");
+        estimatedWattageString = computerComponentData.getComputerList().get("ESTIMATED WATTAGE");
 
     }
 
-    //Update the users title view with the data from the hashmap
-    public void updateUserTitleView() {
+    //Update the users view with the data from the hashmap
+    public void updateUserDataViews() {
         enterTitleForPCList.setText(listTitleName);
         if (estimatedPrice == 0.0){
             estimatedPriceString = "";
         } else {
-            estimatedPriceView.setText((getResources().getString(R.string.cost_of_list) + estimatedPriceString));;
+            estimatedPriceView.setText((getResources().getString(R.string.cost_of_list) + estimatedPriceString));
+        }
+        if (estimatedWattage == 0){
+            estimatedWattageString = "";
+        } else {
+            estimatedWattageView.setText("Estimated Wattage Of List: " +estimatedWattageString + " W");
         }
     }
 

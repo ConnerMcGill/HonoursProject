@@ -190,14 +190,17 @@ public class ViewMemoryDetails extends AppCompatActivity {
                 String memoryName = (String) memoryHashMapData.get("name");
                 Double memoryPrice = (Double) memoryHashMapData.get("price");
                 String memoryPriceString = Double.toString(memoryPrice);
+                Long memoryTDP = (Long) memoryHashMapData.get("tdp");
 
                 Intent passMotherboardDataToCreateComputerActivity = new Intent
                         (ViewMemoryDetails.this, CreateComputerListActivity.class);
 
                 memoryData.getComputerList().put("MEMORY NAME", memoryName);
                 memoryData.getComputerList().put("MEMORY PRICE", memoryPriceString);
+                memoryData.getComputerList().put("MEMORY TDP", String.valueOf(memoryTDP));
                 Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY NAME"));
                 Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY PRICE"));
+                Log.d(TAG, "onSuccess: " + memoryData.getComputerList().get("MEMORY TDP"));
 
                 startActivity(passMotherboardDataToCreateComputerActivity);
 
