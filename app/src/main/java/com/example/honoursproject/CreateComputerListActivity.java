@@ -116,48 +116,64 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         cpuPriceField = findViewById(R.id.priceValueOfSelectedCPU);
         final Button selectCPU = findViewById(R.id.addCPUButton);
         selectCPU.setOnClickListener(this);
+        final Button removeCPU = findViewById(R.id.removeCPUButton);
+        removeCPU.setOnClickListener(this);
 
         //CPU Cooler References:
         cpuCoolerNameField = findViewById(R.id.nameOfSelectedCPUCooler);
         cpuCoolerPriceField = findViewById(R.id.priceValueOfSelectedCPUCooler);
         final Button selectCPUCooler = findViewById(R.id.addCPUCoolerButton);
         selectCPUCooler.setOnClickListener(this);
+        final Button removeCPUCooler = findViewById(R.id.removeCPUCoolerButton);
+        removeCPUCooler.setOnClickListener(this);
 
         //Motherboard References:
         motherboardNameFiled = findViewById(R.id.nameOfSelectedMotherboard);
         motherboardPriceField = findViewById(R.id.priceValueOfSelectedMotherboard);
         final Button selectMotherboard = findViewById(R.id.addMotherboardButton);
         selectMotherboard.setOnClickListener(this);
+        final Button removeMotherboard = findViewById(R.id.removeMotherboardButton);
+        removeMotherboard.setOnClickListener(this);
 
         //Memory References:
         memoryNameField = findViewById(R.id.nameOfSelectedMemory);
         memoryPriceField = findViewById(R.id.priceValueOfSelectedMemory);
         final Button selectMemory = findViewById(R.id.addMemoryButton);
         selectMemory.setOnClickListener(this);
+        final Button removeMemory = findViewById(R.id.removeMemoryButton);
+        removeMemory.setOnClickListener(this);
 
         //Storage References:
         storageNameField = findViewById(R.id.nameOfSelectedStorage);
         storagePriceField = findViewById(R.id.priceValueOfSelectedStorage);
         final Button selectStorage = findViewById(R.id.addStorageButton);
         selectStorage.setOnClickListener(this);
+        final Button removeStorage = findViewById(R.id.removeStorageButton);
+        removeStorage.setOnClickListener(this);
 
         //GPU References:
         gpuNameField = findViewById(R.id.nameOfSelectedGPU);
         gpuPriceField = findViewById(R.id.priceValueOfSelectedGPU);
         final Button selectGPU = findViewById(R.id.addGPUButton);
         selectGPU.setOnClickListener(this);
+        final Button removeGPU = findViewById(R.id.removeGPUButton);
+        removeGPU.setOnClickListener(this);
 
         //Case References:
         caseNameField = findViewById(R.id.nameOfSelectedCase);
         casePriceField = findViewById(R.id.priceValueOfSelectedCase);
         final Button selectCase = findViewById(R.id.addCaseButton);
         selectCase.setOnClickListener(this);
+        final Button removeCase = findViewById(R.id.removeCaseButton);
+        removeCase.setOnClickListener(this);
 
         //PSU References:
         psuNameField = findViewById(R.id.nameOfSelectedPowerSupply);
         psuPriceField = findViewById(R.id.priceValueOfSelectedPowerSupply);
         final Button selectPSU = findViewById(R.id.addPowerSupplyButton);
         selectPSU.setOnClickListener(this);
+        final Button removePSU = findViewById(R.id.removePowerSupplyButton);
+        removePSU.setOnClickListener(this);
 
         //Estimated Price and Wattage:
         estimatedPriceView = findViewById(R.id.estimatedPriceOfList);
@@ -212,9 +228,34 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             case R.id.addPowerSupplyButton:
                 openSelectPSUOptions();
                 break;
+            case R.id.removeCPUButton:
+                removeSelectedCPUDetails();
+                break;
+            case R.id.removeCPUCoolerButton:
+                removeSelectedCPUCoolerDetails();
+                break;
+            case R.id.removeMotherboardButton:
+                removeSelectedMotherboardDetails();
+                break;
+            case R.id.removeMemoryButton:
+                removeSelectedMemoryDetails();
+                break;
+            case R.id.removeStorageButton:
+                removeSelectedStorageDetails();
+                break;
+            case R.id.removeGPUButton:
+                removeSelectedGPUDetails();
+                break;
+            case R.id.removeCaseButton:
+                removeSelectedCaseDetails();
+                break;
+            case R.id.removePowerSupplyButton:
+                removeSelectedPSUDetails();
         }
     }
 
+
+    //Open select part options
 
     private void openSelectCPUOptions() {
         Intent openSelectCPUOptions = new Intent(CreateComputerListActivity.this,
@@ -271,6 +312,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         saveUserTitleData();
         startActivity(openSelectPSUOptions);
     }
+
+
+    //Retrieve part options
 
     private void retrieveCPUData() {
 
@@ -722,63 +766,387 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
     }
 
+
+    //Remove parts options
+    private void removeSelectedCPUDetails() {
+        if (computerComponentData.getComputerList().get("CPU NAME") != null && computerComponentData.getComputerList().get("CPU PRICE") != null) {
+
+            //Update the total cost and total wattage counts
+            double cpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU PRICE"));
+            estimatedPrice = estimatedPrice - cpuPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedCPUDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+            int cpuTDP = Integer.parseInt(computerComponentData.getComputerList().get("CPU TDP"));
+            int temp = estimatedWattage - cpuTDP;
+            Log.d(TAG, "removeSelectedCPUDetails: " + temp);
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(temp));
+            //If the original item CPU TDP key from the storage hashmap is not removed the old tdp value will remain
+            computerComponentData.getComputerList().remove("CPU TDP");
+            Log.d(TAG, "removeSelectedCPUDetails: estimated wattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+
+
+            //Update view fields for CPU
+            cpuPriceField.setText("");
+            cpuNameField.setText("");
+
+            //Update storage hashmap by removing the cpu name and price
+            computerComponentData.getComputerList().put("CPU NAME", null);
+            computerComponentData.getComputerList().put("CPU PRICE", null);
+            Log.d(TAG, "removeSelectedCPUDetails: CPU NAME: " + computerComponentData.getComputerList().get("CPU NAME"));
+            Log.d(TAG, "removeSelectedCPUDetails: CPU PRICE: " + computerComponentData.getComputerList().get("CPU PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectCPUImage = findViewById(R.id.imageOfSelectedCPU);
+            selectCPUImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedCPUCoolerDetails() {
+        if (computerComponentData.getComputerList().get("CPU COOLER NAME") != null && computerComponentData.getComputerList().get("CPU COOLER PRICE") != null) {
+
+            //Update the total cost and total wattage counts
+            double cpuCoolerPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU COOLER PRICE"));
+            estimatedPrice = estimatedPrice - cpuCoolerPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedCPUCoolerDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+            int cpuCoolerTDP = Integer.parseInt(computerComponentData.getComputerList().get("CPU COOLER TDP"));
+            int temp = estimatedWattage - cpuCoolerTDP;
+            Log.d(TAG, "removeSelectedCPUCoolerDetails: " + temp);
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(temp));
+            //If the original item CPU COOLER TDP key from the storage hashmap is not removed the old tdp value will remain
+            computerComponentData.getComputerList().remove("CPU COOLER TDP");
+            Log.d(TAG, "removeSelectedCPUCoolerDetails: estimated wattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+
+
+            //Update view fields for CPU Cooler
+            cpuCoolerPriceField.setText("");
+            cpuCoolerNameField.setText("");
+
+            //Update storage hashmap by removing the cpu cooler name and price
+            computerComponentData.getComputerList().put("CPU COOLER NAME", null);
+            computerComponentData.getComputerList().put("CPU COOLER PRICE", null);
+            Log.d(TAG, "removeSelectedCPUCoolerDetails: CPU COOLER NAME: " + computerComponentData.getComputerList().get("CPU COOLER NAME"));
+            Log.d(TAG, "removeSelectedCPUCoolerDetails: CPU COOLER PRICE: " + computerComponentData.getComputerList().get("CPU COOLER PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectCPUCoolerImage = findViewById(R.id.imageOfSelectedCPUCooler);
+            selectCPUCoolerImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedMotherboardDetails() {
+        if (computerComponentData.getComputerList().get("MOTHERBOARD NAME") != null && computerComponentData.getComputerList().get("MOTHERBOARD PRICE") != null) {
+
+            //Update the total cost and total wattage counts
+            double motherboardPrice = Double.parseDouble(computerComponentData.getComputerList().get("MOTHERBOARD PRICE"));
+            estimatedPrice = estimatedPrice - motherboardPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedMotherboardDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+            int motherboardTDP = Integer.parseInt(computerComponentData.getComputerList().get("MOTHERBOARD TDP"));
+            int temp = estimatedWattage - motherboardTDP;
+            Log.d(TAG, "removeSelectedMotherboardDetails: " + temp);
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(temp));
+            //If the original item Motherboard TDP key from the storage hashmap is not removed the old tdp value will remain
+            computerComponentData.getComputerList().remove("MOTHERBOARD TDP");
+            Log.d(TAG, "removeSelectedMotherboardDetails: estimated wattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+
+
+            //Update view fields for Motherboard
+            motherboardPriceField.setText("");
+            motherboardNameFiled.setText("");
+
+            //Update storage hashmap by removing the motherboard name and price
+            computerComponentData.getComputerList().put("MOTHERBOARD NAME", null);
+            computerComponentData.getComputerList().put("MOTHERBOARD PRICE", null);
+            Log.d(TAG, "removeSelectedMotherboardDetails: MOTHERBOARD NAME: " + computerComponentData.getComputerList().get("MOTHERBOARD NAME"));
+            Log.d(TAG, "removeSelectedMotherboardDetails: MOTHERBOARD PRICE: " + computerComponentData.getComputerList().get("MOTHERBOARD PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectMotherboardImage = findViewById(R.id.imageOfSelectedMotherboard);
+            selectMotherboardImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedMemoryDetails() {
+        if (computerComponentData.getComputerList().get("MEMORY NAME") != null && computerComponentData.getComputerList().get("MEMORY PRICE") != null) {
+
+            //Update the total cost and total wattage counts
+            double memoryPrice = Double.parseDouble(computerComponentData.getComputerList().get("MEMORY PRICE"));
+            estimatedPrice = estimatedPrice - memoryPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedMemoryDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+            int memoryTDP = Integer.parseInt(computerComponentData.getComputerList().get("MEMORY TDP"));
+            int temp = estimatedWattage - memoryTDP;
+            Log.d(TAG, "removeSelectedMemoryDetails: " + temp);
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(temp));
+            //If the original item Memory TDP key from the storage hashmap is not removed the old tdp value will remain
+            computerComponentData.getComputerList().remove("MEMORY TDP");
+            Log.d(TAG, "removeSelectedMemoryDetails: estimated wattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+
+
+            //Update view fields for Memory
+            memoryNameField.setText("");
+            memoryPriceField.setText("");
+
+            //Update storage hashmap by removing the memory name and price
+            computerComponentData.getComputerList().put("MEMORY NAME", null);
+            computerComponentData.getComputerList().put("MEMORY PRICE", null);
+            Log.d(TAG, "removeSelectedMemoryDetails: MEMORY NAME: " + computerComponentData.getComputerList().get("MEMORY NAME"));
+            Log.d(TAG, "removeSelectedMemoryDetails: MEMORY PRICE: " + computerComponentData.getComputerList().get("MEMORY PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectMemoryImage = findViewById(R.id.imageOfSelectedMemory);
+            selectMemoryImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedStorageDetails() {
+        if (computerComponentData.getComputerList().get("STORAGE NAME") != null && computerComponentData.getComputerList().get("STORAGE PRICE") != null) {
+
+            //Update the total cost and total wattage counts
+            double storagePrice = Double.parseDouble(computerComponentData.getComputerList().get("STORAGE PRICE"));
+            estimatedPrice = estimatedPrice - storagePrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedStorageDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+            int storageTDP = Integer.parseInt(computerComponentData.getComputerList().get("STORAGE TDP"));
+            int temp = estimatedWattage - storageTDP;
+            Log.d(TAG, "removeSelectedStorageDetails: " + temp);
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(temp));
+            //If the original item Storage TDP key from the storage hashmap is not removed the old tdp value will remain
+            computerComponentData.getComputerList().remove("STORAGE TDP");
+            Log.d(TAG, "removeSelectedStorageDetails: estimated wattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+
+
+            //Update view fields for Storage
+            storageNameField.setText("");
+            storagePriceField.setText("");
+
+            //Update storage hashmap by removing the storage name and price
+            computerComponentData.getComputerList().put("STORAGE NAME", null);
+            computerComponentData.getComputerList().put("STORAGE PRICE", null);
+            Log.d(TAG, "removeSelectedStorageDetails: STORAGE NAME: " + computerComponentData.getComputerList().get("STORAGE NAME"));
+            Log.d(TAG, "removeSelectedStorageDetails: STORAGE PRICE: " + computerComponentData.getComputerList().get("STORAGE PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectStorageImage = findViewById(R.id.imageOfSelectedStorage);
+            selectStorageImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedGPUDetails() {
+        if (computerComponentData.getComputerList().get("GPU NAME") != null && computerComponentData.getComputerList().get("GPU PRICE") != null) {
+
+            //Update the total cost and total wattage counts
+            double gpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("GPU PRICE"));
+            estimatedPrice = estimatedPrice - gpuPrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedGPUDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+            int gpuTDP = Integer.parseInt(computerComponentData.getComputerList().get("GPU TDP"));
+            int temp = estimatedWattage - gpuTDP;
+            Log.d(TAG, "removeSelectedGPUDetails: " + temp);
+            computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(temp));
+            //If the original item GPU TDP key from the storage hashmap is not removed the old tdp value will remain
+            computerComponentData.getComputerList().remove("GPU TDP");
+            Log.d(TAG, "removeSelectedGPUDetails: estimated wattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
+
+
+            //Update view fields for GPU
+            gpuNameField.setText("");
+            gpuPriceField.setText("");
+
+            //Update storage hashmap by removing the GPU name and price
+            computerComponentData.getComputerList().put("GPU NAME", null);
+            computerComponentData.getComputerList().put("GPU PRICE", null);
+            Log.d(TAG, "removeSelectedGPUDetails: GPU NAME: " + computerComponentData.getComputerList().get("GPU NAME"));
+            Log.d(TAG, "removeSelectedGPUDetails: GPU PRICE: " + computerComponentData.getComputerList().get("GPU PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectGPUImage = findViewById(R.id.imageOfSelectedGPU);
+            selectGPUImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedCaseDetails() {
+        if (computerComponentData.getComputerList().get("CASE NAME") != null && computerComponentData.getComputerList().get("CASE PRICE") != null) {
+
+            //Update the total cost count
+            double casePrice = Double.parseDouble(computerComponentData.getComputerList().get("CASE PRICE"));
+            estimatedPrice = estimatedPrice - casePrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedCaseDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+
+            //Update view fields for case
+            caseNameField.setText("");
+            casePriceField.setText("");
+
+            //Update storage hashmap by removing the case name and price
+            computerComponentData.getComputerList().put("CASE NAME", null);
+            computerComponentData.getComputerList().put("CASE PRICE", null);
+            Log.d(TAG, "removeSelectedCaseDetails: CASE NAME: " + computerComponentData.getComputerList().get("CASE NAME"));
+            Log.d(TAG, "removeSelectedCaseDetails: CASE PRICE: " + computerComponentData.getComputerList().get("CASE PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectCaseImage = findViewById(R.id.imageOfSelectedCase);
+            selectCaseImage.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    private void removeSelectedPSUDetails() {
+        if (computerComponentData.getComputerList().get("PSU NAME") != null && computerComponentData.getComputerList().get("PSU PRICE") != null) {
+
+            //Update the total cost count
+            double casePrice = Double.parseDouble(computerComponentData.getComputerList().get("PSU PRICE"));
+            estimatedPrice = estimatedPrice - casePrice;
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
+            Log.d(TAG, "removeSelectedPSUDetails: Total Costs " + computerComponentData.getComputerList().get("LIST COSTS"));
+
+
+            //Update view fields for power supply
+            psuNameField.setText("");
+            psuPriceField.setText("");
+
+            //Update storage hashmap by removing the case name and price
+            computerComponentData.getComputerList().put("PSU NAME", null);
+            computerComponentData.getComputerList().put("PSU PRICE", null);
+            Log.d(TAG, "removeSelectedPSUDetails: PSU NAME: " + computerComponentData.getComputerList().get("PSU NAME"));
+            Log.d(TAG, "removeSelectedPSUDetails: PSU PRICE: " + computerComponentData.getComputerList().get("PSU PRICE"));
+
+            //Remove the image and set to a blank white square
+            ImageView selectPowerSupply = findViewById(R.id.imageOfSelectedPowerSupply);
+            selectPowerSupply.setImageResource(R.drawable.blank_image);
+
+            //Refresh the activity without the 'animation'
+            //https://stackoverflow.com/a/17488862
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
+
+        }
+    }
+
+    
+
     //If a price is not null then retrieve the part cost in the DataStorage Hashmap and assign the total
     //cost to the relevant view. This is a bit inefficient though I must say
     private void calculateEstimatedPrice() {
-        if (computerComponentData.getComputerList().get("CPU PRICE") != null){
+        if (computerComponentData.getComputerList().get("CPU PRICE") != null) {
             double cpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + cpuPrice);
             estimatedPrice = estimatedPrice + cpuPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("CPU COOLER PRICE") != null){
+        if (computerComponentData.getComputerList().get("CPU COOLER PRICE") != null) {
             double cpuCoolerPrice = Double.parseDouble(computerComponentData.getComputerList().get("CPU COOLER PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + cpuCoolerPrice);
             estimatedPrice = estimatedPrice + cpuCoolerPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("MOTHERBOARD PRICE") != null){
+        if (computerComponentData.getComputerList().get("MOTHERBOARD PRICE") != null) {
             double motherboardPrice = Double.parseDouble(computerComponentData.getComputerList().get("MOTHERBOARD PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + motherboardPrice);
             estimatedPrice = estimatedPrice + motherboardPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("MEMORY PRICE") != null){
+        if (computerComponentData.getComputerList().get("MEMORY PRICE") != null) {
             double memoryPrice = Double.parseDouble(computerComponentData.getComputerList().get("MEMORY PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + memoryPrice);
             estimatedPrice = estimatedPrice + memoryPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("STORAGE PRICE") != null){
+        if (computerComponentData.getComputerList().get("STORAGE PRICE") != null) {
             double storagePrice = Double.parseDouble(computerComponentData.getComputerList().get("STORAGE PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + storagePrice);
             estimatedPrice = estimatedPrice + storagePrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("GPU PRICE") != null){
+        if (computerComponentData.getComputerList().get("GPU PRICE") != null) {
             double gpuPrice = Double.parseDouble(computerComponentData.getComputerList().get("GPU PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + gpuPrice);
             estimatedPrice = estimatedPrice + gpuPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("CASE PRICE") != null){
+        if (computerComponentData.getComputerList().get("CASE PRICE") != null) {
             double casePrice = Double.parseDouble(computerComponentData.getComputerList().get("CASE PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + casePrice);
             estimatedPrice = estimatedPrice + casePrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
-        if (computerComponentData.getComputerList().get("PSU PRICE") != null){
+        if (computerComponentData.getComputerList().get("PSU PRICE") != null) {
             double psuPrice = Double.parseDouble(computerComponentData.getComputerList().get("PSU PRICE"));
             Log.d(TAG, "calculateEstimatedPrice: " + psuPrice);
             estimatedPrice = estimatedPrice + psuPrice;
-            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(),"%.2f", estimatedPrice));
+            computerComponentData.getComputerList().put("LIST COSTS", String.format(Locale.getDefault(), "%.2f", estimatedPrice));
             Log.d(TAG, "calculateEstimatedPrice: " + computerComponentData.getComputerList().get("LIST COSTS"));
         }
 
@@ -787,37 +1155,37 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     //If a product has been selected then get its tdp value if it has one and assign that value to
     //the counting total wattage count
     private void calculateEstimatedWattage() {
-        if (computerComponentData.getComputerList().get("CPU TDP") != null){
+        if (computerComponentData.getComputerList().get("CPU TDP") != null) {
             int cpuTDP = Integer.parseInt(computerComponentData.getComputerList().get("CPU TDP"));
             estimatedWattage = estimatedWattage + cpuTDP;
             computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
             Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
         }
-        if (computerComponentData.getComputerList().get("CPU COOLER TDP") != null){
+        if (computerComponentData.getComputerList().get("CPU COOLER TDP") != null) {
             int cpuCoolerTDP = Integer.parseInt(computerComponentData.getComputerList().get("CPU COOLER TDP"));
             estimatedWattage = estimatedWattage + cpuCoolerTDP;
             computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
             Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
         }
-        if (computerComponentData.getComputerList().get("MOTHERBOARD TDP") != null){
+        if (computerComponentData.getComputerList().get("MOTHERBOARD TDP") != null) {
             int motherboardTDP = Integer.parseInt(computerComponentData.getComputerList().get("MOTHERBOARD TDP"));
             estimatedWattage = estimatedWattage + motherboardTDP;
             computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
             Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
         }
-        if (computerComponentData.getComputerList().get("GPU TDP") != null){
+        if (computerComponentData.getComputerList().get("GPU TDP") != null) {
             int gpuTDP = Integer.parseInt(computerComponentData.getComputerList().get("GPU TDP"));
             estimatedWattage = estimatedWattage + gpuTDP;
             computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
             Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
         }
-        if (computerComponentData.getComputerList().get("MEMORY TDP") != null){
+        if (computerComponentData.getComputerList().get("MEMORY TDP") != null) {
             int memoryTDP = Integer.parseInt(computerComponentData.getComputerList().get("MEMORY TDP"));
             estimatedWattage = estimatedWattage + memoryTDP;
             computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
             Log.d(TAG, "calculateEstimatedWattage: " + computerComponentData.getComputerList().get("ESTIMATED WATTAGE"));
         }
-        if (computerComponentData.getComputerList().get("STORAGE TDP") != null){
+        if (computerComponentData.getComputerList().get("STORAGE TDP") != null) {
             int storageTDP = Integer.parseInt(computerComponentData.getComputerList().get("STORAGE TDP"));
             estimatedWattage = estimatedWattage + storageTDP;
             computerComponentData.getComputerList().put("ESTIMATED WATTAGE", String.valueOf(estimatedWattage));
@@ -849,16 +1217,18 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     //Update the users view with the data from the hashmap
     public void updateUserDataViews() {
         enterTitleForPCList.setText(listTitleName);
-        if (estimatedPrice == 0.0){
+        if (estimatedPrice == 0.00) {
             estimatedPriceString = "";
         } else {
             estimatedPriceView.setText((getResources().getString(R.string.cost_of_list) + estimatedPriceString));
         }
-        if (estimatedWattage == 0){
-            estimatedWattageString = "";
+
+        if (estimatedWattage == 0) {
+            estimatedWattageView.setText((getResources().getString(R.string.estimated_wattage_of_list)));
         } else {
-            estimatedWattageView.setText("Estimated Wattage Of List: " +estimatedWattageString + " W");
+            estimatedWattageView.setText((getResources().getString(R.string.estimated_wattage_of_list) + " " + estimatedWattageString + " W"));
         }
     }
+
 
 }

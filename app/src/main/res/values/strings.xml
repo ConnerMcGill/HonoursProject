@@ -109,7 +109,7 @@
     <string name="add_power_supply">add power supply</string>
     <string name="image_of_psu">image of psu</string>
     <string name="estimated_price_of_list">Estimated Price Of List:</string>
-    <string name="estimated_wattage_of_list">Estimated Wattage Of List:</string>
+    <string name="estimated_wattage_of_list">Estimated Wattage Of List: </string>
     <string name="enter_list_description">Enter Description For List:</string>
     <string name="enter_description_about_the_list">Enter Description About The List</string>
     <string name="cost_of_list" formatted="true">Estimated Price Of List: £ </string>
