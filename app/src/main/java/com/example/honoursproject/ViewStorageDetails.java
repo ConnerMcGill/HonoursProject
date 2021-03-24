@@ -52,7 +52,7 @@ public class ViewStorageDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_storage_details);
 
-        //Get all the data for the motherboard firestore document that was selected as a HashMap
+        //Get all the data for the storage firestore document that was selected as a HashMap
         Intent intent = getIntent();
         final HashMap<String, Object> storageHashMapData = (HashMap<String, Object>) intent.getSerializableExtra("hashMap");
         //Randomly testing I can get some data here

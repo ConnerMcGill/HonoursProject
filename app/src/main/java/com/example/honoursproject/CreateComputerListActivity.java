@@ -1267,7 +1267,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         mAuth = FirebaseAuth.getInstance();
 
         String currentUser = mAuth.getUid();
-        Toast.makeText(this, "" + currentUser, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + currentUser, Toast.LENGTH_SHORT).show();
 
         //Trying to write something to firestore first before touching it up properly
         computerComponentData.getComputerList().put("userID", currentUser);
@@ -1288,6 +1288,11 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        //Return back to the MainActivity and display toast message
+                        Intent returnToMainActivity = new Intent(CreateComputerListActivity.this,
+                                MainActivity.class);
+                        Toast.makeText(CreateComputerListActivity.this, "List Saved Successfully", Toast.LENGTH_LONG).show();
+                        startActivity(returnToMainActivity);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
