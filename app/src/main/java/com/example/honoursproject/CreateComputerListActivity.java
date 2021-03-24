@@ -30,6 +30,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,6 +47,13 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
     //Tag used for debugging and log comments
     private static final String TAG = "CreateComputerListActivity";
+
+    //Declare an instance of firebaseAuthentication
+    private FirebaseAuth mAuth;
+
+    //Reference to firestore database
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     //DataStorage instance
     DataStorage computerComponentData = new DataStorage();
@@ -92,6 +104,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     int estimatedWattage = 0;
     String estimatedWattageString;
 
+    //Description box and String for value
+    EditText listDescription;
+    String listDescriptionString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +125,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
         //EditText that lets user enter a title:
         enterTitleForPCList = findViewById(R.id.enterTitleForListEditText);
+
+        //EditText that lets user enter a description:
+        listDescription = findViewById(R.id.userDescriptionForList);
 
         //CPU References:
         cpuNameField = findViewById(R.id.nameOfSelectedCPU);
@@ -178,6 +196,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         //Estimated Price and Wattage:
         estimatedPriceView = findViewById(R.id.estimatedPriceOfList);
         estimatedWattageView = findViewById(R.id.estimatedWattageOfList);
+
+        //Save List Button:
+        final Button saveUsersListToFireStoreBtn = findViewById(R.id.saveUsersListToFirestore);
+        saveUsersListToFireStoreBtn.setOnClickListener(this);
 
 
         //Retrieve relevant item data
@@ -251,6 +273,8 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.removePowerSupplyButton:
                 removeSelectedPSUDetails();
+            case R.id.saveUsersListToFirestore:
+                saveUsersListToFirestore();
         }
     }
 
@@ -803,9 +827,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -845,9 +869,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -887,9 +911,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -929,9 +953,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -971,9 +995,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -1013,9 +1037,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -1047,9 +1071,9 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
@@ -1081,14 +1105,13 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Refresh the activity without the 'animation'
             //https://stackoverflow.com/a/17488862
             finish();
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
             startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            overridePendingTransition(0, 0);
 
         }
     }
 
-    
 
     //If a price is not null then retrieve the part cost in the DataStorage Hashmap and assign the total
     //cost to the relevant view. This is a bit inefficient though I must say
@@ -1198,17 +1221,23 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     //Store the users title into the DataStorage hashmap
     public void saveUserTitleData() {
         listTitleName = enterTitleForPCList.getText().toString();
+        listDescriptionString = listDescription.getText().toString();
 
-        computerComponentData.getComputerList().put("USER TITLE", listTitleName);
-        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("USER TITLE"));
+        computerComponentData.getComputerList().put("title", listTitleName);
+        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("title"));
+
+        computerComponentData.getComputerList().put("description", listDescriptionString);
+        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
 
         Toast.makeText(this, "data saved debug msg", Toast.LENGTH_SHORT).show();
     }
 
     //When the user opens the activity load the potential data from the DataStorage hashmap
     public void loadUserData() {
-        listTitleName = computerComponentData.getComputerList().get("USER TITLE");
-        Log.d(TAG, "loadData: " + computerComponentData.getComputerList().get("USER TITLE"));
+        listTitleName = computerComponentData.getComputerList().get("title");
+        Log.d(TAG, "loadData: " + computerComponentData.getComputerList().get("title"));
+        computerComponentData.getComputerList().get("description");
+        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
         estimatedPriceString = computerComponentData.getComputerList().get("LIST COSTS");
         estimatedWattageString = computerComponentData.getComputerList().get("ESTIMATED WATTAGE");
 
@@ -1217,6 +1246,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     //Update the users view with the data from the hashmap
     public void updateUserDataViews() {
         enterTitleForPCList.setText(listTitleName);
+        listDescription.setText(listDescriptionString);
         if (estimatedPrice == 0.00) {
             estimatedPriceString = "";
         } else {
@@ -1228,6 +1258,46 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         } else {
             estimatedWattageView.setText((getResources().getString(R.string.estimated_wattage_of_list) + " " + estimatedWattageString + " W"));
         }
+    }
+
+    //Save the list to Firestore
+    //Just trying to do it roughly right now to see I can do so and then retrieve the data properly again
+    private void saveUsersListToFirestore() {
+        //Initialise the FirebaseAuth instance
+        mAuth = FirebaseAuth.getInstance();
+
+        String currentUser = mAuth.getUid();
+        Toast.makeText(this, "" + currentUser, Toast.LENGTH_SHORT).show();
+
+        //Trying to write something to firestore first before touching it up properly
+        computerComponentData.getComputerList().put("userID", currentUser);
+
+        //Update the title and description details in the hashmap again just in case they were changed slightly
+        listTitleName = enterTitleForPCList.getText().toString();
+        listDescriptionString = listDescription.getText().toString();
+
+        //Store data into hashmap
+        computerComponentData.getComputerList().put("title", listTitleName);
+        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("title"));
+        computerComponentData.getComputerList().put("description", listDescriptionString);
+        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
+
+        db.collection("user-lists")
+                .add( computerComponentData.getComputerList())
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+
     }
 
 

@@ -31,6 +31,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,12 +52,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Initialise user interface elements
         CardView guidesCard = findViewById(R.id.view_guides_card);
-
-        //When the user 'clicks' the view guides card call the openGuidesLandingPageActivity method
         guidesCard.setOnClickListener(this);
 
         CardView createListCard = findViewById(R.id.create_list_card);
         createListCard.setOnClickListener(this);
+
+        CardView viewSavedListsCard = findViewById(R.id.view_created_lists_card);
+        viewSavedListsCard.setOnClickListener(this);
+
 
     }
 
@@ -70,11 +73,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.create_list_card:
                 openCreateListActivity();
                 break;
+            case R.id.view_created_lists_card:
+                openSavedListsActivity();
+                break;
             default:
                 Log.d("my switch statement failed", "Something went wrong with the switch statement");
                 Toast.makeText(MainActivity.this, "There has been an error with selecting a button...", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     //Create the inflater menu (three dots) in the toolbar
     @Override
@@ -134,5 +141,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent openCreateComputerListActivity = new Intent(MainActivity.this,
                 CreateComputerListActivity.class);
         startActivity(openCreateComputerListActivity);
+    }
+
+    //If the user 'clicks' the view saved lists button then switch the user from the MainActivity to the
+    //ViewSavedLists Activity
+    private void openSavedListsActivity() {
+        Intent openSavedListsActivity = new Intent(MainActivity.this,
+                SelectSavedList.class);
+        startActivity(openSavedListsActivity);
     }
 }

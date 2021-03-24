@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <!--Line Divider-->
+
         <EditText
             android:id="@+id/enterTitleForListEditText"
             android:layout_width="268dp"
@@ -44,6 +44,7 @@
 
         </EditText>
 
+        <!--Line Divider-->
         <View
             android:id="@+id/lineDivider1"
             android:layout_width="match_parent"
@@ -69,7 +70,7 @@
             android:id="@+id/selectCPUTitleHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/select_cpu_title_header"
             android:textSize="18sp"
@@ -327,7 +328,9 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_memory"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectMemoryTitle"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectMemoryTitle">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedMemory"
@@ -404,7 +407,9 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_storage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectStorageTitle"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectStorageTitle">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedStorage"
@@ -481,7 +486,9 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_gpu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectGPUTitle"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectGPUTitle">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedGPU"
@@ -558,7 +565,9 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/image_of_selected_case"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectCaseTitle"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/selectCaseTitle">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/priceValueOfSelectedCase"
@@ -735,7 +744,7 @@
             android:layout_marginEnd="8dp"
             android:hint="@string/enter_description_about_the_list"
             android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="5000"
+            android:maxLength="500"
             android:maxLines="10"
             android:overScrollMode="always"
             android:scrollbarStyle="insideInset"
