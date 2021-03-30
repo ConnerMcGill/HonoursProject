@@ -114,4 +114,10 @@
     <string name="enter_description_about_the_list">Enter Short Description About The List</string>
     <string name="cost_of_list" formatted="true">Estimated Price Of List: £ </string>
     <string name="name_of_cpu_from_users_list">name of CPU from users list</string>
+    <string name="enter_updated_email_address">Enter updated email address</string>
+    <string name="change_email">Change Email:</string>
+    <string name="update_account_details">Update Account Details</string>
+    <string name="change_password">Change Password:</string>
+    <string name="update_email">Update Email</string>
+    <string name="update_password">update password</string>
 </resources>

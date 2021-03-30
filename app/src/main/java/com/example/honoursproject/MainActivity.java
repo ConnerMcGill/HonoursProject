@@ -31,7 +31,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -97,12 +96,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.item3:
+                updateUserAccountDetails();
+                return true;
             case R.id.item1:
                 logoutUserFromAccount();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateUserAccountDetails() {
+        Intent switchToUserAccountUpdateDetailsActivity = new Intent(MainActivity.this, EditAccountDetails.class);
+        startActivity(switchToUserAccountUpdateDetailsActivity);
     }
 
     //When the method is called by the user sign out the user with the firebase authentication
