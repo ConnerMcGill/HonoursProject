@@ -817,6 +817,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Update storage hashmap by removing the cpu name and price
             computerComponentData.getComputerList().put("CPU NAME", null);
             computerComponentData.getComputerList().put("CPU PRICE", null);
+            computerComponentData.getComputerList().put("CPU SOCKET", null);
             Log.d(TAG, "removeSelectedCPUDetails: CPU NAME: " + computerComponentData.getComputerList().get("CPU NAME"));
             Log.d(TAG, "removeSelectedCPUDetails: CPU PRICE: " + computerComponentData.getComputerList().get("CPU PRICE"));
 
@@ -901,6 +902,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             //Update storage hashmap by removing the motherboard name and price
             computerComponentData.getComputerList().put("MOTHERBOARD NAME", null);
             computerComponentData.getComputerList().put("MOTHERBOARD PRICE", null);
+            computerComponentData.getComputerList().put("MOTHERBOARD SOCKET", null);
             Log.d(TAG, "removeSelectedMotherboardDetails: MOTHERBOARD NAME: " + computerComponentData.getComputerList().get("MOTHERBOARD NAME"));
             Log.d(TAG, "removeSelectedMotherboardDetails: MOTHERBOARD PRICE: " + computerComponentData.getComputerList().get("MOTHERBOARD PRICE"));
 

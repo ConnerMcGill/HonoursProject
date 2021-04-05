@@ -89,7 +89,7 @@ public class SelectSavedList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(userListAdapter);
 
-        //When user swipes item in list off the screen delete the document from firestore
+        //When user swipes item in list off the screen to the left delete the document from firestore
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT) {
             @Override

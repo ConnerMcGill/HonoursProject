@@ -144,7 +144,6 @@ public class SelectCPUCooler extends AppCompatActivity {
                                 Log.d(TAG, "CPU Cooler TDP: " + cpuCoolerTDP);
 
 
-
                                 //Pass the data back to the CreateComputerListActivity by storing the data
                                 // into the DataStorage hashmap and then returning to the CreateComputerListActivity:
                                 Intent passCPUCoolerDataToCreateComputerActivity = new Intent
@@ -153,6 +152,7 @@ public class SelectCPUCooler extends AppCompatActivity {
                                 cpuCoolerData.getComputerList().put("CPU COOLER NAME", cpuCoolerName);
                                 cpuCoolerData.getComputerList().put("CPU COOLER PRICE", cpuCoolerPriceString);
                                 cpuCoolerData.getComputerList().put("CPU COOLER TDP", String.valueOf(cpuCoolerTDP));
+
                                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER NAME"));
                                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER PRICE"));
                                 Log.d(TAG, "onSuccess: " + cpuCoolerData.getComputerList().get("CPU COOLER TDP"));

@@ -84,9 +84,22 @@ public class Selectcpu extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        //Create query against the cpu collection which sorts the data by the price from lowest price
-        //to highest price i.e. ascending order
-        Query query = cpuReference.orderBy("price", Query.Direction.ASCENDING);
+
+        //Setup query to filter results to only provide the user with parts compatible with
+        //other parts that they have selected in their list
+
+        String motherboardSocket = cpuData.getComputerList().get("MOTHERBOARD SOCKET");
+
+        Query query;
+
+        if (motherboardSocket != null) {
+            query = cpuReference
+                    .orderBy("price", Query.Direction.ASCENDING)
+                    .whereEqualTo("socket", motherboardSocket);
+        } else {
+            query = cpuReference.orderBy("price", Query.Direction.ASCENDING);
+        }
+
 
         //Create FirestoreRecyclerOptions and bind query into the adapter
         FirestoreRecyclerOptions<CPU> options = new FirestoreRecyclerOptions.Builder<CPU>()
@@ -175,7 +188,6 @@ public class Selectcpu extends AppCompatActivity {
                                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU PRICE"));
                                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU SOCKET"));
                                 Log.d(TAG, "onSuccess: " + cpuData.getComputerList().get("CPU TDP"));
-
 
 
                                 startActivity(passCPUDataToCreateComputerActivity);

@@ -21,6 +21,7 @@ package com.example.honoursproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,6 +68,26 @@ public class ReAuthenticateAccountDetails extends AppCompatActivity {
         textInputEmail = findViewById(R.id.text_update_email);
         textInputPassword = findViewById(R.id.text_update_password);
         submitAccountDetails = findViewById(R.id.submitAccountDetails);
+
+        //Setup references to UI elements within the activity
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Re-Authenticate Account Details:");
+
+        //Go back to the previous activity in the activity backstack
+        //https://stackoverflow.com/questions/49350686/back-to-previous-activity-arrow-button
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                finish();
+            }
+        });
+
+
 
         //Setup the re-authentication submit button onclick here
         submitAccountDetails.setOnClickListener(new View.OnClickListener() {

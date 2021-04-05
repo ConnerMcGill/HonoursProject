@@ -305,6 +305,8 @@ public class ViewMotherboardDetails extends AppCompatActivity {
                 Double motherboardPrice = (Double) motherboardHashMapData.get("price");
                 String motherboardPriceString = Double.toString(motherboardPrice);
                 Long motherboardTDP = (Long) motherboardHashMapData.get("tdp");
+                String motherboardSocket = (String) motherboardHashMapData.get("socket");
+                String motherboardSize = (String) motherboardHashMapData.get("form-factor");
 
                 Intent passMotherboardDataToCreateComputerActivity = new Intent
                         (ViewMotherboardDetails.this, CreateComputerListActivity.class);
@@ -312,6 +314,8 @@ public class ViewMotherboardDetails extends AppCompatActivity {
                 motherboardData.getComputerList().put("MOTHERBOARD NAME", motherboardName);
                 motherboardData.getComputerList().put("MOTHERBOARD PRICE", motherboardPriceString);
                 motherboardData.getComputerList().put("MOTHERBOARD TDP", String.valueOf(motherboardTDP));
+                motherboardData.getComputerList().put("MOTHERBOARD SOCKET", motherboardSocket);
+                motherboardData.getComputerList().put("MOTHERBOARD SIZE", motherboardSize);
                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD NAME"));
                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD PRICE"));
                 Log.d(TAG, "onSuccess: " + motherboardData.getComputerList().get("MOTHERBOARD TDP"));
