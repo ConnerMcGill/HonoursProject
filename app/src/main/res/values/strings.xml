@@ -126,4 +126,7 @@
     <string name="submit_details">Submit Details</string>
     <string name="delete_account">Delete Account</string>
     <string name="deleting_your_account_will_remove_your_details_and_saved_lists_from_our_system_only_continue_if_you_re_sure">Delete Your Account:</string>
+    <string name="learn_how_to_create_list">Learn How To Create List</string>
+    <string name="learn_how_to_view_list">Learn How To View List</string>
+    <string name="learn_how_to_manage_account">Learn How To Manage Account</string>
 </resources>

@@ -46,6 +46,9 @@ public class GuidesLandingPageActivity extends MainActivity implements View.OnCl
         CardView learnHowToBuildAPC = findViewById(R.id.learn_how_to_build_pc);
         learnHowToBuildAPC.setOnClickListener(this);
 
+        CardView learnHowToUseApp = findViewById(R.id.how_to_use_app_card);
+        learnHowToUseApp.setOnClickListener(this);
+
     }
 
     //Take user to respective activity for the button they click
@@ -58,10 +61,19 @@ public class GuidesLandingPageActivity extends MainActivity implements View.OnCl
             case R.id.learn_how_to_build_pc:
                 openLearnHowToBuildAPCGuides();
                 break;
+            case R.id.how_to_use_app_card:
+                openLearnHowToUseAppGuides();
+                break;
             default:
                 Log.d("my switch statement failed", "Something went wrong with the switch statement");
                 Toast.makeText(GuidesLandingPageActivity.this, "There has been an error with selecting a button...", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void openLearnHowToUseAppGuides() {
+        Intent openLearnHowToUseAppGuidesLandingPage = new Intent(GuidesLandingPageActivity.this,
+                LearnHowToUseAppOptionsActivity.class);
+        startActivity(openLearnHowToUseAppGuidesLandingPage);
     }
 
     //Open the learn more about parts guides activity
