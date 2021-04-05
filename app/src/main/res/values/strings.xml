@@ -120,4 +120,10 @@
     <string name="change_password">Change Password:</string>
     <string name="update_email">Update Email</string>
     <string name="update_password">update password</string>
+    <string name="please_enter_login_details_again_before_continuing">Please Enter Login Details Again Before Continuing...</string>
+    <string name="enter_email_for_account">Enter Email For Account:</string>
+    <string name="enter_password_for_account">Enter Password For Account:</string>
+    <string name="submit_details">Submit Details</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="deleting_your_account_will_remove_your_details_and_saved_lists_from_our_system_only_continue_if_you_re_sure">Delete Your Account:</string>
 </resources>

@@ -17,18 +17,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class EditAccountDetails extends AppCompatActivity {
@@ -46,10 +55,15 @@ public class EditAccountDetails extends AppCompatActivity {
     private TextInputLayout textInputPassword;
     private Button updateEmailButton;
     private Button updatePasswordButton;
+    private Button deleteAccountButton;
 
     //Variables for getting the text in the email and Password Fields
     String emailInput;
     String passwordInput;
+
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    String userID;
 
 
     @Override
@@ -81,9 +95,14 @@ public class EditAccountDetails extends AppCompatActivity {
         textInputPassword = findViewById(R.id.text_update_password);
         updateEmailButton = findViewById(R.id.updateEmailBtn);
         updatePasswordButton = findViewById(R.id.updatePasswordBtn);
+        deleteAccountButton = findViewById(R.id.deleteAccountBtn);
+
 
         //Initialise the FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
+
+        //Get the users ID
+        userID = mAuth.getUid();
 
         //Add OnClick Methods here when I setup the other methods for validation
         updateEmailButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +111,21 @@ public class EditAccountDetails extends AppCompatActivity {
                 updateUsersEmail();
             }
         });
+
+        updatePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateUsersPassword();
+            }
+        });
+
+        deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteUsersAccountDetails();
+            }
+        });
+
 
     }
 
@@ -138,17 +172,9 @@ public class EditAccountDetails extends AppCompatActivity {
     }
 
 
-    //In order to update email, delete accounts or reset passwords the user account must be re-authenticated which is great tae learn now
-    //So I am going to leave this here as a note to self:
-
-    //https://firebase.google.com/docs/auth/android/manage-users#re-authenticate_a_user
-
-    //I will probably need to remake similar activates or one if I can which deals with the user re-authenticating their
-    //details first before I can then do things like update email:
-
     //https://firebase.google.com/docs/auth/android/manage-users
 
-    private void updateUsersEmail(){
+    private void updateUsersEmail() {
 
         if (!validateEmail()) {
             return;
@@ -157,7 +183,6 @@ public class EditAccountDetails extends AppCompatActivity {
         //Get the text in the email field if the details are valid
         emailInput = textInputEmail.getEditText().getText().toString().trim();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         user.updateEmail(emailInput)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -165,6 +190,11 @@ public class EditAccountDetails extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "User email address updated.");
+                            Toast.makeText(getApplicationContext(), "Email Has Been Updated Successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Email Failed To Update!",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -172,12 +202,99 @@ public class EditAccountDetails extends AppCompatActivity {
     }
 
 
+    //https://firebase.google.com/docs/auth/android/manage-users
 
+    private void updateUsersPassword() {
+        if (!validatePassword()) {
+            return;
+        }
 
+        passwordInput = textInputPassword.getEditText().getText().toString();
 
+        user.updatePassword(passwordInput)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User password updated.");
+                            Toast.makeText(getApplicationContext(), "Password Has Been Updated Successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Password Failed To Update!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
 
+    //Delete the users account button:
+    private void deleteUsersAccountDetails() {
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                            //Call Batch Write Function that deletes the users lists from the Database
+                            DeleteUsersLists();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Failed To Delete Account Details!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
+    //Delete the users saved lists
+
+    private void DeleteUsersLists() {
+        //Setup reference to user-lists collection in firestore
+        FirebaseFirestore.getInstance().collection("user-lists")
+                .whereEqualTo("userID", userID)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        //Store the users lists in a list which is then deleted as a batch
+                        //This provides better performance than deleting each document individually
+                        //https://firebase.google.com/docs/firestore/manage-data/transactions#batched-writes
+                        WriteBatch batch = FirebaseFirestore.getInstance().batch();
+
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            batch.delete(snapshot.getReference());
+                        }
+
+                        //Call Batch.Commit() in order to push the changes to the database
+                        batch.commit()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "Your Account and Details Have Been Deleted!");
+                                        Toast.makeText(getApplicationContext(), "Account Deleted Successfully!",
+                                                Toast.LENGTH_SHORT).show();
+                                        //Use Intent that takes user to the login screen
+                                        Intent intent = new Intent(EditAccountDetails.this,
+                                                LoginAccountActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG, "onFailure: Failed to commit batch delete");
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "onFailure: Failed To Delete Users Lists");
+                    }
+                });
+    }
 
 
 }

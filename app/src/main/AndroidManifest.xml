@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditAccountDetails"></activity>
+        <activity android:name=".ReAuthenticateAccountDetails"></activity>
+        <activity android:name=".EditAccountDetails" />
         <activity android:name=".ViewSavedList" />
         <activity android:name=".SelectSavedList" />
         <activity android:name=".ViewPowerSupplyDetails" />

@@ -4,44 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditAccountDetails">
+    tools:context=".ReAuthenticateAccountDetails">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
     <TextView
-        android:id="@+id/changeEmailTextHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/change_email"
+        android:id="@+id/randomHeader"
+        android:layout_width="343dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="@string/please_enter_login_details_again_before_continuing"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/changePasswordTextHeader"
+        android:id="@+id/enterEmailLoginAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/change_password"
+        android:layout_marginTop="32dp"
+        android:text="@string/enter_email_for_account"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateEmailBtn" />
-
-    <TextView
-        android:id="@+id/deleteAccountWarningText"
-        android:layout_width="176dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="82dp"
-        android:text="@string/deleting_your_account_will_remove_your_details_and_saved_lists_from_our_system_only_continue_if_you_re_sure"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updatePasswordBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/randomHeader" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_update_email"
@@ -56,7 +48,7 @@
         app:hintEnabled="false"
         app:hintTextColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeEmailTextHeader">
+        app:layout_constraintTop_toBottomOf="@+id/enterEmailLoginAgain">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -64,47 +56,22 @@
             android:ems="10"
             android:hint="@string/enter_updated_email_address"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/primary_text_light"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/updateEmailBtn"
-        android:layout_width="218dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/titleBar"
-        android:text="@string/update_email"
-        android:textColor="#FFFF"
+
+    <TextView
+        android:id="@+id/enterPasswordLoginAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/enter_password_for_account"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_update_email" />
-
-    <Button
-        android:id="@+id/updatePasswordBtn"
-        android:layout_width="218dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/titleBar"
-        android:text="@string/update_password"
-        android:textColor="#FFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_update_password" />
-
-
-    <Button
-        android:id="@+id/deleteAccountBtn"
-        android:layout_width="218dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/titleBar"
-        android:text="@string/delete_account"
-        android:textColor="#FFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteAccountWarningText" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_update_password"
@@ -119,7 +86,7 @@
         app:hintEnabled="false"
         app:hintTextColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changePasswordTextHeader"
+        app:layout_constraintTop_toBottomOf="@+id/enterPasswordLoginAgain"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -128,10 +95,21 @@
             android:ems="10"
             android:hint="@string/login_enter_password_hint"
             android:inputType="textPassword"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/primary_text_light"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:id="@+id/submitAccountDetails"
+        android:layout_width="218dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/titleBar"
+        android:text="@string/submit_details"
+        android:textColor="#FFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_update_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

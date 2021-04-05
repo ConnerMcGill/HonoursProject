@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateUserAccountDetails() {
-        Intent switchToUserAccountUpdateDetailsActivity = new Intent(MainActivity.this, EditAccountDetails.class);
+        Intent switchToUserAccountUpdateDetailsActivity = new Intent(MainActivity.this, ReAuthenticateAccountDetails.class);
         startActivity(switchToUserAccountUpdateDetailsActivity);
     }
 
