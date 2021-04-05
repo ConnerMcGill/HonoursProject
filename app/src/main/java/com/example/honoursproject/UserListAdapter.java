@@ -40,6 +40,11 @@ public class UserListAdapter extends FirestoreRecyclerAdapter<UserList, UserList
         return new UserListHolder(view);
     }
 
+    //Delete document from Firestore when users swipes item in recycler view
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
 
     public class UserListHolder extends RecyclerView.ViewHolder {
         TextView userListTitle;
