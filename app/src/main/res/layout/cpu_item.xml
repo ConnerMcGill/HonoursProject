@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/image_of_cpu"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/nameOfCPU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="CPU Product Name"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/image_of_cpu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceOfCPU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="£160.64"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/coreCountOfCPUTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Core Count"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_cpu" />
+
+        <TextView
+            android:id="@+id/coreCountOfCPUValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="6"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coreCountOfCPUTitle" />
+
+        <TextView
+            android:id="@+id/clockSpeedOfCPUTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:text="Clock Speed"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/coreCountOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_cpu" />
+
+        <TextView
+            android:id="@+id/clockSpeedOfCPUValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="8dp"
+            android:text="3.6 GHz"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/coreCountOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/clockSpeedOfCPUTitle" />
+
+        <TextView
+            android:id="@+id/boostClockSpeedOfCPUTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="16dp"
+            android:text="Boost Clock"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/clockSpeedOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_cpu" />
+
+        <TextView
+            android:id="@+id/boostClockSpeedOfCPUValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="8dp"
+            android:text="4.2 GHz"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/clockSpeedOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/boostClockSpeedOfCPUTitle" />
+
+        <TextView
+            android:id="@+id/tdpOfCPUTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TDP"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coreCountOfCPUValue" />
+
+        <TextView
+            android:id="@+id/tdpOfCPUValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="165W"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tdpOfCPUTitle" />
+
+        <TextView
+            android:id="@+id/integratedGraphicsOfCPUTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="8dp"
+            android:text="Integrated Graphics"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/tdpOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/clockSpeedOfCPUValue" />
+
+        <TextView
+            android:id="@+id/integratedGraphicsOfCPUValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="8dp"
+            android:text="Intel UHD Graphics 610"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/tdpOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/integratedGraphicsOfCPUTitle" />
+
+        <TextView
+            android:id="@+id/smtOfCPUTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="8dp"
+            android:text="SMT"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/integratedGraphicsOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/boostClockSpeedOfCPUValue" />
+
+        <TextView
+            android:id="@+id/smtOfCPUValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="8dp"
+            android:text="Yes: Hyper-Threading"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/integratedGraphicsOfCPUTitle"
+            app:layout_constraintTop_toBottomOf="@+id/smtOfCPUTitle" />
+
+        <Button
+            android:id="@+id/addCPUtoListButton"
+            android:layout_width="73dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/titleBar"
+            android:textColor="#FFFF"
+            android:text="Add "
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceOfCPU" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -3,8 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/item3"
+        android:title="@string/update_account_details"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/item1"
         android:title="@string/logout_text_toolbar"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item2"
+        android:title="@string/return_to_main_activity_text_toolbar"
         app:showAsAction="never" />
 
 

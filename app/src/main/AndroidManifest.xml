@@ -9,8 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LearnHowToBuildPCOptionsActivity"
-            android:parentActivityName=".GuidesLandingPageActivity"/>
+        <activity android:name=".LearnHowToUseAppOptionsActivity"></activity>
+        <activity android:name=".ReAuthenticateAccountDetails" />
+        <activity android:name=".EditAccountDetails" />
+        <activity android:name=".ViewSavedList" />
+        <activity android:name=".SelectSavedList" />
+        <activity android:name=".ViewPowerSupplyDetails" />
+        <activity android:name=".SelectPowerSupply" />
+        <activity android:name=".ViewCaseDetails" />
+        <activity android:name=".SelectCase" />
+        <activity android:name=".ViewGPUDetails" />
+        <activity android:name=".SelectGPU" />
+        <activity android:name=".ViewStorageDetails" />
+        <activity android:name=".SelectStorage" />
+        <activity android:name=".ViewMemoryDetails" />
+        <activity android:name=".SelectMemory" />
+        <activity android:name=".ViewMotherboardDetails" />
+        <activity android:name=".SelectMotherboard" />
+        <activity android:name=".ViewCPUCoolerDetails" />
+        <activity android:name=".ViewCPUDetails" />
+        <activity android:name=".Selectcpu" />
+        <activity android:name=".SelectCPUCooler" />
+        <activity
+            android:name=".CreateComputerListActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LearnHowToBuildPCOptionsActivity"
+            android:parentActivityName=".GuidesLandingPageActivity" />
         <activity android:name=".ViewGuideActivity" />
         <activity
             android:name=".LearnMoreAboutPartsOptionsActivity"

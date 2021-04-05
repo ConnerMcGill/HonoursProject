@@ -18,6 +18,7 @@ package com.example.honoursproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +32,7 @@ import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Declare an instance of firebaseAuthentication
     protected FirebaseAuth mAuth;
@@ -50,22 +51,43 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialise user interface elements
         CardView guidesCard = findViewById(R.id.view_guides_card);
+        guidesCard.setOnClickListener(this);
 
-        //When the user 'clicks' the view guides card call the openGuidesLandingPageActivity method
-        guidesCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openGuideLandingPageActivity();
-            }
-        });
+        CardView createListCard = findViewById(R.id.create_list_card);
+        createListCard.setOnClickListener(this);
+
+        CardView viewSavedListsCard = findViewById(R.id.view_created_lists_card);
+        viewSavedListsCard.setOnClickListener(this);
+
 
     }
+
+    //Take the user to their respective activity from the button the click
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.view_guides_card:
+                openGuideLandingPageActivity();
+                break;
+            case R.id.create_list_card:
+                openCreateListActivity();
+                break;
+            case R.id.view_created_lists_card:
+                openSavedListsActivity();
+                break;
+            default:
+                Log.d("my switch statement failed", "Something went wrong with the switch statement");
+                Toast.makeText(MainActivity.this, "There has been an error with selecting a button...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     //Create the inflater menu (three dots) in the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.example_menu, menu);
+        menu.removeItem(R.id.item2);
         return true;
     }
 
@@ -74,12 +96,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.item3:
+                updateUserAccountDetails();
+                return true;
             case R.id.item1:
                 logoutUserFromAccount();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateUserAccountDetails() {
+        Intent switchToUserAccountUpdateDetailsActivity = new Intent(MainActivity.this, ReAuthenticateAccountDetails.class);
+        startActivity(switchToUserAccountUpdateDetailsActivity);
     }
 
     //When the method is called by the user sign out the user with the firebase authentication
@@ -103,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(returnToLoginIntent);
     }
 
-    //If the user 'clicks' the openGuides button then switch the user from the MainActivity to the
+    //If the user 'clicks' the open guides button then switch the user from the MainActivity to the
     //openGuideLandingPageActivity
     private void openGuideLandingPageActivity() {
         Intent openGuideLandingPage = new Intent(MainActivity.this,
@@ -111,4 +141,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(openGuideLandingPage);
     }
 
+
+    //If the user 'clicks' the create list button then switch the user from the MainActivity to the
+    //CreateComputerListActivity
+    private void openCreateListActivity() {
+        Intent openCreateComputerListActivity = new Intent(MainActivity.this,
+                CreateComputerListActivity.class);
+        startActivity(openCreateComputerListActivity);
+    }
+
+    //If the user 'clicks' the view saved lists button then switch the user from the MainActivity to the
+    //ViewSavedLists Activity
+    private void openSavedListsActivity() {
+        Intent openSavedListsActivity = new Intent(MainActivity.this,
+                SelectSavedList.class);
+        startActivity(openSavedListsActivity);
+    }
 }

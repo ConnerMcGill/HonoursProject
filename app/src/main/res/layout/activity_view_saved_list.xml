@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="24dp"
+    android:fillViewport="true">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFF">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <TextView
+            android:id="@+id/nameOfClickedList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="50dp"
+            android:maxLines="2"
+            android:text="Name of List"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/userClickedListDescription"
+            android:layout_width="378dp"
+            android:layout_height="94dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="10"
+            android:text="descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfClickedList" />
+
+        <!--Line Divider-->
+        <View
+            android:id="@+id/lineDivider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userClickedListDescription" />
+
+        <TextView
+            android:id="@+id/cpuFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/select_cpu_title_header"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider1" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedCPUFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_cpu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cpuFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/nameOfSelectedCPUFromUsersList"
+            android:layout_width="311dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:text="@string/name_of_cpu_from_users_list"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider1" />
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedCPUFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCPUFromUsersList" />
+
+        <!--Line Divider-->
+        <View
+            android:id="@+id/lineDivider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedCPUFromUsersList" />
+
+        <TextView
+            android:id="@+id/cpuCoolerFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/cpu_cooler"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider2" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedCPUCoolerFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_cpu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cpuCoolerFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/nameOfSelectedCPUCoolerFromUsersList"
+            android:layout_width="310dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_a_cpu_cooler"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUCoolerFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider2" />
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedCPUCoolerFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCPUCoolerFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCPUCoolerFromUsersList" />
+
+        <!--Line Divider-->
+        <View
+            android:id="@+id/lineDivider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedCPUCoolerFromUsersList" />
+
+        <TextView
+            android:id="@+id/MotherboardFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/motherboard"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider3" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedMotherboardFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_motherboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MotherboardFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/nameOfSelectedMotherboardFromUsersList"
+            android:layout_width="310dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_a_motherboard"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedMotherboardFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider3" />
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedMotherboardFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedMotherboardFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedMotherboardFromUsersList" />
+
+        <!--Line Divider-->
+        <View
+            android:id="@+id/lineDivider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedMotherboardFromUsersList" />
+
+        <TextView
+            android:id="@+id/MemoryFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/memory"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider4" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedMemoryFromUsersList"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_memory"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedMemoryFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider4" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedMemoryFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_memory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MemoryFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedMemoryFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedMemoryFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedMemoryFromUsersList" />
+
+        <!--Line Divider-->
+        <View
+            android:id="@+id/lineDivider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedMemoryFromUsersList" />
+
+        <TextView
+            android:id="@+id/StorageFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/storage"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider5" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedStorageFromUsersList"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_storage"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedStorageFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider5" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedStorageFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_storage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/StorageFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedStorageFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedStorageFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedStorageFromUsersList" />
+
+        <View
+            android:id="@+id/lineDivider6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedStorageFromUsersList" />
+
+        <TextView
+            android:id="@+id/GPUFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/video_card"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider6" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedGPUFromUsersList"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_video_card"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedGPUFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider6" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedGPUFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_gpu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/GPUFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedGPUFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedGPUFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedGPUFromUsersList" />
+
+        <View
+            android:id="@+id/lineDivider7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedGPUFromUsersList" />
+
+        <TextView
+            android:id="@+id/CaseFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/pc_case"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider7" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedCaseFromUsersList"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_case"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCaseFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider7" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedCaseFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_case"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CaseFromUsersListTitle">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedCaseFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedCaseFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedCaseFromUsersList" />
+
+        <View
+            android:id="@+id/lineDivider8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedCaseFromUsersList" />
+
+        <TextView
+            android:id="@+id/PowerSupplyFromUsersListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/power_supply"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider8" />
+
+        <TextView
+            android:id="@+id/nameOfSelectedPowerSupplyFromUsersList"
+            android:layout_width="302dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="38dp"
+            android:ellipsize="end"
+            android:text="@string/select_case"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedPowerSupplyFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider8" />
+
+        <ImageView
+            android:id="@+id/imageOfSelectedPowerSupplyFromUsersList"
+            android:layout_width="79dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/image_of_selected_power_supply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PowerSupplyFromUsersListTitle" />
+
+        <TextView
+            android:id="@+id/priceValueOfSelectedPowerSupplyFromUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="£00.00"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageOfSelectedPowerSupplyFromUsersList"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfSelectedPowerSupplyFromUsersList" />
+
+        <View
+            android:id="@+id/lineDivider9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceValueOfSelectedPowerSupplyFromUsersList" />
+
+        <TextView
+            android:id="@+id/estimatedWattageOfUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/estimated_wattage_of_list"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineDivider9" />
+
+        <TextView
+            android:id="@+id/estimatedPriceOfUsersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/estimated_price_of_list"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimatedWattageOfUsersList" />
+
+        <Button
+            android:id="@+id/returnToUserSavedListMenuOverview"
+            android:layout_width="388dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFC107"
+            android:text="Return To Saved Lists"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimatedPriceOfUsersList" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

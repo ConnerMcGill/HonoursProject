@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+
+        <ImageView
+            android:id="@+id/image_of_motherboard"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameOfMotherboard"
+            android:layout_width="183dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="Motherboard Product Name"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/image_of_motherboard"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceOfMotherboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="£160.64"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addMotherboardToListButton"
+            android:layout_width="73dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/titleBar"
+            android:text="Add "
+            android:textColor="#FFFF"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceOfMotherboard" />
+
+        <TextView
+            android:id="@+id/motherboardSocketTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Socket / CPU"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_of_motherboard" />
+
+        <TextView
+            android:id="@+id/motherboardSocketValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="LGA 1200"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/motherboardSocketTitle" />
+
+        <TextView
+            android:id="@+id/motherboardFormFactorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:text="Form Factor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/motherboardSocketTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_motherboard" />
+
+        <TextView
+            android:id="@+id/motherboardFormFactorValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:text="ATX"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/motherboardSocketTitle"
+            app:layout_constraintTop_toBottomOf="@+id/motherboardFormFactorTitle" />
+
+        <TextView
+            android:id="@+id/motherboardMemoryMaxTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="16dp"
+            android:text="Memory Max"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/motherboardFormFactorTitle"
+            app:layout_constraintTop_toBottomOf="@id/image_of_motherboard" />
+
+        <TextView
+            android:id="@+id/motherboardMemoryMaxValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="8dp"
+            android:text="128 GB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/motherboardFormFactorTitle"
+            app:layout_constraintTop_toBottomOf="@+id/motherboardMemoryMaxTitle" />
+
+        <TextView
+            android:id="@+id/motherboardMemorySlotsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Memory Slots"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motherboardSocketValue" />
+
+        <TextView
+            android:id="@+id/motherboardMemorySlotsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="4"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motherboardMemorySlotsTitle" />
+
+        <TextView
+            android:id="@+id/motherboardColourTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="Colour"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/motherboardMemorySlotsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/motherboardFormFactorValue" />
+
+        <TextView
+            android:id="@+id/motherboardColourValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="Black / Gold"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/motherboardMemorySlotsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/motherboardColourTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="15dp"
+    android:fadeScrollbars="false"
+    tools:context=".LearnHowToUseAppOptionsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <Button
+            android:id="@+id/learn_how_to_create_list_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_how_to_create_list"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_how_to_view_list_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_how_to_view_list"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/learn_how_to_manage_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/test_bg"
+            android:text="@string/learn_how_to_manage_account"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp">
+
+        </Button>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

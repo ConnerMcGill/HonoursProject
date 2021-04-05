@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+
+        <ImageView
+            android:id="@+id/image_of_storage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameOfStorage"
+            android:layout_width="169dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="Storage Product Name"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/image_of_storage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceOfStorage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="£160.64"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addStorageToListButton"
+            android:layout_width="73dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/titleBar"
+            android:text="Add "
+            android:textColor="#FFFF"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceOfStorage" />
+
+        <TextView
+            android:id="@+id/storageCapacityTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Capacity"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_of_storage" />
+
+        <TextView
+            android:id="@+id/storageCapacityValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="2 TB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storageCapacityTitle" />
+
+        <TextView
+            android:id="@+id/storagePricePerGBTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:text="Price / GB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storageCapacityTitle"
+            app:layout_constraintTop_toBottomOf="@+id/image_of_storage" />
+
+        <TextView
+            android:id="@+id/storagePricePerGBValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:text="£0.139"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storageCapacityTitle"
+            app:layout_constraintTop_toBottomOf="@+id/storagePricePerGBTitle" />
+
+        <TextView
+            android:id="@+id/storageTypeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="16dp"
+            android:text="Type"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storagePricePerGBTitle"
+            app:layout_constraintTop_toBottomOf="@id/image_of_storage" />
+
+        <TextView
+            android:id="@+id/storageTypeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:text="SSD"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storagePricePerGBTitle"
+            app:layout_constraintTop_toBottomOf="@+id/storageTypeTitle" />
+
+        <TextView
+            android:id="@+id/storageCacheTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Cache"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/storageCapacityValue" />
+
+        <TextView
+            android:id="@+id/storageCacheValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="256 MB"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/storageCacheTitle" />
+
+        <TextView
+            android:id="@+id/storageFormFactorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="8dp"
+            android:text="Form Factor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storageCacheTitle"
+            app:layout_constraintTop_toBottomOf="@+id/storagePricePerGBValue" />
+
+        <TextView
+            android:id="@+id/storageFormFactorValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="8dp"
+            android:text="M.2-2280"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storageCacheTitle"
+            app:layout_constraintTop_toBottomOf="@+id/storageFormFactorTitle" />
+
+        <TextView
+            android:id="@+id/storageInterfaceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="Interface"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storageFormFactorTitle"
+            app:layout_constraintTop_toBottomOf="@+id/storageTypeValue" />
+
+        <TextView
+            android:id="@+id/storageInterfaceValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:text="M.2 (M)"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/storageFormFactorTitle"
+            app:layout_constraintTop_toBottomOf="@+id/storageInterfaceTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>
