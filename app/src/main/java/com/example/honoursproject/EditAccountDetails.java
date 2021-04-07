@@ -296,5 +296,12 @@ public class EditAccountDetails extends AppCompatActivity {
                 });
     }
 
+    //Over ride back button
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(EditAccountDetails.this, MainActivity.class));
+        finish();
+    }
 
 }

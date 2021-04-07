@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -100,6 +101,8 @@ public class SelectSavedList extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 userListAdapter.deleteItem(viewHolder.getAdapterPosition());
+                Toast.makeText(getApplicationContext(), "List Deleted!",
+                        Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -150,5 +153,13 @@ public class SelectSavedList extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         userListAdapter.stopListening();
+    }
+
+    //Over ride back button
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(SelectSavedList.this, MainActivity.class));
+        finish();
     }
 }

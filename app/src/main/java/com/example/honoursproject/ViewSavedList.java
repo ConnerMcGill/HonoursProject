@@ -67,14 +67,13 @@ public class ViewSavedList extends AppCompatActivity {
         descriptionOfSavedList.setText((CharSequence) savedListHashMapData.get("description"));
 
 
-
         //CPU Name:
         TextView nameOfCPUFromSavedList = findViewById(R.id.nameOfSelectedCPUFromUsersList);
         nameOfCPUFromSavedList.setText((CharSequence) savedListHashMapData.get("CPU NAME"));
 
         //CPU Price:
         TextView priceOfCPUFromSavedList = findViewById(R.id.priceValueOfSelectedCPUFromUsersList);
-        priceOfCPUFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("CPU PRICE"))));
+        priceOfCPUFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("CPU PRICE"))));
 
         //Image of CPU:
         //In order to get the image for the guide a storage reference needs to be created
@@ -109,14 +108,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //CPU Cooler Name:
         TextView nameOfCPUCoolerFromSavedList = findViewById(R.id.nameOfSelectedCPUCoolerFromUsersList);
         nameOfCPUCoolerFromSavedList.setText((CharSequence) savedListHashMapData.get("CPU COOLER NAME"));
 
         //CPU Cooler Price:
         TextView priceOfCPUCoolerFromSavedList = findViewById(R.id.priceValueOfSelectedCPUCoolerFromUsersList);
-        priceOfCPUCoolerFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("CPU COOLER PRICE"))));
+        priceOfCPUCoolerFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("CPU COOLER PRICE"))));
 
         //Image of CPU COOLER:
         //In order to get the image for the guide a storage reference needs to be created
@@ -151,14 +149,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //Motherboard Name:
         TextView nameOfMotherboardFromSavedList = findViewById(R.id.nameOfSelectedMotherboardFromUsersList);
         nameOfMotherboardFromSavedList.setText((CharSequence) savedListHashMapData.get("MOTHERBOARD NAME"));
 
         //Motherboard Price:
         TextView priceOfMotherboardFromSavedList = findViewById(R.id.priceValueOfSelectedMotherboardFromUsersList);
-        priceOfMotherboardFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("MOTHERBOARD PRICE"))));
+        priceOfMotherboardFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("MOTHERBOARD PRICE"))));
 
         //Image of Motherboard:
         //In order to get the image for the guide a storage reference needs to be created
@@ -193,14 +190,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //Memory Name:
         TextView nameOfMemoryFromSavedList = findViewById(R.id.nameOfSelectedMemoryFromUsersList);
         nameOfMemoryFromSavedList.setText((CharSequence) savedListHashMapData.get("MEMORY NAME"));
 
         //Memory Price:
         TextView priceOfMemoryFromSavedList = findViewById(R.id.priceValueOfSelectedMemoryFromUsersList);
-        priceOfMemoryFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("MEMORY PRICE"))));
+        priceOfMemoryFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("MEMORY PRICE"))));
 
         //Image of Memory:
         //In order to get the image for the guide a storage reference needs to be created
@@ -235,14 +231,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //Storage Name:
         TextView nameOfStorageFromSavedList = findViewById(R.id.nameOfSelectedStorageFromUsersList);
         nameOfStorageFromSavedList.setText((CharSequence) savedListHashMapData.get("STORAGE NAME"));
 
         //Storage Price:
         TextView priceOfStorageFromSavedList = findViewById(R.id.priceValueOfSelectedStorageFromUsersList);
-        priceOfStorageFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("STORAGE PRICE"))));
+        priceOfStorageFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("STORAGE PRICE"))));
 
         //Image of Storage:
         //In order to get the image for the guide a storage reference needs to be created
@@ -277,14 +272,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //Video Card Name:
         TextView nameOfVideoCardFromSavedList = findViewById(R.id.nameOfSelectedGPUFromUsersList);
         nameOfVideoCardFromSavedList.setText((CharSequence) savedListHashMapData.get("GPU NAME"));
 
         //Video Card Price:
         TextView priceOfVideoCardFromSavedList = findViewById(R.id.priceValueOfSelectedGPUFromUsersList);
-        priceOfVideoCardFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("GPU PRICE"))));
+        priceOfVideoCardFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("GPU PRICE"))));
 
         //Image of Storage:
         //In order to get the image for the guide a storage reference needs to be created
@@ -319,14 +313,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //PC Case Name:
         TextView nameOfCaseFromSavedList = findViewById(R.id.nameOfSelectedCaseFromUsersList);
         nameOfCaseFromSavedList.setText((CharSequence) savedListHashMapData.get("CASE NAME"));
 
         //PC Case Price:
         TextView priceOfCaseFromSavedList = findViewById(R.id.priceValueOfSelectedCaseFromUsersList);
-        priceOfCaseFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("CASE PRICE"))));
+        priceOfCaseFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("CASE PRICE"))));
 
         //Image of Case:
         //In order to get the image for the guide a storage reference needs to be created
@@ -361,14 +354,13 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //PC Power Supply Name:
         TextView nameOfPSUFromSavedList = findViewById(R.id.nameOfSelectedPowerSupplyFromUsersList);
         nameOfPSUFromSavedList.setText((CharSequence) savedListHashMapData.get("PSU NAME"));
 
         //PC Power Supply Price:
         TextView priceOfPSUFromSavedList = findViewById(R.id.priceValueOfSelectedPowerSupplyFromUsersList);
-        priceOfPSUFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product),(CharSequence) savedListHashMapData.get("PSU PRICE"))));
+        priceOfPSUFromSavedList.setText((String.format(getResources().getString(R.string.price_of_product), (CharSequence) savedListHashMapData.get("PSU PRICE"))));
 
         //Image of PSU:
         //In order to get the image for the guide a storage reference needs to be created
@@ -403,7 +395,6 @@ public class ViewSavedList extends AppCompatActivity {
         }
 
 
-
         //Estimated Price Of List:
         TextView estimatedPriceOfSavedList = findViewById(R.id.estimatedPriceOfUsersList);
         estimatedPriceOfSavedList.setText((getResources().getString(R.string.cost_of_list) + (CharSequence) savedListHashMapData.get("LIST COSTS")));
@@ -411,7 +402,6 @@ public class ViewSavedList extends AppCompatActivity {
         //Estimated Wattage Of List:
         TextView estimatedWattageOfSavedList = findViewById(R.id.estimatedWattageOfUsersList);
         estimatedWattageOfSavedList.setText(getResources().getString(R.string.estimated_wattage_of_list) + " " + (CharSequence) savedListHashMapData.get("ESTIMATED WATTAGE") + " W");
-
 
 
         //Button to return the user to the saved lists activity:
@@ -425,6 +415,13 @@ public class ViewSavedList extends AppCompatActivity {
             }
         });
 
+    }
 
+    //Over ride back button
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ViewSavedList.this, SelectSavedList.class));
+        finish();
     }
 }

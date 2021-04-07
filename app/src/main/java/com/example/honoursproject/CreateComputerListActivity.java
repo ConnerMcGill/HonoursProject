@@ -1231,7 +1231,6 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         computerComponentData.getComputerList().put("description", listDescriptionString);
         Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
 
-        Toast.makeText(this, "data saved debug msg", Toast.LENGTH_SHORT).show();
     }
 
     //When the user opens the activity load the potential data from the DataStorage hashmap
@@ -1265,11 +1264,12 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     //Save the list to Firestore
     //Just trying to do it roughly right now to see I can do so and then retrieve the data properly again
     private void saveUsersListToFirestore() {
+
+
         //Initialise the FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
         String currentUser = mAuth.getUid();
-        //Toast.makeText(this, "" + currentUser, Toast.LENGTH_SHORT).show();
 
         //Trying to write something to firestore first before touching it up properly
         computerComponentData.getComputerList().put("userID", currentUser);

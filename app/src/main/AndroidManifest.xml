@@ -9,11 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LearnHowToUseAppOptionsActivity"></activity>
+        <activity
+            android:name=".LearnHowToUseAppOptionsActivity"
+            android:parentActivityName=".GuidesLandingPageActivity" />
         <activity android:name=".ReAuthenticateAccountDetails" />
         <activity android:name=".EditAccountDetails" />
-        <activity android:name=".ViewSavedList" />
-        <activity android:name=".SelectSavedList" />
+        <activity
+            android:name=".ViewSavedList"
+            android:parentActivityName=".SelectSavedList" />
+        <activity
+            android:name=".SelectSavedList"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".ViewPowerSupplyDetails" />
         <activity android:name=".SelectPowerSupply" />
         <activity android:name=".ViewCaseDetails" />
