@@ -31,8 +31,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
@@ -53,7 +51,6 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
 
     //Reference to firestore database
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
     //DataStorage instance
     DataStorage computerComponentData = new DataStorage();
@@ -1237,7 +1234,7 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
     public void loadUserData() {
         listTitleName = computerComponentData.getComputerList().get("title");
         Log.d(TAG, "loadData: " + computerComponentData.getComputerList().get("title"));
-        computerComponentData.getComputerList().get("description");
+        listDescriptionString = computerComponentData.getComputerList().get("description");
         Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
         estimatedPriceString = computerComponentData.getComputerList().get("LIST COSTS");
         estimatedWattageString = computerComponentData.getComputerList().get("ESTIMATED WATTAGE");
@@ -1261,49 +1258,111 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         }
     }
 
+
+    private boolean validateListTitle() {
+        //Gets the text from the title text field
+        String userTitle = enterTitleForPCList.getText().toString();
+        if (userTitle.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please Enter A Title!",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean validateDescription() {
+        //Gets the text from the title text field
+        String userDescription = listDescription.getText().toString();
+        if (userDescription.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please Enter A Description For List!",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
     //Save the list to Firestore
     //Just trying to do it roughly right now to see I can do so and then retrieve the data properly again
     private void saveUsersListToFirestore() {
 
+        //Check that the user title and description is not empty before saving
+        //For some reason it doesn't work with them in the same if statement using && so I have made
+        //them separate. It's dumb I know
+        if (!validateListTitle()) {
+            return;
+        }
 
-        //Initialise the FirebaseAuth instance
-        mAuth = FirebaseAuth.getInstance();
+        if (!validateDescription()) {
+            return;
+        }
 
-        String currentUser = mAuth.getUid();
+        //Bunch of validation checks to make sure that the user has selected a bunch of parts
+        if (computerComponentData.getComputerList().get("CPU NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select A CPU!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("CPU COOLER NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select A CPU Cooler!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("MOTHERBOARD NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select A Motherboard!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("MEMORY NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select Memory!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("STORAGE NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select Storage!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("GPU NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select A Video Card!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("CASE NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select A PC Case!",
+                    Toast.LENGTH_SHORT).show();
+        } else if (computerComponentData.getComputerList().get("PSU NAME") == null) {
+            Toast.makeText(getApplicationContext(), "Please Select A Power Supply!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            //Initialise the FirebaseAuth instance
+            mAuth = FirebaseAuth.getInstance();
 
-        //Trying to write something to firestore first before touching it up properly
-        computerComponentData.getComputerList().put("userID", currentUser);
+            String currentUser = mAuth.getUid();
 
-        //Update the title and description details in the hashmap again just in case they were changed slightly
-        listTitleName = enterTitleForPCList.getText().toString();
-        listDescriptionString = listDescription.getText().toString();
+            //Trying to write something to firestore first before touching it up properly
+            computerComponentData.getComputerList().put("userID", currentUser);
 
-        //Store data into hashmap
-        computerComponentData.getComputerList().put("title", listTitleName);
-        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("title"));
-        computerComponentData.getComputerList().put("description", listDescriptionString);
-        Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
+            //Update the title and description details in the hashmap again just in case they were changed slightly
+            listTitleName = enterTitleForPCList.getText().toString();
+            listDescriptionString = listDescription.getText().toString();
 
-        db.collection("user-lists")
-                .add( computerComponentData.getComputerList())
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                        //Return back to the MainActivity and display toast message
-                        Intent returnToMainActivity = new Intent(CreateComputerListActivity.this,
-                                MainActivity.class);
-                        Toast.makeText(CreateComputerListActivity.this, "List Saved Successfully", Toast.LENGTH_LONG).show();
-                        startActivity(returnToMainActivity);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+            //Store data into hashmap
+            computerComponentData.getComputerList().put("title", listTitleName);
+            Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("title"));
+            computerComponentData.getComputerList().put("description", listDescriptionString);
+            Log.d(TAG, "saveData: " + computerComponentData.getComputerList().get("description"));
 
+            db.collection("user-lists")
+                    .add(computerComponentData.getComputerList())
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            //Return back to the MainActivity and display toast message
+                            Intent returnToMainActivity = new Intent(CreateComputerListActivity.this,
+                                    MainActivity.class);
+                            Toast.makeText(CreateComputerListActivity.this, "List Saved Successfully", Toast.LENGTH_LONG).show();
+                            startActivity(returnToMainActivity);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
 
     }
 
