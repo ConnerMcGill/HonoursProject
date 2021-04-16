@@ -237,7 +237,7 @@ public class EditAccountDetails extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "User account deleted.");
                             //Call Batch Write Function that deletes the users lists from the Database
-                            DeleteUsersLists();
+                            deleteUsersLists();
                         } else {
                             Toast.makeText(getApplicationContext(), "Failed To Delete Account Details!",
                                     Toast.LENGTH_SHORT).show();
@@ -248,7 +248,7 @@ public class EditAccountDetails extends AppCompatActivity {
 
     //Delete the users saved lists
 
-    private void DeleteUsersLists() {
+    private void deleteUsersLists() {
         //Setup reference to user-lists collection in firestore
         FirebaseFirestore.getInstance().collection("user-lists")
                 .whereEqualTo("userID", userID)
