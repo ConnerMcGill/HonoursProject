@@ -1266,6 +1266,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
             Toast.makeText(getApplicationContext(), "Please Enter A Title!",
                     Toast.LENGTH_SHORT).show();
             return false;
+        } else if (userTitle.length() < 3) {
+            Toast.makeText(getApplicationContext(), "Title Must Have 3 Or More Characters!",
+                    Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             return true;
         }
@@ -1276,6 +1280,10 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
         String userDescription = listDescription.getText().toString();
         if (userDescription.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please Enter A Description For List!",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (userDescription.length() < 3) {
+            Toast.makeText(getApplicationContext(), "Description Must Have 3 Or More Characters!",
                     Toast.LENGTH_SHORT).show();
             return false;
         } else {
@@ -1349,6 +1357,8 @@ public class CreateComputerListActivity extends AppCompatActivity implements Vie
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            //Clear the computerComponentData hashmap so the user can create a new list again:
+                            computerComponentData.getComputerList().clear();
                             //Return back to the MainActivity and display toast message
                             Intent returnToMainActivity = new Intent(CreateComputerListActivity.this,
                                     MainActivity.class);

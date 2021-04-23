@@ -86,6 +86,7 @@ public class EditAccountDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // back button pressed
+                returnToMainActivity();
                 finish();
             }
         });
@@ -127,6 +128,12 @@ public class EditAccountDetails extends AppCompatActivity {
         });
 
 
+    }
+
+    private void returnToMainActivity() {
+        Intent openMainActivity = new Intent
+                (this, MainActivity.class);
+        startActivity(openMainActivity);
     }
 
     //Validate the users email address
