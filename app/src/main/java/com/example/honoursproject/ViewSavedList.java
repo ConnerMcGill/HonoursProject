@@ -54,6 +54,7 @@ public class ViewSavedList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // back button pressed
+                returnToSelectSavedLists();
                 finish();
             }
         });
@@ -415,6 +416,12 @@ public class ViewSavedList extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void returnToSelectSavedLists() {
+        Intent openSelectSavedList = new Intent
+                (this, SelectSavedList.class);
+        startActivity(openSelectSavedList);
     }
 
     //Over ride back button

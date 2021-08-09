@@ -67,6 +67,7 @@ public class SelectSavedList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // back button pressed
+                returnToMainActivity();
                 finish();
             }
         });
@@ -153,6 +154,12 @@ public class SelectSavedList extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         userListAdapter.stopListening();
+    }
+
+    private void returnToMainActivity() {
+        Intent openMainActivity = new Intent
+                (this, MainActivity.class);
+        startActivity(openMainActivity);
     }
 
     //Over ride back button
