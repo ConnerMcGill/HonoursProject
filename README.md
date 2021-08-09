@@ -7,6 +7,6 @@ The project is an attempt of making a native andorid app in order to learn more 
 
 <img src="images/login-activtiy.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/main-actvity.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/create-list.png" width="300" height="600">
 
-<img src="images/select-part-1.png" width="300" height="600"> &nbsp;&nbsp;&nbsp; <img src="images/select-part-2.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/view-guides-1.png" width="300" height="600">
+<img src="images/select-part-1.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/select-part-2.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/view-guides-1.png" width="300" height="600">
   
 <img src="images/view-guides-2.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/view-saved-lists-1.png" width="300" height="600"> &nbsp;&nbsp; <img src="images/view-saved-lists-2.png" width="300" height="600">
